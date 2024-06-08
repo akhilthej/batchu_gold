@@ -13,47 +13,18 @@ const GoldBuying = () => {
     setGold(inr / goldPricePerGram);
   };
 
-  const sendPaymentResultToBackend = (paymentData) => {
-    fetch('https://gold.cyberspacedigital.in/api/goldtransations.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(paymentData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert('Payment status updated successfully.');
-        } else {
-          alert('Failed to update payment status.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
   const handlePayment = () => {
     const options = {
-      key: 'rzp_live_JbXDlasvark44n',
+      key: 'rzp_live_JbXDlasvark44n', // Replace with your Razorpay key
       amount: amount * 100, // Amount is in paise
       currency: 'INR',
       name: 'Gold Buying App',
       description: 'Gold purchase',
       handler: function (response) {
         alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-        sendPaymentResultToBackend({
-          status: 'success',
-          payment_id: response.razorpay_payment_id,
-          amount: amount,
-          gold: gold.toFixed(8),
-          email: user.emailaddress,
-          phone: user.phonenumber,
-        });
       },
       prefill: {
-        name: '',
+        name: user.name || '', // Replace with user's name if available
         email: user.emailaddress,
         contact: user.phonenumber,
       },
@@ -66,13 +37,6 @@ const GoldBuying = () => {
       modal: {
         ondismiss: function () {
           alert('Payment process cancelled.');
-          sendPaymentResultToBackend({
-            status: 'failed',
-            amount: amount,
-            gold: gold.toFixed(8),
-            email: user.emailaddress,
-            phone: user.phonenumber,
-          });
         },
       },
     };

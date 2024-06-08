@@ -11,9 +11,6 @@ import { useAuth } from './hooks/GlobalProvider';
 import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory'
 
-
-
-import SilverBuying from './routes/MarketPlace/SilverBuying'
 import GoldBuying from './routes/MarketPlace/GoldBuying'
 
 const App = () => {
@@ -50,7 +47,6 @@ const App = () => {
         <Route path="/paymenthistory" element={<PaymentHistory />} />
         
         <Route path="/MarketPlace" element={<MarketPlace />} />
-        <Route path="/silver-buying" element={user ? <SilverBuying /> : <Navigate to="/signin" />} />
         <Route path="/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
 
         <Route path="/signin" element={<Signin />} />
