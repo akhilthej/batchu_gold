@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
 
@@ -20,26 +20,26 @@ const Signin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-100">
-      <div className="w-full max-w-md bg-white p-6 mt-6 rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-100 p-4">
+      <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-lg font-bold text-center">Sign In</h1>
         <input
           type="email"
           value={emailAddress}
           placeholder="Email"
           onChange={(e) => setEmailAddress(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
         <input
           type="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
-        {error !== "" && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
-        <button onClick={onSignInPress} className="bg-teal-800 text-white font-bold py-3 mt-5 w-full rounded-full">Sign In</button>
-        <p className="text-xs text-center mt-2">Don't have an account? <Link to='/signup' className="text-black font-bold">Sign Up</Link></p>
+        {error && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
+        <button onClick={onSignInPress} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 mt-6 w-full rounded-full">Sign In</button>
+        <p className="text-xs text-center mt-4">Don't have an account? <Link to='/signup' className="text-black font-bold">Sign Up</Link></p>
       </div>
     </div>
   );

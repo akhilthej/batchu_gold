@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-import {CRUD_API} from '../../hooks/APIHooks'; 
+import { CRUD_API } from '../../hooks/APIHooks';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,15 +12,6 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const onSignUpPress = async () => {
-    console.log(JSON.stringify({
-      name: `${firstName} ${lastName}`,
-      emailaddress: emailAddress,
-      phonenumber: phoneNumber,
-      sex: 'Male', // Assuming default to "Male"
-      role: 'client',
-      password: password,
-    }));
-    
     setError(""); // Reset error state before starting
     try {
       const response = await fetch(CRUD_API, {
@@ -40,15 +30,12 @@ const Signup = () => {
       });
 
       const data = await response.json();
-      console.log("Response status:", response.status); // Log response status
-      console.log("Response data:", data); // Log response data for debugging
 
       if (response.ok) {
         if (data.status === 'success') {
-          // Navigate to sign-in page upon successful signup
           navigate('/signin');
         } else {
-          setError(data.message); // Set error message received from the server
+          setError(data.message);
         }
       } else {
         setError('Failed to sign up. Please try again.');
@@ -60,9 +47,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-100">
-
-      <div className="w-full max-w-md bg-white p-6 mt-6 rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-100 p-4">
+      <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-lg font-bold text-center">Let's Start</h1>
         <h2 className="text-xl font-bold text-center">Building your Brand</h2>
         <p className="text-xs text-gray-500 mt-2 text-center">A Knowledge place for all your Digital Needs.</p>
@@ -72,45 +58,45 @@ const Signup = () => {
           value={firstName}
           placeholder="First Name"
           onChange={(e) => setFirstName(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
         <input
           type="text"
           value={lastName}
           placeholder="Last Name"
           onChange={(e) => setLastName(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
         <input
           type="email"
           value={emailAddress}
           placeholder="Email"
           onChange={(e) => setEmailAddress(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
         <input
           type="tel"
           value={phoneNumber}
           placeholder="Phone Number"
           onChange={(e) => setPhoneNumber(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
         <input
           type="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="border-b border-gray-500 py-2 text-base text-black mt-5"
+          className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
         />
-        {error !== "" && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
+        {error && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
 
-        <button onClick={onSignUpPress} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 mt-5 w-full rounded-full">Sign Up</button>
+        <button onClick={onSignUpPress} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 mt-6 w-full rounded-full">Sign Up</button>
 
-        <p className="text-xs text-center mt-2">✓ I accept the following <span className="text-blue-400 cursor-pointer" onClick={() => navigate('/termsconditions')}>Terms & Conditions</span></p>
+        <p className="text-xs text-center mt-4">✓ I accept the following <span className="text-blue-400 cursor-pointer" onClick={() => navigate('/termsconditions')}>Terms & Conditions</span></p>
         <p className="text-xs text-center mt-2">Already an Existing User? <Link to='/signin' className="text-black font-bold">Sign In</Link></p>
       </div>
 
-      <p className="text-xs font-light text-gray-500 mt-2 text-center pb-5">
+      <p className="text-xs font-light text-gray-500 mt-6 text-center pb-5">
         www.digitalgita.com | www.cyberspacedigital.in <br />
         &copy; 2024 Cyber Space Digital. All rights reserved.
       </p>
