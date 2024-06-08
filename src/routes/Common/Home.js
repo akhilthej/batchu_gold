@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from "../../hooks/GlobalProvider";
 import { Link } from "react-router-dom";
-import { Godjar_home,UPI } from "../../assets/data/Imagedata";
+import { Godjar_home_video,UPI ,Godjar_home} from "../../assets/data/Imagedata";
 
 import GoldInvestmentCalculator from '../../components/Calculator/GoldInvestmentCalculator.js'
 
@@ -96,9 +96,9 @@ const Home = () => {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="mx-2">
-                    Anyone can buy, starting as low as ₹ 1
-                  </span>
+                  <p className="mx-2">
+                    Anyone can buy, starting as low as ₹10
+                  </p>
                 </p>
                 <p className="text-sm flex">
                   Powered by  <img
@@ -116,13 +116,18 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center w-full h-96 lg:w-1/2">
-            <img
-              src={Godjar_home}
-              alt="Gold"
-              className="w-[500px] h-auto mb-2"
-            />
-          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '24rem' }}>
+  <video
+    src={Godjar_home_video}  // Ensure this path points to your .mp4 file
+    style={{ width: '500px', height: 'auto', marginBottom: '0.5rem' }}
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
+</div>
+
+
         </div>
       </section>
 

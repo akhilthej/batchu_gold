@@ -83,121 +83,60 @@ const Navbar = () => {
     </div>
 
 
-    <nav>
-  <>
-    {/* Container */}
-    <div className="flex items-center bg-white fixed bottom-0 z-10 w-full justify-center">
-      <div className="flex flex-col">
-          {/* Navigation Bar */}
-          <div className="pt-2">
-            <div className="flex flex-row space-x-5">
+    <nav className="fixed bottom-0 w-full bg-white z-10">
+      <div className="flex justify-center">
+        <div className="flex flex-row justify-around w-full max-w-md p-2">
+          {/* Item #1 */}
+          <div className="flex flex-col items-center group">
+            <Link to="/contactus" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <i className="mdi mdi-phone-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+              <span className="text-xs">Contact</span>
+            </Link>
+          </div>
 
+          {/* Item #2 */}
+          <div className="flex flex-col items-center group">
+            <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <i className="mdi mdi-basket-plus-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+              <span className="text-xs">Market</span>
+            </Link>
+          </div>
 
-            {/* Item #1 */}
-            <div className="flex group">
-                <Link to="/contactus" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-phone-outline mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    Contact
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
+          {/* Item #3 */}
+          <div className="flex flex-col items-center group">
+            <Link to="/" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <i className="mdi mdi-home-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+              <span className="text-xs">Home</span>
+            </Link>
+          </div>
 
-            
-               {/* Item #2 */}
-               <div className="flex group">
-                <Link to="/MarketPlace" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-basket-plus-outline mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    Market
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
+          {/* Item #4 */}
+          <div className="flex flex-col items-center group">
+            <Link to="/aboutus" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <i className="mdi mdi-compass-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+              <span className="text-xs">About</span>
+            </Link>
+          </div>
 
-
-              
-
-               {/* Item #3 Active */}
-             <div className="flex group">
-                <Link to="/" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-home-outline mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    Home
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
-
-
-             
-
-             
-
-              {/* Item #4 */}
-              <div className="flex group">
-                <Link to="/aboutus" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-compass-outline  mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    About
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
-
-              <div className="sticky w-full top-0 z-50 drop-shadow-lg ">
-      
-       
-        <div>
-        
+          {/* Item #5 (Conditional) */}
           {user ? (
-            <>
-            <div className="flex group">
-                <Link to="/dashboard" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-account-circle-outline mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    Account
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
-            </>
+            <div className="flex flex-col items-center group">
+              <Link to="/dashboard" className="text-black hover:text-yellow-500 flex flex-col items-center">
+                <i className="mdi mdi-account-circle-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+                <span className="text-xs">Account</span>
+              </Link>
+            </div>
           ) : (
-            <>
-            <div className="flex group">
-                <Link to="/signup" className=" text-black hover:text-yellow-500 flex flex-col items-center">
-                  {/* Icon */}
-                  <i className="mdi mdi-account-circle-outline mdi-24px mx-1 text-black group-hover:text-yellow-500 transition-color duration-200"/>
-                  {/* Text */}
-                  <span className="text-xs mb-1">
-                    Signup
-                  </span>
-                  {/* Focus Dot */}
-                </Link>
-              </div>
-           
-            </>
+            <div className="flex flex-col items-center group">
+              <Link to="/signup" className="text-black hover:text-yellow-500 flex flex-col items-center">
+                <i className="mdi mdi-account-circle-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+                <span className="text-xs">Signup</span>
+              </Link>
+            </div>
           )}
         </div>
       </div>
-    </div>
-             
-            </div>
-          </div>
-        </div>
-  </>
-</nav>
+    </nav>
 
 
 

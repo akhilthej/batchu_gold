@@ -7,6 +7,7 @@ import UPI from '../../assets/common/UPi.svg'
 
 /*Home */
 import Godjar_home from '../../assets/home/Godjar_home.png'
+import Godjar_home_video from '../../assets/home/Godjar_home_video.mp4'
 
 export {
 
@@ -14,7 +15,7 @@ export {
   Indiarupees,GoldCoin,SilverCoin,UPI,
 
   /*Home */
-  Godjar_home
+  Godjar_home,Godjar_home_video
 
   };
  
