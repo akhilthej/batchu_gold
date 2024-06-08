@@ -104,7 +104,7 @@ const Signup = () => {
         />
         {error !== "" && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
 
-        <button onClick={onSignUpPress} className="bg-teal-800 text-white font-bold py-3 mt-5 w-full rounded-full">Sign Up</button>
+        <button onClick={onSignUpPress} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 mt-5 w-full rounded-full">Sign Up</button>
 
         <p className="text-xs text-center mt-2">✓ I accept the following <span className="text-blue-400 cursor-pointer" onClick={() => navigate('/termsconditions')}>Terms & Conditions</span></p>
         <p className="text-xs text-center mt-2">Already an Existing User? <Link to='/signin' className="text-black font-bold">Sign In</Link></p>
