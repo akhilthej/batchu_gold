@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5ba68f45.css",
-    "main.js": "/static/js/main.d3777ece.js",
+    "main.js": "/static/js/main.16ee96c1.js",
     "static/media/Godjar_home.png": "/static/media/Godjar_home.14b61b250b020a8888a1.png",
     "static/media/Gold_coin.png": "/static/media/Gold_coin.f1f9b94a3615e23f2787.png",
     "static/media/Silver_coin.png": "/static/media/Silver_coin.711b1eaadbb6d56546ad.png",
@@ -13,10 +13,10 @@
     "static/media/csdv2Logofooter.svg": "/static/media/csdv2Logofooter.fd1b0a495973bc9e3a9d8b4c42fed61b.svg",
     "index.html": "/index.html",
     "main.5ba68f45.css.map": "/static/css/main.5ba68f45.css.map",
-    "main.d3777ece.js.map": "/static/js/main.d3777ece.js.map"
+    "main.16ee96c1.js.map": "/static/js/main.16ee96c1.js.map"
   },
   "entrypoints": [
     "static/css/main.5ba68f45.css",
-    "static/js/main.d3777ece.js"
+    "static/js/main.16ee96c1.js"
   ]
 }
