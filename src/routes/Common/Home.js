@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Godjar_home_video,UPI ,Godjar_home} from "../../assets/data/Imagedata";
 
 import GoldInvestmentCalculator from '../../components/Calculator/GoldInvestmentCalculator.js'
+import WhyChooseUs from '../../components/home/WhyChooseUs.jsx'
 
 const Home = () => {
   const { user } = useAuth();
@@ -20,7 +21,7 @@ const Home = () => {
   return (
     <section className="sm:pt-20 pt-20 px-10">
       {/* User and Auth */}
-      <section className="text-center">
+      <section className="text-center z-10">
         <div>
           {user ? (
             <span className="text-black font-bold cursor-pointer text-6xl">
@@ -119,7 +120,7 @@ const Home = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '24rem' }}>
   <video
     src={Godjar_home_video}  // Ensure this path points to your .mp4 file
-    style={{ width: '500px', height: 'auto', marginBottom: '0.5rem' }}
+    style={{ width: '500px', height: 'auto', marginBottom: '0.5rem', zIndex:0 }}
     autoPlay
     muted
     loop
@@ -138,10 +139,10 @@ const Home = () => {
       <div className="flex flex-col gap-7">
         <div className="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
           <h2 className="text-6xl font-extrabold leading-tight text-white">
-          Digital <spam className="text-white">gold?</spam>
+          Whats is Digital <spam className="text-white">gold?</spam>
           </h2>
           <p className=" text-white">
-          With the Jar app, you can participate in the tradition of saving in   24 Karat gold at 99.5% purity, and build wealth and security for you and your family.
+          It is a form of investment where gold is purchased and stored in a digital format. Investors own the gold but do not take physical possession of it. Instead, the gold is securely stored by the service provider.
           </p>
         </div>
        
@@ -152,25 +153,79 @@ const Home = () => {
 </section>
 
 
-{/* Digital Gold */}
-<section>
-  <div className=" flex flex-col cursor-default section relative pt-10 pb-8 md:pt-16 md:pb-10 rounded-2xl">
-    <div className=" flex flex-col items-center mx-auto ">
-      <div className="flex flex-col gap-7">
-        <div className="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
-          <h2 className="text-6xl font-extrabold leading-tight text-black">
-          Digital <spam className="text-black">gold?</spam>
-          </h2>
-          <p className=" text-black">
-          With the Jar app, you can participate in the tradition of saving in   24 Karat gold at 99.5% purity, and build wealth and security for you and your family.
-          </p>
-        </div>
-       
+{/* Why choose us? */}
+<WhyChooseUs />
+
+
+
+{/* patners? */}
+<div className="py-16 bg-white">
+  <div className="container m-auto px-6 space-y-8 md:px-12 lg:px-56">
+    <div className="m-auto text-center lg:w-7/12">
+      <h2 className="text-2xl text-gray-700 font-bold md:text-4xl">
+        Your favorite companies are our partners.
+      </h2>
+    </div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/airbnb.svg"
+          className=""
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-8.png"
+          className="w-32 "
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-3.png"
+          className="w-32 "
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-1.png"
+          className="w-32 "
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/tailus.svg"
+          className="w-32"
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/microsoft.svg"
+          className="w-32"
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/coty.svg"
+          className="w-20"
+          alt=""
+        />
+      </div>
+      <div className="p-4">
+        <img
+          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-4.png"
+          className="w-24"
+          alt=""
+        />
       </div>
     </div>
   </div>
-  
-</section>
+</div>
 
 
 
@@ -195,6 +250,8 @@ const Home = () => {
 
 
 
+
+
 {/* How it works */}
 <section>
   <div className=" flex flex-col cursor-default section relative pt-10 pb-8 md:pt-16 md:pb-10 ">
@@ -205,7 +262,7 @@ const Home = () => {
         How it works?
           </p>
           <h2 className="text-6xl font-extrabold leading-tight text-yellow-500">
-          Whhy choose <spam className="text-orange-500">us?</spam>
+          Why choose <spam className="text-orange-500">us?</spam>
           </h2>
           <p className=" text-black">
           With the Jar app, you can participate in the tradition of saving in   24 Karat gold at 99.5% purity, and build wealth and security for you and your family.

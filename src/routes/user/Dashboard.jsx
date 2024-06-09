@@ -1,12 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
-
-import { GoldCoin } from '../../assets/data/Imagedata'
+import { GoldCoin } from '../../assets/data/Imagedata';
 
 function Dashboard() {
   const { user, signOut } = useAuth();
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,80 +21,62 @@ function Dashboard() {
   };
 
   return (
-<section className='p-8 bg-gray-100 text-center'>
+    <section className="pt-20 px-4 sm:px-10 sm:pt-20">
 
-{/* User and Auth */}
-<section>
-<div className="min-w-full items-center justify-center bg-teal-700 rounded-2xl p-8 text-white">
+      {/* User and Auth */}
+      <section>
+        <div className="min-w-full flex flex-col items-center justify-center bg-yellow-500 rounded-2xl p-6 text-white">
+          {user ? (
+            <>
+              <div className="flex flex-col items-center space-y-2">
+                <img src={GoldCoin} alt="GoldCoin profile" width={50} height={50} className="rounded-full" />
+                <span className="font-bold text-lg">Hello, {user.name}</span>
+                <span className="text-sm">{user.emailaddress}</span>
+                <span className="text-sm">{user.sex}</span>
+                <span className="text-sm">{user.phonenumber}</span>
+              </div>
+            </>
+          ) : (
+            <span className="text-black">Welcome Guest</span>
+          )}
+        </div>
+      </section>
 
-{user ? (
-<>
-  <span className="cursor-" >
-
-  <img src={GoldCoin} alt="GoldCoinprofile" width={50} height={50} className="cursor-default " />
-   Hello, <span className=" cursor-default font-bold" >{user.name}</span> 
-   <br/>
-   <span className=" cursor-default font-bold" >{user.emailaddress}</span> 
-   <br/>
-   <span className=" cursor-default font-bold" >{user.sex}</span> 
-   <br/>
-   <span className=" cursor-default font-bold" >{user.phonenumber}</span> 
-  </span>
-</>
-) : (
-<>
-<span className="text-black cursor-default" >
-    Welcome Guest
-  </span>
-
-</>
-)}
-</div>
-</section>
-
-
-   
-
-
-    <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-full grid grid-cols-1 md:grid-cols-4 gap-8">
-
-      <button
+      {/* Dashboard Actions */}
+      <div className="flex flex-col items-center justify-center bg-gray-100 py-6">
+        <div className="w-full max-w-md grid grid-cols-1 gap-4">
+          <button
             onClick={handlePaymentHistory}
-            className="mt-4 w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600"
+            className="w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition duration-300"
           >
             Edit Profile
           </button>
 
-
           <button
             onClick={handlePaymentHistory}
-            className="mt-4 w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+            className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition duration-300"
           >
             Payment History
           </button>
 
           <button
             onClick={handleBuySilver}
-            className="mt-4 w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+            className="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition duration-300"
           >
             Market Place
           </button>
 
-         <button
+          <button
             onClick={handleLogout}
-            className="mt-4 w-full bg-red-500 text-white py-2 rounded hover:bg-red-900"
+            className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition duration-300"
           >
             Logout
           </button>
-
-
+        </div>
       </div>
-    </div>
-    
 
     </section>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
