@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { USER_FETCH_TRANSACTIONS_URL } from '../../hooks/APIHooks';
 import { GoldCoin, SilverCoin } from '../../assets/data/Imagedata';
-import TotalMaterial from './TotalMaterial';
+import TotalMaterial from './Tools/TotalMaterial';
 
 const TransactionTable = () => {
   const { user } = useAuth();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { GoldBar } from '../../assets/data/Imagedata';
-import { FaPhone, FaHistory, FaStore, FaExchangeAlt, FaUserEdit, FaLifeRing, FaBug } from 'react-icons/fa';
+import {  FaHistory, FaStore, FaExchangeAlt, FaUserEdit, FaLifeRing, FaBug } from 'react-icons/fa';
 
 function Dashboard() {
   const { user, signOut } = useAuth();
@@ -14,7 +14,7 @@ function Dashboard() {
   };
 
   return (
-    <section className="py-20 sm:py-20 px-10">
+    <section className="py-20 sm:py-20 px-5">
       <div className="flex flex-col lg:flex-row lg:space-x-10 ">
         {/* First Row: User Details and Actions */}
         <div className="flex-1 flex flex-col items-center py-10  bg-white rounded-2xl shadow-2xl">
@@ -40,8 +40,9 @@ function Dashboard() {
           {/* Dashboard Actions */}
           <div className="flex flex-col items-center justify-center w-full px-20">
             <div className="w-full grid grid-cols-1 gap-4">
-              <div className='border-t border-gray-300 '></div>
-              <div className="text-center py-4">
+              <div className='border-t border-gray-300 '/>
+              
+              <div className="text-center">
                 <p className="text-xl font-medium">Transactions</p>
                 <p className="text-sm">Check all your transactions</p>
               </div>
@@ -49,7 +50,7 @@ function Dashboard() {
               <Link to='/user/paymenthistory'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaHistory className="mr-3" size={23} />
-                  <p className="text-[16px]">Payment History & Transations</p>
+                  <p className="text-[16px]">Payment History</p>
                 </button>
                 <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
               </Link>
@@ -71,12 +72,12 @@ function Dashboard() {
               </Link>
 
               <div className='border-t border-gray-300 '></div>
-              <div className="text-center py-4">
+              <div className="text-center">
                 <p className="text-xl font-medium">Personal</p>
                 <p className="text-sm">Modify your profile</p>
               </div>
 
-              <Link to='/'>
+              <Link to='/user/profileedit'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaUserEdit className="mr-3" size={23} />
                   <p className="text-[16px]">Edit Profile</p>
@@ -86,7 +87,7 @@ function Dashboard() {
 
               <div className='border-t border-gray-300 '></div>
 
-              <div className="text-center py-4">
+              <div className="text-center">
                 <p className="text-xl font-medium">Help Center</p>
                 <p className="text-sm">Need more help?</p>
               </div>

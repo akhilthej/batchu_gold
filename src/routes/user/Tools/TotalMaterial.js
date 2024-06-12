@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/GlobalProvider';
-import { USER_FETCH_TRANSACTIONS_URL } from '../../hooks/APIHooks';
-import { GoldCoin, SilverCoin } from '../../assets/data/Imagedata';
+import { useAuth } from '../../../hooks/GlobalProvider';
+import { USER_FETCH_TRANSACTIONS_URL } from '../../../hooks/APIHooks';
+import { GoldCoin, SilverCoin } from '../../../assets/data/Imagedata';
 
 const TotalMaterial = () => {
   const { user } = useAuth();

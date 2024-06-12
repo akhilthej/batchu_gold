@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
         Home, Aboutus, Contactus, 
-        MarketPlace, Exchange } from './routes/Routes';
+        MarketPlace, Exchange,ProfileEdit } from './routes/Routes';
 
 
 import Signin from './routes/auth/Signin';
@@ -13,6 +13,7 @@ import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory'
 
 import GoldBuying from './routes/Exchange/GoldBuying'
+
 
 const App = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const App = () => {
 
         <Route path="/user/dashboard" element={<Dashboard />} />
         <Route path="/user/paymenthistory" element={<PaymentHistory />} />
+        <Route path="/user/profileedit" element={<ProfileEdit />} />
         
         <Route path="/MarketPlace" element={<MarketPlace />} />
 

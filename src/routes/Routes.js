@@ -16,6 +16,7 @@ import Contactus from './Common/Contactus';
 
 import Exchange from './Exchange/Exchange'
 
+import ProfileEdit from "./user/ProfileEdit";
 
 
 
@@ -30,6 +31,7 @@ Error404,Home,
 MarketPlace,Aboutus,Contactus,
 ReturnPolicy,
 
+ProfileEdit,
 
 Exchange,
 
