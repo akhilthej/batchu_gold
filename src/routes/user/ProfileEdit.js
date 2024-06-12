@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { CRUD_API } from '../../hooks/APIHooks';
 
 const ProfileEdit = () => {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
