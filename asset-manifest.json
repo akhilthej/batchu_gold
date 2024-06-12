@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.7692ac50.css",
-    "main.js": "/static/js/main.308ab693.js",
+    "main.css": "/static/css/main.e8e9ed34.css",
+    "main.js": "/static/js/main.391f6010.js",
+    "static/media/thegoldjar_1080p.png": "/static/media/thegoldjar_1080p.e15409323c55dd2b6452.png",
     "static/media/Godjar_home_video.mp4": "/static/media/Godjar_home_video.1ad1900c35a29155ecad.mp4",
     "static/media/Godjar_home.png": "/static/media/Godjar_home.14b61b250b020a8888a1.png",
     "static/media/Gold_coin.png": "/static/media/Gold_coin.f1f9b94a3615e23f2787.png",
@@ -13,11 +14,11 @@
     "static/media/UPi.svg": "/static/media/UPi.fabdc966e48be0c8ec6a81274b563eee.svg",
     "static/media/csdv2Logofooter.svg": "/static/media/csdv2Logofooter.fd1b0a495973bc9e3a9d8b4c42fed61b.svg",
     "index.html": "/index.html",
-    "main.7692ac50.css.map": "/static/css/main.7692ac50.css.map",
-    "main.308ab693.js.map": "/static/js/main.308ab693.js.map"
+    "main.e8e9ed34.css.map": "/static/css/main.e8e9ed34.css.map",
+    "main.391f6010.js.map": "/static/js/main.391f6010.js.map"
   },
   "entrypoints": [
-    "static/css/main.7692ac50.css",
-    "static/js/main.308ab693.js"
+    "static/css/main.e8e9ed34.css",
+    "static/js/main.391f6010.js"
   ]
 }
