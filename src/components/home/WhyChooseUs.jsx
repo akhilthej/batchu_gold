@@ -36,15 +36,15 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section className="sm:px-6 bg-gray-50">
       <div className=" flex flex-col cursor-default section relative pt-10 pb-8 md:pt-16 md:pb-10 ">
     <div className=" flex flex-col items-center mx-auto ">
       <div className="flex flex-col gap-7">
-        <div className="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
+        <div className="flex flex-col gap-2 px-6 text-center w-12/12 mx-auto">
         <p className=" text-black font-bold">
         How it works?
           </p>
-          <h2 className="text-6xl font-extrabold leading-tight text-yellow-500">
+          <h2 className="md:text-6xl text-4xl font-extrabold leading-tight text-yellow-500">
           Why choose <spam className="text-orange-500">us?</spam>
           </h2>
           <p className=" text-black">

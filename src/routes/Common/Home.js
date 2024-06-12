@@ -19,7 +19,7 @@ const Home = () => {
   ];
 
   return (
-    <section className="sm:pt-20 pt-20 px-10">
+    <section className="sm:pt-20 pt-20 px-2">
       {/* User and Auth */}
       <section className="text-center z-10">
         <div>
@@ -40,7 +40,7 @@ const Home = () => {
 
       {/* Saving Gold */}
       <section>
-        <div className="container flex flex-col py-10 mx-auto lg:flex-row lg:items-center">
+        <div className="container flex flex-col py-10 mx-auto lg:flex-row lg:items-center px-4">
           <div className="w-full">
             <div>
               <h1 className="text-3xl font-bold tracking-wide text-black lg:text-5xl">
@@ -137,9 +137,9 @@ const Home = () => {
   <div className=" flex flex-col cursor-default section relative pt-10 pb-8 md:pt-16 md:pb-10 bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 rounded-2xl">
     <div className=" flex flex-col items-center mx-auto ">
       <div className="flex flex-col gap-7">
-        <div className="flex flex-col gap-2 px-6 text-center w-10/12 mx-auto">
-          <h2 className="text-6xl font-extrabold leading-tight text-white">
-          Whats is Digital <spam className="text-white">gold?</spam>
+        <div className="flex flex-col gap-2 px-4 text-center w-12/12 mx-auto">
+          <h2 className="md:text-6xl text-4xl font-extrabold leading-tight text-white">
+          What is Digital <spam className="text-white">gold?</spam>
           </h2>
           <p className=" text-white">
           It is a form of investment where gold is purchased and stored in a digital format. Investors own the gold but do not take physical possession of it. Instead, the gold is securely stored by the service provider.
@@ -157,81 +157,9 @@ const Home = () => {
 <WhyChooseUs />
 
 
-
-{/* patners? */}
-<div className="py-16 bg-white">
-  <div className="container m-auto px-6 space-y-8 md:px-12 lg:px-56">
-    <div className="m-auto text-center lg:w-7/12">
-      <h2 className="text-2xl text-gray-700 font-bold md:text-4xl">
-        Your favorite companies are our partners.
-      </h2>
-    </div>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/airbnb.svg"
-          className=""
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-8.png"
-          className="w-32 "
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-3.png"
-          className="w-32 "
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-1.png"
-          className="w-32 "
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/tailus.svg"
-          className="w-32"
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/microsoft.svg"
-          className="w-32"
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/coty.svg"
-          className="w-20"
-          alt=""
-        />
-      </div>
-      <div className="p-4">
-        <img
-          src="https://tailus.io/sources/blocks/company-site/preview/images/clients/client-4.png"
-          className="w-24"
-          alt=""
-        />
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 {/* Tab */}
 <div className="flex h-screen bg-yellow-500 text-white rounded-2xl">
-      <div className="w-1/3 p-5">
+      <div className="w-1/3 md:p-5 p-1">
         {tabs.map((tab) => (
           <div
             key={tab.name}
@@ -265,7 +193,7 @@ const Home = () => {
           Why choose <spam className="text-orange-500">us?</spam>
           </h2>
           <p className=" text-black">
-          With the Jar app, you can participate in the tradition of saving in   24 Karat gold at 99.5% purity, and build wealth and security for you and your family.
+          With the Gold Jar app, you can participate in the tradition of saving in   24 Karat gold at 99.9% purity, and build wealth and security for you and your family.
           </p>
         </div>
        

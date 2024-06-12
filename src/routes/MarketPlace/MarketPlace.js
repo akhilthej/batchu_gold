@@ -9,6 +9,7 @@ const Marketplace = () => {
   };
 
   return (
+    <section className='sm:pt-20 pt-20 px-10'>
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-xl">
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
@@ -21,6 +22,8 @@ const Marketplace = () => {
         </div>
       </div>
     </div>
+
+    </section>
   );
 };
 
