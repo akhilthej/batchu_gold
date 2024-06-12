@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
-import { GoldCoin } from '../../assets/data/Imagedata';
+import { GoldBar } from '../../assets/data/Imagedata';
 
 function Dashboard() {
   const { user, signOut } = useAuth();
@@ -29,7 +29,7 @@ function Dashboard() {
           {user ? (
             <>
               <div className="flex flex-col items-center space-y-2">
-                <img src={GoldCoin} alt="GoldCoin profile" width={50} height={50} className="rounded-full" />
+                <img src={GoldBar} alt="GoldBar profile" width={50} height={50} className="rounded-full" />
                 <span className="font-bold text-lg">Hello, {user.name}</span>
                 <span className="text-sm">{user.emailaddress}</span>
                 <span className="text-sm">{user.sex}</span>

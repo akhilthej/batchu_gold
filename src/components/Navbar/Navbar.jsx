@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
-import CsdLogo from './csdv2Logo.svg';
 import LiveGoldPrice from '../../components/Tools/LiveGoldPrice';
-import { TheGoldJar1080p } from '../../assets/data/Imagedata';
+import { TheGoldJar1080p,TheGoldJartitle } from '../../assets/data/Imagedata';
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -44,9 +43,12 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={CsdLogo} alt="csdlogo" width={150} height={150} className="cursor-pointer" />
+            
+          <img src={TheGoldJar1080p} alt="csdlogo" width={50} height={50} className="cursor-pointer" />
+            <img src={TheGoldJartitle} alt="csdlogo" width={150} height={50} className="cursor-pointer pl-2" />
           </Link>
         </div>
+        
 
         {/* User and Auth */}
         <div className="flex items-center relative text-sm">
