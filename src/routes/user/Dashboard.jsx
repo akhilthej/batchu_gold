@@ -27,9 +27,11 @@ function Dashboard() {
                     <img src={GoldBar} alt="GoldBar profile" width={100} height={100} className="rounded-full" />
                     <span className="font-bold text-lg">Hello, {user.name}</span>
                     <span className="text-sm">{user.emailaddress}</span>
+                    <div className='flex-row space-x-2'>
                     <span className="text-sm">{user.sex}</span>
                     <span className="text-sm">{user.phonenumber}</span>
-                  </div>
+                    <span className="text-sm">{user.address}</span>
+                  </div></div>
                 </>
               ) : (
                 <span className="text-black">Welcome Guest</span>
