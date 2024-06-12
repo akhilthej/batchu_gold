@@ -14,7 +14,7 @@ import Aboutus from './Common/Aboutus';
 import Contactus from './Common/Contactus';
 
 
-
+import Exchange from './Exchange/Exchange'
 
 
 
@@ -30,5 +30,7 @@ Error404,Home,
 MarketPlace,Aboutus,Contactus,
 ReturnPolicy,
 
+
+Exchange,
 
 };

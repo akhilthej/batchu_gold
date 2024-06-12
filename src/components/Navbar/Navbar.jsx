@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
 import LiveGoldPrice from '../../components/Tools/LiveGoldPrice';
-import { TheGoldJar1080p,TheGoldJartitle } from '../../assets/data/Imagedata';
+import { TheGoldJar1080p, TheGoldJartitle } from '../../assets/data/Imagedata';
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -43,12 +43,10 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            
-          <img src={TheGoldJar1080p} alt="csdlogo" width={50} height={50} className="cursor-pointer" />
-            <img src={TheGoldJartitle} alt="csdlogo" width={150} height={50} className="cursor-pointer pl-2" />
+            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-12 h-auto hidden md:block" />
+            <img src={TheGoldJartitle} alt="csdlogo" className="cursor-pointer w-36 h-auto pl-2 " />
           </Link>
         </div>
-        
 
         {/* User and Auth */}
         <div className="flex items-center relative text-sm">
@@ -65,7 +63,7 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={` fixed top-0 left-0 h-full bg-[#f7f7f7] shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 h-full bg-[#f7f7f7] shadow-lg transform transition-transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } w-64 z-40 overflow-y-auto`}
       >
@@ -96,7 +94,7 @@ const Navbar = () => {
                   Logout
                 </button>
 
-                <Link to="/dashboard" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
+                <Link to="/user/dashboard" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
                   <i className="mdi mdi-view-dashboard-outline mdi-24px mr-2"></i>
                   Account
                 </Link>
@@ -111,6 +109,10 @@ const Navbar = () => {
             <Link to="/MarketPlace" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
               <i className="mdi mdi-storefront-outline mdi-24px mr-2"></i>
               Market
+            </Link>
+            <Link to="/Exchange" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
+              <i className="mdi mdi-storefront-outline mdi-24px mr-2"></i>
+              Exchange
             </Link>
 
             <Link to="/contactus" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
@@ -131,7 +133,7 @@ const Navbar = () => {
             <div className="relative">
               <div
                 onClick={toggleDocumentsDropdown}
-                className=" text-black hover:text-yellow-500 py-1 px-3 cursor-pointer flex items-center"
+                className="text-black hover:text-yellow-500 py-1 px-3 cursor-pointer flex items-center"
               >
                 <i className="mdi mdi-folder-outline mdi-24px mr-2"></i>
                 Legal
@@ -165,7 +167,7 @@ const Navbar = () => {
           </div>
 
           <Link to="/" className="flex items-center justify-center">
-            <img src={TheGoldJar1080p} alt="csdlogo" width={100} height={100} className="cursor-pointer" />
+            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-24 h-24" />
           </Link>
           <p id="copyright" className="text-center text-xs text-black m-4">
             <span className="font-bold">© Batchu Gold</span> <br />(CopyRightsReserved)
@@ -178,22 +180,22 @@ const Navbar = () => {
         </div>
       </div>
 
-      <nav className="fixed bottom-0 w-full bg-white z-10 ">
+      <nav className="fixed bottom-0 w-full bg-white z-10">
         <div className="flex justify-center">
           <div className="flex flex-row justify-around w-full max-w-md p-2">
             {/* Item #1 */}
             <div className="flex flex-col items-center group">
-              <Link to="/contactus" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-phone-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Contact</span>
+                <span className="text-xs">Market</span>
               </Link>
             </div>
 
             {/* Item #2 */}
             <div className="flex flex-col items-center group">
-              <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
+              <Link to="/Exchange" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-basket-plus-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Market</span>
+                <span className="text-xs">Exchange</span>
               </Link>
             </div>
 
@@ -216,7 +218,7 @@ const Navbar = () => {
             {/* Item #5 (Conditional) */}
             {user ? (
               <div className="flex flex-col items-center group">
-                <Link to="/dashboard" className="text-black hover:text-yellow-500 flex flex-col items-center">
+                <Link to="/user/dashboard" className="text-black hover:text-yellow-500 flex flex-col items-center">
                   <i className="mdi mdi-account-circle-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
                   <span className="text-xs">Account</span>
                 </Link>

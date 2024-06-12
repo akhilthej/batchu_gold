@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
-        Home, Aboutus, Contactus, MarketPlace } from './routes/Routes';
+        Home, Aboutus, Contactus, 
+        MarketPlace, Exchange } from './routes/Routes';
 
 
 import Signin from './routes/auth/Signin';
@@ -11,7 +12,7 @@ import { useAuth } from './hooks/GlobalProvider';
 import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory'
 
-import GoldBuying from './routes/MarketPlace/GoldBuying'
+import GoldBuying from './routes/Exchange/GoldBuying'
 
 const App = () => {
   const location = useLocation();
@@ -43,11 +44,13 @@ const App = () => {
 
         
 
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/paymenthistory" element={<PaymentHistory />} />
+        <Route path="/user/dashboard" element={<Dashboard />} />
+        <Route path="/user/paymenthistory" element={<PaymentHistory />} />
         
         <Route path="/MarketPlace" element={<MarketPlace />} />
-        <Route path="/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
+
+        <Route path="/Exchange" element={<Exchange />} />
+        <Route path="/Exchange/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
 
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Register />} />
