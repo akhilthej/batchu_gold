@@ -11,6 +11,26 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const sendOnboardingEmail = async (email) => {
+    try {
+      const response = await fetch('https://batchugold.com/(apis)/sendOnboardingEmail.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          email: email
+        })
+      });
+      const data = await response.json();
+      if (data.status !== 'success') {
+        console.error('Failed to send onboarding email:', data.message);
+      }
+    } catch (err) {
+      console.error('Error sending onboarding email:', err);
+    }
+  };
+
   const onSignUpPress = async () => {
     setError(""); // Reset error state before starting
     try {
@@ -33,6 +53,7 @@ const Signup = () => {
 
       if (response.ok) {
         if (data.status === 'success') {
+          await sendOnboardingEmail(emailAddress); // Send the onboarding email
           navigate('/signin');
         } else {
           setError(data.message);
