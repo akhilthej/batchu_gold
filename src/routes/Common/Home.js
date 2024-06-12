@@ -117,10 +117,10 @@ const Home = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '24rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '24rem',zIndex:-5}}>
   <video
     src={Godjar_home_video}  // Ensure this path points to your .mp4 file
-    style={{ width: '500px', height: 'auto', marginBottom: '0.5rem', zIndex:0 }}
+    style={{ width: '500px', height: 'auto', marginBottom: '0.5rem'}}
     autoPlay
     muted
     loop

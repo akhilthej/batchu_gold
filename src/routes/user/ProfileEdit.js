@@ -20,15 +20,16 @@ const ProfileEdit = () => {
       const nameParts = user.name.split(' ');
       setFirstName(nameParts[0] || '');
       setLastName(nameParts.slice(1).join(' ') || '');
+      setUserData(prevUserData => ({
+        ...prevUserData,
+        emailaddress: user.emailaddress,
+        phonenumber: user.phonenumber || '',
+        sex: user.sex || '',
+        address: user.address || '',
+      }));
     }
-    setUserData({
-      ...userData,
-      emailaddress: user.emailaddress,
-      phonenumber: user.phonenumber || '',
-      sex: user.sex || '',
-      address: user.address || '',
-    });
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]); // Only run this effect when `user` changes
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
