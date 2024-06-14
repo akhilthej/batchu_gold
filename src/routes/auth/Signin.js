@@ -13,7 +13,7 @@ const Signin = () => {
     setError(""); // Reset error state before starting
     const result = await signIn(emailAddress, password);
     if (result.success) {
-      navigate('/'); // Navigate to home page upon successful login
+      navigate('/Exchange'); // Navigate to home page upon successful login
     } else {
       setError(result.message); // Set error message received from the server
     }

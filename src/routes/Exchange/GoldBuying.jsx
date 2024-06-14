@@ -5,12 +5,18 @@ const GoldBuying = () => {
   const { user } = useAuth();
   const [amount, setAmount] = useState('');
   const [gold, setGold] = useState(0);
+  const [referralCode, setReferralCode] = useState(''); // State for referral code
   const goldPricePerGram = 8000; // 1 gram 24 carat gold price in INR
 
   const handleAmountChange = (e) => {
     const inr = e.target.value;
     setAmount(inr);
     setGold(inr / goldPricePerGram);
+  };
+
+  const handleReferralCodeChange = (e) => {
+    const code = e.target.value;
+    setReferralCode(code);
   };
 
   const handlePayment = () => {
@@ -30,6 +36,7 @@ const GoldBuying = () => {
       },
       notes: {
         address: 'Gold Buying App Corporate Office',
+        referral_code_gold: referralCode, // Pass referral code in notes
       },
       theme: {
         color: '#3399cc',
@@ -73,6 +80,13 @@ const GoldBuying = () => {
             />
           </>
         )}
+        <label className="block mb-2 text-gray-700">Referral Code:</label>
+        <input
+          type="text"
+          value={referralCode}
+          onChange={handleReferralCodeChange}
+          className="w-full px-3 py-2 mb-4 border rounded"
+        />
         <p className="mb-4">Gold you will receive: {gold.toFixed(8)} grams</p>
         <button
           onClick={handlePayment}
