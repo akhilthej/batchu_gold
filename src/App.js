@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
         Home, Aboutus, Contactus, 
-        MarketPlace, Exchange,ProfileEdit } from './routes/Routes';
+
+        MarketPlace, GoldBuying,
+        
+        Store,ProfileEdit } from './routes/Routes';
 
 
 import Signin from './routes/auth/Signin';
@@ -12,7 +15,6 @@ import { useAuth } from './hooks/GlobalProvider';
 import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory'
 
-import GoldBuying from './routes/Exchange/GoldBuying'
 
 
 const App = () => {
@@ -50,9 +52,9 @@ const App = () => {
         <Route path="/user/profileedit" element={<ProfileEdit />} />
         
         <Route path="/MarketPlace" element={<MarketPlace />} />
+        <Route path="/MarketPlace/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
 
-        <Route path="/Exchange" element={<Exchange />} />
-        <Route path="/Exchange/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
+        <Route path="/Store" element={<Store />} />
 
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Register />} />

@@ -9,12 +9,15 @@ import Disclaimer from '../components/Documents/Disclaimer';
 
 import Error404 from '../components/Tools/Error404';
 import Home from './Common/Home';
-import MarketPlace from './MarketPlace/MarketPlace';
+
 import Aboutus from './Common/Aboutus';
 import Contactus from './Common/Contactus';
 
 
-import Exchange from './Exchange/Exchange'
+import MarketPlace from './MarketPlace/MarketPlace';
+import GoldBuying from './MarketPlace/GoldBuying'
+
+import Store from './Store/Store'
 
 import ProfileEdit from "./user/ProfileEdit";
 
@@ -28,11 +31,13 @@ Navbar,Footer,
 PrivacyPolicy,TermsnConditions,Disclaimer,ShippingandDelivery,
 Error404,Home,
 
-MarketPlace,Aboutus,Contactus,
+Aboutus,Contactus,
 ReturnPolicy,
 
 ProfileEdit,
 
-Exchange,
+MarketPlace,GoldBuying,
+
+Store,
 
 };

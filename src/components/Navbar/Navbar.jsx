@@ -110,9 +110,9 @@ const Navbar = () => {
               <i className="mdi mdi-storefront-outline mdi-24px mr-2"></i>
               Market
             </Link>
-            <Link to="/Exchange" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
+            <Link to="/Store" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
               <i className="mdi mdi-storefront-outline mdi-24px mr-2"></i>
-              Exchange
+              Store
             </Link>
 
             <Link to="/contactus" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
@@ -185,17 +185,18 @@ const Navbar = () => {
           <div className="flex flex-row justify-around w-full max-w-md p-2">
             {/* Item #1 */}
             <div className="flex flex-col items-center group">
-              <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
-                <i className="mdi mdi-phone-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Market</span>
+              <Link to="/Store" className="text-black hover:text-yellow-500 flex flex-col items-center">
+                <i className="mdi mdi-basket-plus-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+                <span className="text-xs">Store</span>
               </Link>
-            </div>
+            </div> 
+           
 
             {/* Item #2 */}
             <div className="flex flex-col items-center group">
-              <Link to="/Exchange" className="text-black hover:text-yellow-500 flex flex-col items-center">
-                <i className="mdi mdi-basket-plus-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Exchange</span>
+              <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
+                <i className="mdi mdi-phone-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+                <span className="text-xs">Market</span>
               </Link>
             </div>
 

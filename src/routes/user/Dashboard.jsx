@@ -65,10 +65,10 @@ function Dashboard() {
                 <span className='text-xs text-gray-600'>Browse our marketplace for more ornaments and items.</span>
               </Link>
 
-              <Link to='/Exchange'>
+              <Link to='/Store'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaExchangeAlt className="mr-3" size={23} />
-                  <p className="text-[16px]">Exchange</p>
+                  <p className="text-[16px]">Store</p>
                 </button>
                 <span className='text-xs text-gray-600'>Start saving gold. Buy from 10 INR. Daily, planned, and bulk savings available.</span>
               </Link>
