@@ -45,7 +45,7 @@ const GoldBuying = () => {
   };
 
   return (
-    <div className="py-10 flex flex-col items-center justify-center bg-gray-100">
+    <div className="py-10 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-4">Buy Gold</h1>
         <label className="block mb-2 text-gray-700">Enter Amount (INR):</label>
