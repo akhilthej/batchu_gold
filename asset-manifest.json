@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.45a46348.css",
-    "main.js": "/static/js/main.38e1a57b.js",
+    "main.js": "/static/js/main.1589a8d6.js",
     "static/media/thegoldjar_1080p.png": "/static/media/thegoldjar_1080p.00f0826236b59db328df.png",
     "static/media/TGJLogofooter.png": "/static/media/TGJLogofooter.3f0785746724b4aa9cc9.png",
     "static/media/thegoldjar_title.png": "/static/media/thegoldjar_title.3f0785746724b4aa9cc9.png",
@@ -16,10 +16,10 @@
     "static/media/csdv2Logofooter.svg": "/static/media/csdv2Logofooter.fd1b0a495973bc9e3a9d8b4c42fed61b.svg",
     "index.html": "/index.html",
     "main.45a46348.css.map": "/static/css/main.45a46348.css.map",
-    "main.38e1a57b.js.map": "/static/js/main.38e1a57b.js.map"
+    "main.1589a8d6.js.map": "/static/js/main.1589a8d6.js.map"
   },
   "entrypoints": [
     "static/css/main.45a46348.css",
-    "static/js/main.38e1a57b.js"
+    "static/js/main.1589a8d6.js"
   ]
 }
