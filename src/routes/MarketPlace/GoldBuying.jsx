@@ -5,7 +5,8 @@ const GoldBuying = () => {
   const { user } = useAuth();
   const [amount, setAmount] = useState('');
   const [gold, setGold] = useState(0);
-  const goldPricePerGram = 8000; // 1 gram 24 carat gold price in INR
+  const [referralCode, setReferralCode] = useState('');
+  const goldPricePerGram = 8000;
 
   const handleAmountChange = (e) => {
     const inr = e.target.value;
@@ -13,23 +14,57 @@ const GoldBuying = () => {
     setGold(inr / goldPricePerGram);
   };
 
+  const handleReferralCodeChange = (e) => {
+    const code = e.target.value;
+    setReferralCode(code);
+  };
+
   const handlePayment = () => {
     const options = {
-      key: 'rzp_live_JbXDlasvark44n', // Replace with your Razorpay key
-      amount: amount * 100, // Amount is in paise
+      key: 'rzp_live_JbXDlasvark44n',
+      amount: amount * 100,
       currency: 'INR',
       name: 'Gold Buying App',
       description: 'Gold purchase',
       handler: function (response) {
         alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
+
+        if (amount >= 10) {
+          // Call the backend to handle the referral payment
+          fetch('https://batchugold.com/(apis)/goldtransations.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              payment_id: response.razorpay_payment_id,
+              amount: amount,
+              referral_code: referralCode,
+              email: user.emailaddress,
+              phone: user.phonenumber,
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('Referral bonus processed successfully');
+            } else {
+              alert('Failed to process referral bonus');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
       },
       prefill: {
-        name: user.name || '', // Replace with user's name if available
+        name: user.name || '',
         email: user.emailaddress,
         contact: user.phonenumber,
       },
       notes: {
         address: 'Gold Buying App Corporate Office',
+        referral_code_gold: referralCode,
       },
       theme: {
         color: '#3399cc',
@@ -70,6 +105,17 @@ const GoldBuying = () => {
               value={user.phonenumber}
               readOnly
               className="w-full px-3 py-2 mb-4 border rounded bg-gray-200"
+            />
+          </>
+        )}
+        {amount >= 10 && (
+          <>
+            <label className="block mb-2 text-gray-700">Referral Code:</label>
+            <input
+              type="text"
+              value={referralCode}
+              onChange={handleReferralCodeChange}
+              className="w-full px-3 py-2 mb-4 border rounded"
             />
           </>
         )}
