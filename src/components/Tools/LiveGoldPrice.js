@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Goldraw } from '../../assets/data/Imagedata';
-
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
-
 
 const LiveGoldPrice = () => {
   const [goldPrice, setGoldPrice] = useState(null);
-  const apiUrl = GOLD_LIVE_PRICE;
+  const goldpricelive = GOLD_LIVE_PRICE;
 
   useEffect(() => {
     const fetchGoldPrice = async () => {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(goldpricelive);
         const data = await response.json();
         // Assuming the API response has a structure like { price: 8000 }
         if (data && data.length > 0) {
@@ -26,7 +24,7 @@ const LiveGoldPrice = () => {
     };
 
     fetchGoldPrice();
-  }, []);
+  }, [goldpricelive]);
 
   return (
     <section className="flex items-center">

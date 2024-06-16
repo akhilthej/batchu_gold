@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
 
 function Cart() {
     const [cart, setCart] = useState([]);
