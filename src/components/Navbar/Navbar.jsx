@@ -52,6 +52,10 @@ const Navbar = () => {
         <div className="flex items-center relative text-sm">
           <LiveGoldPrice />
 
+         <Link to='/Store/cart'> <div>
+            Cart
+          </div></Link>
+
           <button
             onClick={toggleSidebar}
             className="text-black py-1 px-3 rounded-lg"

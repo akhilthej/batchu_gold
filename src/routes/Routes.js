@@ -17,12 +17,8 @@ import Contactus from './Common/Contactus';
 import MarketPlace from './MarketPlace/MarketPlace';
 import GoldBuying from './MarketPlace/GoldBuying'
 
-import Store from './Store/Store'
 
 import ProfileEdit from "./user/ProfileEdit";
-
-
-
 
 export {
 /*Fixed */
@@ -38,6 +34,7 @@ ProfileEdit,
 
 MarketPlace,GoldBuying,
 
-Store,
+
+
 
 };

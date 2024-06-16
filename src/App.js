@@ -5,8 +5,11 @@ import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, Shippingan
 
         MarketPlace, GoldBuying,
         
-        Store,ProfileEdit } from './routes/Routes';
+        ProfileEdit } from './routes/Routes';
 
+// Store
+import Store from './routes/Store/Store'
+import Cart from './routes/Store/Cart'
 
 import Signin from './routes/auth/Signin';
 import Register from './routes/auth/register';
@@ -14,6 +17,8 @@ import { useAuth } from './hooks/GlobalProvider';
 
 import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory'
+
+import ProductPost from "./routes/Admin/ProductsPost";
 
 
 
@@ -54,7 +59,11 @@ const App = () => {
         <Route path="/MarketPlace" element={<MarketPlace />} />
         <Route path="/MarketPlace/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
 
+
         <Route path="/Store" element={<Store />} />
+        <Route path="/Store/cart" element={<Cart />} />
+
+        <Route path="/Admin/ProductPost" element={user ? <ProductPost /> : <Navigate to="/signin" />} />
 
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Register />} />
