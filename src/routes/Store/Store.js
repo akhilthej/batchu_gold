@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 function Store() {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [quantities, setQuantities] = useState({}); // State to manage quantities for each product
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -25,9 +26,16 @@ function Store() {
     }, []);
 
     const addToCart = (product) => {
-        const updatedCart = [...cart, product];
+        const updatedCart = [...cart, { ...product, quantity: quantities[product.id] || 1 }];
         setCart(updatedCart);
         localStorage.setItem('cart', JSON.stringify(updatedCart));
+    };
+
+    const handleQuantityChange = (productId, newQuantity) => {
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [productId]: newQuantity,
+        }));
     };
 
     return (
@@ -46,6 +54,16 @@ function Store() {
                             <p>{product.description}</p>
                             <p className="text-lg font-semibold">${product.price}</p>
                             <p className="text-sm text-gray-600">{product.product_catalogue}</p>
+                            <div className="flex items-center mt-4">
+                                <label className="mr-2">Quantity:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={quantities[product.id] || 1}
+                                    onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                />
+                            </div>
                             <button
                                 onClick={() => addToCart(product)}
                                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
