@@ -39,12 +39,9 @@ const TotalMaterial = () => {
 
   // Calculate total gold and silver grams
   let totalGoldGrams = 0;
-  let totalSilverGrams = 0;
   successfulTransactions.forEach(transaction => {
     if (transaction.type === 'Gold') {
       totalGoldGrams += parseFloat(transaction.gold || 0);
-    } else if (transaction.type === 'Silver') {
-      totalSilverGrams += parseFloat(transaction.silver || 0);
     }
   });
 
@@ -57,11 +54,7 @@ const TotalMaterial = () => {
           <p className="text-lg text-gray-800 font-bold">{totalGoldGrams.toFixed(8)} g</p>
           <p className="text-sm text-gray-600">Gold</p>
         </div>
-        <div className="flex flex-col items-center">
-          <img src={SilverCoin} alt="Silver" className="w-16 h-16 mb-2" />
-          <p className="text-lg text-gray-800 font-bold">{totalSilverGrams.toFixed(8)} g</p>
-          <p className="text-sm text-gray-600">Silver</p>
-        </div>
+        
       </div>
     </section>
   );

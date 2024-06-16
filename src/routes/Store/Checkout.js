@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider'; // Replace with your authentication context or hook
 
 function Checkout({ cart }) {
@@ -12,6 +11,8 @@ function Checkout({ cart }) {
         address: '',
         referralCode: '', // Default referral code
     });
+
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         // Fetch user details from auth provider
@@ -37,12 +38,11 @@ function Checkout({ cart }) {
     // Calculate total price of all items in the cart
     const totalPrice = cart.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
 
-    // Handle checkout and API call to store order
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
+        setLoading(true);
         // Prepare order data
         const orderData = {
-            status: 'Processing', // Initial status can be set here
-            payment_id: 'Razorpay_payment_id_here', // Replace with actual payment ID from Razorpay
+            status: 'Processing',
             amount: totalPrice.toFixed(2),
             products: cart.map(product => `product: ${product.title} quantity: ${product.quantity}`).join(', '),
             email: userData.emailAddress,
@@ -53,23 +53,76 @@ function Checkout({ cart }) {
         // API endpoint URL
         const apiUrl = 'https://batchugold.com/(apis)/checkout.php'; // Replace with your actual API endpoint
 
-        // API call to store order data
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderData),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Order stored successfully:', data);
-            // Optionally handle success or navigate to confirmation page
-        })
-        .catch(error => {
-            console.error('Error storing order:', error);
-            // Handle error, show message to user, etc.
-        });
+        try {
+            // API call to create Razorpay order and store order data
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            });
+
+            const data = await response.json();
+            if (data.error) {
+                console.error('Error creating order:', data.error);
+                setLoading(false);
+                return;
+            }
+
+            const { order_id, amount, email, phone } = data;
+
+            // Razorpay options
+            const options = {
+                key: 'rzp_test_XBUIzxvVbOfPLr', // Replace with your Razorpay key
+                amount: amount * 100, // Amount in paise
+                currency: 'INR',
+                name: 'batchu gold',
+                description: 'Purchase Description',
+                order_id: order_id,
+                handler: async function (response) {
+                    console.log('Payment successful', response);
+                    const paymentData = {
+                        status: 'Complete',
+                        payment_id: response.razorpay_payment_id,
+                        amount: amount,
+                        email: email,
+                        phone: phone,
+                        referral_code_order: userData.referralCode,
+                    };
+
+                    // Update order status in the backend
+                    const updateResponse = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(paymentData),
+                    });
+
+                    const updateData = await updateResponse.json();
+                    console.log('Order update response:', updateData);
+                },
+                prefill: {
+                    name: userData.name,
+                    email: email,
+                    contact: phone,
+                },
+                notes: {
+                    address: userData.address,
+                },
+                theme: {
+                    color: '#F37254',
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+            setLoading(false);
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            setLoading(false);
+        }
     };
 
     return (
@@ -102,7 +155,6 @@ function Checkout({ cart }) {
                 <p className="text-lg font-bold ml-2">${totalPrice.toFixed(2)}</p>
             </div>
 
-            {/* Display user details form */}
             <div className="mt-6 border-t pt-6">
                 <h3 className="text-xl font-bold mb-2">Your Details</h3>
                 <form className="flex flex-col space-y-4">
@@ -164,8 +216,9 @@ function Checkout({ cart }) {
                 <button
                     onClick={handleCheckout}
                     className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                    disabled={loading}
                 >
-                    Confirm Order
+                    {loading ? 'Processing...' : 'Confirm Order'}
                 </button>
             </div>
         </div>
