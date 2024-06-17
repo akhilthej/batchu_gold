@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
 import LiveGoldPrice from '../../components/Tools/LiveGoldPrice';
@@ -11,26 +11,46 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDocumentsDropdownOpen, setIsDocumentsDropdownOpen] = useState(false);
 
+  // Function to close sidebar
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  // Function to handle logout
   const handleLogout = () => {
     signOut();
     navigate('/signin');
   };
 
+  // Toggle sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
-
+  // Toggle dropdown for user menu
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  // Toggle documents dropdown
   const toggleDocumentsDropdown = () => {
     setIsDocumentsDropdownOpen(!isDocumentsDropdownOpen);
   };
+
+  // Effect to add click event listener to close sidebar
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isSidebarOpen && !event.target.closest('.sidebar')) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isSidebarOpen]);
 
   return (
     <nav>
@@ -52,9 +72,6 @@ const Navbar = () => {
         <div className="flex items-center relative text-sm">
           <LiveGoldPrice />
 
-         <Link to='/Store/cart'> <div>
-            Cart
-          </div></Link>
 
           <button
             onClick={toggleSidebar}
@@ -67,7 +84,7 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-[#f7f7f7] shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 h-full bg-[#f7f7f7] shadow-lg transform transition-transform sidebar ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } w-64 z-40 overflow-y-auto`}
       >
@@ -81,37 +98,10 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex-grow p-4">
-            {user ? (
-              <>
-                <div className="block text-black hover:text-yellow-500 py-1 px-3">
-                  <span className="block text-black hover:text-yellow-500" onClick={toggleDropdown}>
-                    <i className="mdi mdi-account-circle-outline mdi-24px mr-2"></i>
-                    Hi, {user.name}
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleLogout}
-                  className="block text-black hover:text-yellow-500 py-1 px-3"
-                >
-                  <i className="mdi mdi-logout mdi-24px mr-2"></i>
-                  Logout
-                </button>
-
-                <Link to="/user/dashboard" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
-                  <i className="mdi mdi-view-dashboard-outline mdi-24px mr-2"></i>
-                  Account
-                </Link>
-              </>
-            ) : (
-              <Link to="/signin" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
-                <i className="mdi mdi-login mdi-24px mr-2"></i>
-                LogIn
-              </Link>
-            )}
+          
 
             <Link to="/MarketPlace" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
-              <i className="mdi mdi-storefront-outline mdi-24px mr-2"></i>
+              <i className="mdi mdi-gold mdi-24px mr-2"></i>
               Market
             </Link>
             <Link to="/Store" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
@@ -168,12 +158,43 @@ const Navbar = () => {
               <i className="mdi mdi-phone-outline mdi-24px mr-2"></i>
               Contact
             </Link>
+
+            {user ? (
+              <>
+                <div className="block text-black hover:text-yellow-500 py-1 px-3">
+                  <span className="block text-black hover:text-yellow-500" onClick={toggleDropdown}>
+                    <i className="mdi mdi-account-circle-outline mdi-24px mr-2"></i>
+                    Hi, {user.name}
+                  </span>
+                </div>
+                <Link to="/user/dashboard" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
+                  <i className="mdi mdi-view-dashboard-outline mdi-24px mr-2"></i>
+                  Account
+                </Link>
+
+                <button
+                  onClick={handleLogout}
+                  className="block text-black hover:text-yellow-500 py-1 px-3"
+                >
+                  <i className="mdi mdi-logout mdi-24px mr-2"></i>
+                  Logout
+                </button>
+
+                
+              </>
+            ) : (
+              <Link to="/signin" onClick={closeSidebar} className="block text-black hover:text-yellow-500 py-1 px-3">
+                <i className="mdi mdi-login mdi-24px mr-2"></i>
+                LogIn
+              </Link>
+            )}
+
           </div>
 
           <Link to="/" className="flex items-center justify-center">
-            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-24 h-24" />
+            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-8 h-8 sm:w-24 sm:h-24" />
           </Link>
-          <p id="copyright" className="text-center text-xs text-black m-4">
+          <p id="copyright" className="text-center text-xs text-black">
             <span className="font-bold">© Batchu Gold</span> <br />(CopyRightsReserved)
             <br />
             <span className="text-[10px]">Web Development & Designer Community<br /></span>
@@ -199,7 +220,7 @@ const Navbar = () => {
             {/* Item #2 */}
             <div className="flex flex-col items-center group">
               <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
-                <i className="mdi mdi-phone-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
+                <i className="mdi mdi-gold mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
                 <span className="text-xs">Market</span>
               </Link>
             </div>
