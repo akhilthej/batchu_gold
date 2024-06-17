@@ -29,8 +29,8 @@ const LogoLoader = () => {
   };
 
   const videoStyle = {
-    width: '10%', // Default width for larger screens
-    height: 'auto', // Maintain aspect ratio
+    width: '30%', // Default width for larger screens
+    height: "auto", // Maintain aspect ratio
   };
 
   const footerStyle = {
@@ -45,7 +45,7 @@ const LogoLoader = () => {
   // Adjust the width to 70% for mobile screens
   const smallerScreens = `@media (max-width: 768px) {
     .logo {
-      width: 70%;
+      width: '50%',
     }
   }`;
 
