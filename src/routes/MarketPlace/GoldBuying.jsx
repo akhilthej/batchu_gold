@@ -1,12 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
+import {GOLD_LIVE_PRICE} from '../../hooks/APIHooks'
 
 const GoldBuying = () => {
   const { user } = useAuth();
   const [amount, setAmount] = useState('');
   const [gold, setGold] = useState(0);
   const [referralCode, setReferralCode] = useState('');
-  const goldPricePerGram = 8000;
+  const [goldPricePerGram, setGoldPricePerGram] = useState(0); // State to hold gold price
+
+  // Calculate the amount of gold after applying -30% GST
+let goldAfterGST = gold * (1 - 0.35); // Applying -30% GST
+
+// Format the gold amount to 8 decimal places
+let formattedGold = goldAfterGST.toFixed(8);
+
+
+  useEffect(() => {
+    // Function to fetch gold price
+    const fetchGoldPrice = async () => {
+      try {
+        const response = await fetch(GOLD_LIVE_PRICE); // Replace with your API endpoint
+        const data = await response.json();
+        const goldPrice = data.find(item => item.product_name === 'Gold');
+        if (goldPrice) {
+          setGoldPricePerGram(goldPrice.price); // Set the gold price per gram
+        } else {
+          console.error('Gold price not found in API response');
+        }
+      } catch (error) {
+        console.error('Error fetching gold price:', error);
+      }
+    };
+
+    fetchGoldPrice(); // Call the fetch function when component mounts
+  }, []); // Empty dependency array ensures it runs only once
 
   const handleAmountChange = (e) => {
     const inr = e.target.value;
@@ -21,7 +49,7 @@ const GoldBuying = () => {
 
   const handlePayment = () => {
     const options = {
-      key: 'rzp_live_JbXDlasvark44n',
+      key: 'rzp_test_XBUIzxvVbOfPLr',
       amount: amount * 100,
       currency: 'INR',
       name: 'Gold Buying App',
@@ -119,7 +147,7 @@ const GoldBuying = () => {
             />
           </>
         )}
-        <p className="mb-4">Gold you will receive: {gold.toFixed(8)} grams</p>
+        <p className="mb-4">Gold you will receive after GST: {formattedGold} grams</p>
         <button
           onClick={handlePayment}
           className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
