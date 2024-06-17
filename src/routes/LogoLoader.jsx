@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import applogo from "../assets/CSDLogo.svg"
+import videoSrc from "../assets/CSDLogo.mp4";
 
 const LogoLoader = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,13 +8,13 @@ const LogoLoader = () => {
     // Simulate a loading delay (replace this with your actual data loading logic)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Adjust the delay as needed
+    }, 7000); // Adjust the delay as needed
 
     // Clear the timer when the component unmounts or when isLoading becomes false
     return () => clearTimeout(timer);
   }, []); // Empty dependency array to ensure the effect runs only once
 
-  const logoLoaderStyle = {
+  const videoLoaderStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
@@ -22,16 +22,32 @@ const LogoLoader = () => {
     height: '100%',
     backgroundColor: '#FFF8F0',
     display: 'flex',
+    flexDirection: 'column', // Added to align footer text below video
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 100,
-    transition: 'opacity 0.5s',
   };
 
-  const logoStyle = {
-    maxWidth: '20%', /* Make the logo width 100% of its container */
-    maxHeight: '20%', /* Make the logo height 100% of its container */
+  const videoStyle = {
+    width: '10%', // Default width for larger screens
+    height: 'auto', // Maintain aspect ratio
   };
+
+  const footerStyle = {
+    position: 'fixed',
+    bottom:0,
+    margin: '20px', // Adjust spacing as needed
+    fontSize: '14px', // Adjust font size as needed
+    color: '#555', // Adjust color as needed
+  };
+
+  // Media query for smaller screens (e.g., mobile devices)
+  // Adjust the width to 70% for mobile screens
+  const smallerScreens = `@media (max-width: 768px) {
+    .logo {
+      width: 70%;
+    }
+  }`;
 
   // Ensure the loader is hidden when isLoading becomes false
   if (!isLoading) {
@@ -39,8 +55,13 @@ const LogoLoader = () => {
   }
 
   return (
-    <div style={logoLoaderStyle} className={`logo-loader ${isLoading ? 'show' : 'hide'}`}>
-      <img src={applogo} alt="Loading" style={logoStyle} className="logo" />
+    <div style={videoLoaderStyle} className={`video-loader ${isLoading ? 'show' : 'hide'}`}>
+      <style>{smallerScreens}</style>
+      <video autoPlay loop muted style={videoStyle} className="logo">
+        <source src={videoSrc} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div style={footerStyle}>Made in INDIA</div>
     </div>
   );
 };
