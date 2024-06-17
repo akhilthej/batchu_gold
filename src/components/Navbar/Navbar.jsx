@@ -59,26 +59,30 @@ const Navbar = () => {
         href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css"
       />
 
-      <div className="bg-white fixed w-full top-0 z-50 drop-shadow-lg md:px-10 px-1 py-2 flex justify-between items-center text-black">
+      <div className="bg-white fixed w-full top-0 z-50 drop-shadow-lg md:px-10 px-2 py-2 flex justify-between items-center text-black">
         <div className="flex items-center space-x-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-12 h-auto hidden md:block" />
-            <img src={TheGoldJartitle} alt="csdlogo" className="cursor-pointer w-36 h-auto pl-2 " />
-          </Link>
-        </div>
 
-        {/* User and Auth */}
-        <div className="flex items-center relative text-sm">
-          <LiveGoldPrice />
-
-
-          <button
+        <button
             onClick={toggleSidebar}
             className="text-black py-1 px-3 rounded-lg"
           >
             <i className="mdi mdi-menu mdi-24px"></i>
           </button>
+
+        
+        </div>
+
+        {/* User and Auth */}
+        <div className="flex items-center relative ">
+          <LiveGoldPrice />
+
+            {/* Logo */}
+            <Link to="/" className="flex items-center px-2">
+            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-12 h-auto " />
+            <img src={TheGoldJartitle} alt="csdlogo" className="cursor-pointer w-36 h-auto pl-2 hidden md:block " />
+          </Link>
+
+
         </div>
       </div>
 
