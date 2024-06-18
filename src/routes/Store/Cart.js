@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
+import { useAuth } from '../../hooks/GlobalProvider';
 
 function Cart() {
+    const { user } = useAuth();
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
@@ -17,14 +19,16 @@ function Cart() {
     };
 
     const updateQuantity = (product, newQuantity) => {
-        const updatedCart = cart.map((item) => {
-            if (item.id === product.id) {
-                return { ...item, quantity: newQuantity };
-            }
-            return item;
-        });
-        setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        if (newQuantity >= 0) {
+            const updatedCart = cart.map((item) => {
+                if (item.id === product.id) {
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            });
+            setCart(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+        }
     };
 
     useEffect(() => {
@@ -32,9 +36,14 @@ function Cart() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
+    // Calculate total cart value
+    const totalCartValue = cart.reduce((total, product) => {
+        return total + (product.price * product.quantity);
+    }, 0);
+
     return (
-        <div className="mt-20 mx-auto w-full max-w-screen-lg">
-            <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
+        <div className="my-20 mx-auto w-full max-w-screen-lg">
+            <h2 className="text-3xl font-bold mb-6">Shopping Cart</h2>
             {cart.length === 0 ? (
                 <p className="text-xl">Your cart is empty</p>
             ) : (
@@ -43,6 +52,7 @@ function Cart() {
                         <table className="min-w-full bg-white border-collapse rounded-lg">
                             <thead className="bg-gray-200">
                                 <tr>
+                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Image</th>
                                     <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Product</th>
                                     <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Price</th>
                                     <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Quantity</th>
@@ -53,8 +63,15 @@ function Cart() {
                             <tbody>
                                 {cart.map((product) => (
                                     <tr key={product.id} className="border-b border-gray-200">
+                                        <td className="px-4 py-2">
+                                            <img
+                                                src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
+                                                alt={product.title}
+                                                className="w-16 h-16 object-cover rounded"
+                                            />
+                                        </td>
                                         <td className="px-4 py-2 text-sm">{product.title}</td>
-                                        <td className="px-4 py-2 text-sm">${product.price}</td>
+                                        <td className="px-4 py-2 text-sm">₹{product.price}</td>
                                         <td className="px-4 py-2 text-sm">
                                             <input
                                                 type="number"
@@ -63,7 +80,7 @@ function Cart() {
                                                 className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                                             />
                                         </td>
-                                        <td className="px-4 py-2 text-sm">${(product.price * product.quantity).toFixed(2)}</td>
+                                        <td className="px-4 py-2 text-sm">₹{(product.price * product.quantity).toFixed(2)}</td>
                                         <td className="px-4 py-2">
                                             <RiCloseCircleLine
                                                 className="h-6 w-6 text-red-500 cursor-pointer"
@@ -75,6 +92,21 @@ function Cart() {
                             </tbody>
                         </table>
                     </div>
+                    
+                    <div className="mt-6">
+                        <h2 className="text-2xl font-bold mb-4">Cart Totals</h2>
+                        <div className="flex justify-between items-center border-t border-gray-300 py-4">
+                            <div>
+                                <p className="text-lg font-semibold">Shipping:</p>
+                                <p className="text-sm">{user.address}</p>
+                            </div>
+                            <div>
+                                <p className="text-lg font-semibold">Total Cart Value:</p>
+                                <p className="text-xl font-bold">₹{totalCartValue.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="flex justify-end mt-6">
                         <a href="/Store/checkout">
                             <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">

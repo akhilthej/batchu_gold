@@ -123,13 +123,7 @@ function Dashboard() {
                   <p className="text-sm">Only Admin can access this.</p>
                   </div>
 
-                  <Link to='/user/paymenthistory'>
-                    <button className="flex items-center justify-center text-black py-2">
-                      <FaHistory className="mr-3" size={23} />
-                      <p className="text-[16px]">All Payments</p>
-                    </button>
-                    <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
-                  </Link>
+                 
 
                   <Link to='/Admin/ProductPost'>
                     <button className="flex items-center justify-center text-black py-2">
@@ -139,13 +133,7 @@ function Dashboard() {
                     <span className='text-xs text-gray-600'>Browse our marketplace for more ornaments and items.</span>
                   </Link>
 
-                  <Link to='/Store'>
-                    <button className="flex items-center justify-center text-black py-2">
-                      <FaExchangeAlt className="mr-3" size={23} />
-                      <p className="text-[16px]">Store</p>
-                    </button>
-                    <span className='text-xs text-gray-600'>Start saving gold. Buy from 10 INR. Daily, planned, and bulk savings available.</span>
-                  </Link>
+                 
                 </div>
               )}
               {/*---- end Admin controls ---*/}
