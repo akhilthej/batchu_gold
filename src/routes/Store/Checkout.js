@@ -16,7 +16,7 @@ function Checkout() {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [shippingAddress, setShippingAddress] = useState(user.address || '');
-    const [paymentMethod, setPaymentMethod] = useState('Credit Card');
+    const [paymentMethod] = useState('Credit Card');
 
     useEffect(() => {
         if (user.name) {

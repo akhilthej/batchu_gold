@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
+import { Navbar, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
         Home, Aboutus, Contactus, MarketPlace, GoldBuying, ProfileEdit } from './routes/Routes';
 
 import Store from './routes/Store/Store';
