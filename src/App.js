@@ -5,7 +5,8 @@ import { Navbar, Footer, PrivacyPolicy, TermsnConditions, Disclaimer, Shippingan
 
 import Store from './routes/Store/Store';
 import Cart from './routes/Store/Cart';
-import Checkout from './routes/Store/Checkout';
+import Checkout from './routes/Store/Checkout'
+
 import Signin from './routes/auth/Signin';
 import Register from './routes/auth/register';
 import { useAuth } from './hooks/GlobalProvider';
@@ -56,6 +57,7 @@ const App = () => {
 
         <Route path="/Store" element={<Store />} />
         <Route path="/Store/cart" element={<Cart />} />
+        <Route path="/Store/checkout" element={<Checkout />} />
 
         <Route path="/*" element={<Error404 />} />
       </Routes>

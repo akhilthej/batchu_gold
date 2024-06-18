@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { useAuth } from '../../hooks/GlobalProvider';
+import { Link } from 'react-router-dom';
 
 function Cart() {
     const { user } = useAuth();
@@ -108,11 +109,11 @@ function Cart() {
                     </div>
 
                     <div className="flex justify-end mt-6">
-                        <a href="/Store/checkout">
+                        <Link to="/Store/checkout">
                             <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
                                 Proceed to Checkout
                             </button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}
