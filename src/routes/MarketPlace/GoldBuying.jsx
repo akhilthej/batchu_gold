@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
-import {GOLD_LIVE_PRICE} from '../../hooks/APIHooks'
+import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
 const GoldBuying = () => {
   const { user } = useAuth();
@@ -8,13 +8,9 @@ const GoldBuying = () => {
   const [gold, setGold] = useState(0);
   const [referralCode, setReferralCode] = useState('');
   const [goldPricePerGram, setGoldPricePerGram] = useState(0); // State to hold gold price
-
-  // Calculate the amount of gold after applying -30% GST
-let goldAfterGST = gold * (1 - 0.35); // Applying -30% GST
-
-// Format the gold amount to 8 decimal places
-let formattedGold = goldAfterGST.toFixed(8);
-
+  const [productType] = useState('Regular Savings'); // Fixed product type
+  const [products] = useState('Raw Gold'); // Fixed product
+  const [formattedGold, setFormattedGold] = useState('');
 
   useEffect(() => {
     // Function to fetch gold price
@@ -36,29 +32,42 @@ let formattedGold = goldAfterGST.toFixed(8);
     fetchGoldPrice(); // Call the fetch function when component mounts
   }, []); // Empty dependency array ensures it runs only once
 
-  const handleAmountChange = (e) => {
+  useEffect(() => {
+    // Calculate the amount of gold after applying -30% GST
+    const calculateGoldAfterGST = () => {
+      const goldAfterGST = gold * (1 - 0.35); // Applying -30% GST
+      const formattedGold = goldAfterGST.toFixed(8); // Format to 8 decimal places
+      setFormattedGold(formattedGold);
+    };
+
+    calculateGoldAfterGST();
+  }, [gold]);
+
+  const handleAmountChange = e => {
     const inr = e.target.value;
     setAmount(inr);
     setGold(inr / goldPricePerGram);
   };
 
-  const handleReferralCodeChange = (e) => {
+  const handleReferralCodeChange = e => {
     const code = e.target.value;
     setReferralCode(code);
   };
 
   const handlePayment = () => {
     const options = {
-      key: 'rzp_test_XBUIzxvVbOfPLr',
+      key: 'rzp_test_qjbYOaA0BlqnRS',
       amount: amount * 100,
       currency: 'INR',
       name: 'Gold Buying App',
       description: 'Gold purchase',
-      handler: function (response) {
+      handler: function(response) {
         alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
 
+        const currentDateTime = new Date().toISOString();
+
         if (amount >= 10) {
-          // Call the backend to handle the referral payment
+          // Call the backend to handle the payment
           fetch('https://batchugold.com/(apis)/goldtransations.php', {
             method: 'POST',
             headers: {
@@ -67,22 +76,26 @@ let formattedGold = goldAfterGST.toFixed(8);
             body: JSON.stringify({
               payment_id: response.razorpay_payment_id,
               amount: amount,
-              referral_code: referralCode,
+              product_type: productType,
+              products: products,
               email: user.emailaddress,
               phone: user.phonenumber,
+              referral_code: referralCode,
+              created_at: currentDateTime,
             }),
           })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert('Referral bonus processed successfully');
-            } else {
-              alert('Failed to process referral bonus');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert('Payment processed successfully');
+              } else {
+                alert('Failed to process payment');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Failed to process payment');
+            });
         }
       },
       prefill: {
@@ -98,7 +111,7 @@ let formattedGold = goldAfterGST.toFixed(8);
         color: '#3399cc',
       },
       modal: {
-        ondismiss: function () {
+        ondismiss: function() {
           alert('Payment process cancelled.');
         },
       },

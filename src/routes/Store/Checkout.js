@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
-
-import { RazorpayLogo } from '../../assets/data/Imagedata'
+import { RazorpayLogo } from '../../assets/data/Imagedata'; // Ensure this path is correct
 
 function Checkout() {
     const { user } = useAuth();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [referralCode, setReferralCode] = useState('');
     const [userData, setUserData] = useState({
         emailaddress: '',
         phonenumber: '',
@@ -16,7 +16,6 @@ function Checkout() {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [shippingAddress, setShippingAddress] = useState(user.address || '');
-    const [paymentMethod] = useState('Credit Card');
 
     useEffect(() => {
         if (user.name) {
@@ -30,22 +29,72 @@ function Checkout() {
                 address: user.address || '',
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]); // Only run this effect when `user` changes
 
-    const handleOrderSubmit = (e) => {
-        e.preventDefault();
-        // Here you would handle order submission, e.g., sending the order to a server
-        console.log('Order submitted:', {
-            cart,
-            shippingAddress,
-            paymentMethod,
-            userData,
-        });
-        alert('Order submitted successfully!');
-        // Optionally, clear the cart and redirect the user
-        localStorage.removeItem('cart');
-        setCart([]);
+    const handleReferralCodeChange = (e) => {
+        const code = e.target.value;
+        setReferralCode(code);
+    };
+
+    const handlePayment = () => {
+        const options = {
+            key: 'rzp_test_XBUIzxvVbOfPLr', // Replace with your Razorpay test key
+            amount: totalAmount * 100, // Amount is in paisa (100 times of amount in currency)
+            currency: 'INR',
+            name: 'Gold Buying App',
+            description: 'Gold purchase',
+            handler: function (response) {
+                alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
+    
+                if (totalAmount >= 10 && referralCode) {
+                    // Call the backend to handle the referral payment
+                    fetch('https://batchugold.com/(apis)/Store/StoreOrders.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            payment_id: response.razorpay_payment_id,
+                            amount: totalAmount,
+                            referral_code: referralCode,
+                            email: user.emailaddress,
+                            phone: user.phonenumber,
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Referral bonus processed successfully');
+                        } else {
+                            alert('Failed to process referral bonus');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            },
+            prefill: {
+                name: `${firstName} ${lastName}`,
+                email: user.emailaddress,
+                contact: user.phonenumber,
+            },
+            notes: {
+                address: user.address,
+                referral_code_gold: referralCode,
+            },
+            theme: {
+                color: '#3399cc',
+            },
+            modal: {
+                ondismiss: function () {
+                    alert('Payment process cancelled.');
+                },
+            },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
     };
 
     const totalCartValue = cart.reduce((total, product) => total + product.price * product.quantity, 0);
@@ -106,6 +155,13 @@ function Checkout() {
                         rows={4}
                         required
                     ></textarea>
+                    <label className="block mb-2 text-gray-700">Referral Code:</label>
+                    <input
+                        type="text"
+                        value={referralCode}
+                        onChange={handleReferralCodeChange}
+                        className="w-full px-3 py-2 mb-4 border rounded"
+                    />
                 </div>
             </div>
 
@@ -161,15 +217,13 @@ function Checkout() {
                         </div>
                         <div className="mb-6">
                             <h3 className="text-xl font-semibold mb-4">Payment Method</h3>
-                            
-                            <div className=" items-center mt-4">
-                            <span>Razorpay Payment Solutions</span>
+                            <div className="flex items-center mt-4">
                                 <img
                                     src={RazorpayLogo} // Replace with your image path
                                     alt="Razorpay Logo"
                                     className="h-8 mr-4"
                                 />
-                                
+                                <span>Razorpay Payment Solutions</span>
                             </div>
                         </div>
                     </>
@@ -179,7 +233,7 @@ function Checkout() {
             <div className="col-span-2 flex justify-end">
                 <button
                     type="submit"
-                    onClick={handleOrderSubmit}
+                    onClick={handlePayment}
                     className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
                     Place Order - ₹{totalAmount.toFixed(2)}
