@@ -4,6 +4,8 @@ import GoldCoin from '../../assets/common/Gold_coin.png'
 import SilverCoin from '../../assets/common/Silver_coin.png'
 import UPI from '../../assets/common/UPi.svg'
 import Goldraw from '../../assets/common/goldraw.png'
+import RazorpayLogo from '../../assets/common/Razorpay_logo.svg'
+
 
 import GoldBar from '../../assets/common/Gold_bar.png'
 
@@ -17,7 +19,7 @@ import Godjar_home_video from '../../assets/home/Godjar_home_video.mp4'
 
 export {
   /*Company Logos */
-  TheGoldJar1080p,TheGoldJartitle,
+  TheGoldJar1080p,TheGoldJartitle,RazorpayLogo,
 
   /*Common */
   GoldCoin,SilverCoin,UPI,Goldraw,GoldBar,

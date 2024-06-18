@@ -56,8 +56,8 @@ const App = () => {
         <Route path="/MarketPlace/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
 
         <Route path="/Store" element={<Store />} />
-        <Route path="/Store/cart" element={<Cart />} />
-        <Route path="/Store/checkout" element={<Checkout />} />
+        <Route path="/Store/cart" element={user ? <Cart /> : <Navigate to="/signin" />} />
+        <Route path="/Store/checkout" element={user ? <Checkout /> : <Navigate to="/signin" />} />
 
         <Route path="/*" element={<Error404 />} />
       </Routes>
