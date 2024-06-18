@@ -38,7 +38,7 @@ function Checkout() {
 
     const handlePayment = () => {
         const options = {
-            key: 'rzp_test_XBUIzxvVbOfPLr', // Replace with your Razorpay test key
+            key: 'rzp_test_qjbYOaA0BlqnRS', // Replace with your Razorpay test key
             amount: totalAmount * 100, // Amount is in paisa (100 times of amount in currency)
             currency: 'INR',
             name: 'Gold Buying App',
@@ -48,7 +48,7 @@ function Checkout() {
     
                 if (totalAmount >= 10 && referralCode) {
                     // Call the backend to handle the referral payment
-                    fetch('https://batchugold.com/(apis)/Store/StoreOrders.php', {
+                    fetch('https://batchugold.com/(apis)/goldtransations.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -82,6 +82,8 @@ function Checkout() {
             notes: {
                 address: user.address,
                 referral_code_gold: referralCode,
+                product_type: 'Store', // Set product_type dynamically
+                products: 'Iteams', // Set products dynamically
             },
             theme: {
                 color: '#3399cc',

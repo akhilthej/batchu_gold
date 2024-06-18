@@ -8,8 +8,6 @@ const GoldBuying = () => {
   const [gold, setGold] = useState(0);
   const [referralCode, setReferralCode] = useState('');
   const [goldPricePerGram, setGoldPricePerGram] = useState(0); // State to hold gold price
-  const [productType] = useState('Regular Savings'); // Fixed product type
-  const [products] = useState('Raw Gold'); // Fixed product
   const [formattedGold, setFormattedGold] = useState('');
 
   useEffect(() => {
@@ -33,9 +31,9 @@ const GoldBuying = () => {
   }, []); // Empty dependency array ensures it runs only once
 
   useEffect(() => {
-    // Calculate the amount of gold after applying -30% GST
+    // Calculate the amount of gold after applying -3% GST
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.35); // Applying -30% GST
+      const goldAfterGST = gold * (1 - 0.03); // Applying -3% GST
       const formattedGold = goldAfterGST.toFixed(8); // Format to 8 decimal places
       setFormattedGold(formattedGold);
     };
@@ -76,12 +74,16 @@ const GoldBuying = () => {
             body: JSON.stringify({
               payment_id: response.razorpay_payment_id,
               amount: amount,
-              product_type: productType,
-              products: products,
               email: user.emailaddress,
               phone: user.phonenumber,
               referral_code: referralCode,
               created_at: currentDateTime,
+              notes: {
+                address: 'Gold Buying App Corporate Office',
+                referral_code_gold: referralCode,
+                product_type: 'Referral', // Set product_type dynamically
+                products: 'Raw Gold', // Set products dynamically
+              },
             }),
           })
             .then(response => response.json())
@@ -106,6 +108,8 @@ const GoldBuying = () => {
       notes: {
         address: 'Gold Buying App Corporate Office',
         referral_code_gold: referralCode,
+        product_type: 'Regular Savings - Digital Gold', // Set product_type dynamically
+        products: 'Raw Gold', // Set products dynamically
       },
       theme: {
         color: '#3399cc',
@@ -116,6 +120,7 @@ const GoldBuying = () => {
         },
       },
     };
+
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
@@ -149,17 +154,13 @@ const GoldBuying = () => {
             />
           </>
         )}
-        {amount >= 10 && (
-          <>
-            <label className="block mb-2 text-gray-700">Referral Code:</label>
-            <input
-              type="text"
-              value={referralCode}
-              onChange={handleReferralCodeChange}
-              className="w-full px-3 py-2 mb-4 border rounded"
-            />
-          </>
-        )}
+        <label className="block mb-2 text-gray-700">Referral Code:</label>
+        <input
+          type="text"
+          value={referralCode}
+          onChange={handleReferralCodeChange}
+          className="w-full px-3 py-2 mb-4 border rounded"
+        />
         <p className="mb-4">Gold you will receive after GST: {formattedGold} grams</p>
         <button
           onClick={handlePayment}

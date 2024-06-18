@@ -69,6 +69,12 @@ const Navbar = () => {
             <i className="mdi mdi-menu mdi-24px"></i>
           </button>
 
+           {/* Logo */}
+           <Link to="/" className="flex items-center px-2">
+            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-12 h-auto " />
+            <img src={TheGoldJartitle} alt="csdlogo" className="cursor-pointer w-36 h-auto pl-2 hidden md:block " />
+          </Link>
+
         
         </div>
 
@@ -76,11 +82,11 @@ const Navbar = () => {
         <div className="flex items-center relative ">
           <LiveGoldPrice />
 
-            {/* Logo */}
-            <Link to="/" className="flex items-center px-2">
-            <img src={TheGoldJar1080p} alt="csdlogo" className="cursor-pointer w-12 h-auto " />
-            <img src={TheGoldJartitle} alt="csdlogo" className="cursor-pointer w-36 h-auto pl-2 hidden md:block " />
-          </Link>
+         <Link to='/Store/cart'> <button className="text-black py-1 px-3 rounded-lg">
+            <i className="mdi mdi-cart mdi-24px"></i>
+          </button></Link>
+
+           
 
 
         </div>
