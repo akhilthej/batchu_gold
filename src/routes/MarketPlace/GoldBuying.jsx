@@ -66,7 +66,7 @@ const GoldBuying = () => {
 
         if (amount >= 10) {
           // Call the backend to handle the payment
-          fetch('https://batchugold.com/(apis)/goldtransations.php', {
+          fetch('https://batchugold.com/(apis)/Store/Orders.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const GoldBuying = () => {
               notes: {
                 address: 'Gold Buying App Corporate Office',
                 referral_code_gold: referralCode,
-                product_type: 'Referral', // Set product_type dynamically
+                product_type: 'Regular Savings', // Set product_type dynamically
                 products: 'Raw Gold', // Set products dynamically
               },
             }),
@@ -108,7 +108,7 @@ const GoldBuying = () => {
       notes: {
         address: 'Gold Buying App Corporate Office',
         referral_code_gold: referralCode,
-        product_type: 'Regular Savings - Digital Gold', // Set product_type dynamically
+        product_type: 'Regular Savings', // Set product_type dynamically
         products: 'Raw Gold', // Set products dynamically
       },
       theme: {

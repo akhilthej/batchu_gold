@@ -46,9 +46,9 @@ function Checkout() {
             handler: function (response) {
                 alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
     
-                if (totalAmount >= 10 && referralCode) {
+                if (totalAmount >= 2000 && referralCode) {
                     // Call the backend to handle the referral payment
-                    fetch('https://batchugold.com/(apis)/goldtransations.php', {
+                    fetch('https://batchugold.com/(apis)/Store/Orders.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -59,6 +59,12 @@ function Checkout() {
                             referral_code: referralCode,
                             email: user.emailaddress,
                             phone: user.phonenumber,
+                            notes: {
+                                address: 'Gold Buying App Corporate Office',
+                                referral_code_gold: referralCode,
+                                product_type: 'Store', // Set product_type dynamically
+                                products: 'Iteams', // Set products dynamically
+                              },
                         }),
                     })
                     .then(response => response.json())
@@ -82,8 +88,6 @@ function Checkout() {
             notes: {
                 address: user.address,
                 referral_code_gold: referralCode,
-                product_type: 'Store', // Set product_type dynamically
-                products: 'Iteams', // Set products dynamically
             },
             theme: {
                 color: '#3399cc',

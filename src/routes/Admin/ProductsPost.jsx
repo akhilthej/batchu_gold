@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 function Productpost() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [makingPercentage, setMakingPercentage] = useState(''); // Updated
     const [productCatalogue, setProductCatalogue] = useState('Gold Coin');
     const [weight, setWeight] = useState('');
     const [image, setImage] = useState(null);
@@ -29,7 +29,7 @@ function Productpost() {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('price', price);
+        formData.append('making_percentage', makingPercentage); // Updated
         formData.append('product_catalogue', productCatalogue);
         formData.append('weight', weight);
         formData.append('image', image);
@@ -47,7 +47,7 @@ function Productpost() {
             // Reset form after successful upload
             setTitle('');
             setDescription('');
-            setPrice('');
+            setMakingPercentage(''); // Updated
             setProductCatalogue('Gold Coin');
             setWeight('');
             setImage(null);
@@ -88,8 +88,8 @@ function Productpost() {
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} required className='p-2 border rounded'></textarea>
                     </div>
                     <div className='flex flex-col'>
-                        <label className='font-semibold mb-1'>Price:</label>
-                        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} step="0.01" required className='p-2 border rounded' />
+                        <label className='font-semibold mb-1'>Making Percentage:</label> {/* Updated */}
+                        <input type="number" value={makingPercentage} onChange={(e) => setMakingPercentage(e.target.value)} step="0.01" required className='p-2 border rounded' /> {/* Updated */}
                     </div>
                     <div className='flex flex-col'>
                         <label className='font-semibold mb-1'>Product Catalogue:</label>
@@ -119,7 +119,7 @@ function Productpost() {
                         <tr className='bg-gray-200'>
                             <th className='p-2'>Title</th>
                             <th className='p-2'>Description</th>
-                            <th className='p-2'>Price</th>
+                            <th className='p-2'>Making Percentage</th> {/* Updated */}
                             <th className='p-2'>Product Catalogue</th>
                             <th className='p-2'>Weight (g)</th>
                             <th className='p-2'>Image</th>
@@ -131,7 +131,7 @@ function Productpost() {
                             <tr key={product.id} className='border-b'>
                                 <td className='p-2'>{product.title}</td>
                                 <td className='p-2'>{product.description}</td>
-                                <td className='p-2'>₹{product.price}</td>
+                                <td className='p-2'>{product.making_percentage}%</td> {/* Updated */}
                                 <td className='p-2'>{product.product_catalogue}</td>
                                 <td className='p-2'>{product.weight}</td>
                                 <td className='p-2'>
