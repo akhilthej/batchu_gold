@@ -12,7 +12,6 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename="/">
       <HelmetProvider>
-      <LogoLoader/>
         <AuthProvider>
           <App />
         </AuthProvider>

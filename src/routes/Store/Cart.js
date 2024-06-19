@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RiCloseCircleLine } from 'react-icons/ri';
+import { RiCloseCircleLine,RiShoppingCartLine } from 'react-icons/ri';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { Link } from 'react-router-dom';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
@@ -77,10 +77,10 @@ function Cart() {
         const totalPrice = originalProductPrice + makingCharges + gst;
 
         return {
-            totalPrice: totalPrice.toFixed(2),
-            originalProductPrice: originalProductPrice.toFixed(2),
-            makingCharges: makingCharges.toFixed(2),
-            gst: gst.toFixed(2)
+            totalPrice: Math.round(totalPrice),
+            originalProductPrice: Math.round(originalProductPrice),
+            makingCharges: Math.round(makingCharges),
+            gst: Math.round(gst)
         };
     };
 
@@ -91,35 +91,31 @@ function Cart() {
     }, 0);
 
     return (
-        <div className="my-20 mx-auto w-full max-w-screen-lg">
-            <h2 className="text-3xl font-bold mb-6">Shopping Cart</h2>
+        <section>
+        <div className="my-20 mx-auto w-full max-w-screen-lg px-2">
+            <h2 className="text-3xl font-bold mb-6 text-center">Cart</h2>
             {cart.length === 0 ? (
                 <p className="text-xl">Your cart is empty</p>
             ) : (
                 <div>
                     <div className="overflow-x-auto">
                         <table className="min-w-full bg-white border-collapse rounded-lg">
-                            <thead className="bg-gray-200">
+                            <thead className="bg-yellow-500">
                                 <tr>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Product</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Raw Gold</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase"></th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Making</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase"></th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">GST (3%)</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase"></th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Quantity</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase"></th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">Subtotal</th>
-                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase"></th>
+                                    <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-white uppercase">Product</th>
+                                    <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase">Quantity</th>
+                                    <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase">Subtotal</th>
+                                    <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase"></th>
                                 </tr>
                             </thead>
+
+
                             <tbody>
                                 {cart.map((product) => {
-                                    const { totalPrice, originalProductPrice, gst } = calculateTotalPrice(product);
+                                    const { totalPrice, originalProductPrice, gst, makingCharges } = calculateTotalPrice(product);
                                     return (
                                         <tr key={product.id} className="border-b border-gray-200">
-                                            <td className="px-4 py-2 justify-center mx-auto">
+                                            <td className=" p-2  justify-center mx-auto">
                                                 <img
                                                     src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
                                                     alt={product.title}
@@ -127,27 +123,14 @@ function Cart() {
                                                 />
                                                 <div className='flex-col flex'>
                                                     <td className="pt-1 font-bold text-xs flex-col">{product.title}</td>
-                                                    <td className="pb-1 font-medium text-xs"><span className='font-bold'>Price Per Coin:</span> ₹{totalPrice}</td>
+                                                    <td className="pb-1 font-medium text-xs"><span className='font-bold'>Per Coin:</span> ₹{totalPrice}</td>
                                                 </div>
                                             </td>
-                                            <td className="px-4 py-2 text-sm">
-                                                {(originalProductPrice * product.quantity)} ₹
-                                            </td>
-                                            <td className="px-4 py-2 text-sm">
-                                               +
-                                            </td>
+                                       
 
-                                            <td className="px-4 py-2 text-sm">{( ((product.making_percentage / 100) * originalProductPrice)  * product.quantity)} ₹</td>
-                                            <td className="px-4 py-2 text-sm">
-                                               +
-                                            </td>
+                                           
 
-                                            <td className="px-4 py-2 text-sm">{(gst * product.quantity)} ₹</td>
-                                            <td className="px-4 py-2 text-sm">
-                                               +
-                                            </td>
-
-                                            <td className="px-4 py-2 text-sm">
+                                            <td className="text-sm">
                                                 <input
                                                     type="number"
                                                     value={product.quantity}
@@ -155,12 +138,10 @@ function Cart() {
                                                     className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                                                 />
                                             </td>
-                                            <td className="px-4 py-2 text-sm">
-                                               =
-                                            </td>
+                                           
 
-                                            <td className="px-4 py-2 text-sm">₹{(totalPrice * product.quantity).toFixed(2)}</td>
-                                            <td className="px-4 py-2">
+                                            <td className="text-sm">₹{(totalPrice * product.quantity)}</td>
+                                            <td className="">
                                                 <RiCloseCircleLine
                                                     className="h-6 w-6 text-red-500 cursor-pointer"
                                                     onClick={() => removeFromCart(product)}
@@ -173,30 +154,41 @@ function Cart() {
                         </table>
                     </div>
                     
-                    <div className="mt-6">
-                        <h2 className="text-2xl font-bold mb-4">Cart Totals</h2>
-                        <div className="flex justify-between items-center border-t border-gray-300 py-4">
-                            <div>
-                                <p className="text-lg font-semibold">Shipping:</p>
+                   
+                      
+                  
+                            <div className='mt-10'>
+                                <p className="text-lg font-semibold p-2">Shipping:</p>
+                                <div className="flex justify-between items-center border-t border-gray-300 p-2" />
+                               
                                 <p className="text-sm">{user.address}</p>
                             </div>
-                            <div>
-                                <p className="text-lg font-semibold">Total Cart Value:</p>
-                                <p className="text-xl font-bold">₹{totalCartValue.toFixed(2)}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-end mt-6">
-                        <Link to="/Store/checkout">
-                            <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                                Proceed to Checkout
-                            </button>
-                        </Link>
-                    </div>
                 </div>
             )}
         </div>
+
+
+        <div className="flex z-50 fixed w-full bottom-0 bg-white drop-shadow-xl">
+      <div className="w-1/2  flex items-center justify-center">
+      <div className='text-center'>
+      <span className='"text-gray-700 text-sm'>Total Cart Value</span>
+      <p className="text-xl font-bold">₹{Math.round(totalCartValue)}</p>
+      </div></div>
+
+      <button type="submit" className="w-1/2 bg-yellow-500  hover:bg-orange-600 transition duration-300 flex items-center justify-center">
+      
+      <Link to="/Store/checkout">
+      <button className="flex items-center justify-center text-white ">
+        <RiShoppingCartLine className="h-6 w-8 text-white" />
+         Checkout
+      </button>
+    </Link>
+          
+
+      </button>
+    </div>
+
+        </section>
     );
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { RazorpayLogo } from '../../assets/data/Imagedata'; // Ensure this path is correct
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
+import { FaLock } from 'react-icons/fa';
 
 function Checkout() {
     const { user } = useAuth();
@@ -85,7 +86,7 @@ function Checkout() {
                                 referral_code_gold: referralCode,
                                 product_type: 'Store', // Set product_type dynamically
                                 products: 'Items', // Set products dynamically
-                              },
+                            },
                         }),
                     })
                     .then(response => response.json())
@@ -135,7 +136,7 @@ function Checkout() {
 
         const totalPrice = originalProductPrice + makingCharges + gst;
 
-        return totalPrice;
+        return Math.round(totalPrice); // Return the total price rounded to the nearest whole number
     };
 
     const totalCartValue = cart.reduce((total, product) => {
@@ -147,7 +148,8 @@ function Checkout() {
     const totalAmount = totalCartValue + shippingCharge;
 
     return (
-        <div className="mt-20 mx-auto w-full max-w-screen-lg grid grid-cols-1 gap-8 md:grid-cols-2">
+        <section>
+        <div className="py-20 mx-auto w-full grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Left side: Customer Details */}
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold mb-6">Your Details</h2>
@@ -226,6 +228,18 @@ function Checkout() {
                                             Product
                                         </th>
                                         <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
+                                            Raw Gold
+                                        </th>
+                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
+                                            Making
+                                        </th>
+                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
+                                            GST 3%
+                                        </th>
+                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
+                                        Quantity
+                                        </th>
+                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
                                             Subtotal
                                         </th>
                                     </tr>
@@ -233,61 +247,90 @@ function Checkout() {
                                 <tbody>
                                     {cart.map((product) => {
                                         const totalPrice = calculateTotalPrice(product);
+                                        const originalProductPrice = Math.round((goldPrice / 1) * product.weight); // Assuming goldPrice is per gram
+                                        const makingCharges = Math.round((product.making_percentage / 100) * originalProductPrice);
+                                        const gst = Math.round(0.03 * (originalProductPrice + makingCharges));
                                         return (
                                             <tr key={product.id} className="border-b border-gray-200">
-                                                <td className="px-4 py-2 text-sm">{product.title}</td>
-                                                <td className="px-4 py-2 text-sm">₹{(totalPrice * product.quantity).toFixed(2)}</td>
+                                            <td className="px-4 py-2 justify-center mx-auto">
+                                                <img
+                                                    src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
+                                                    alt={product.title}
+                                                    className="w-16 h-16 object-cover rounded"
+                                                />
+                                                <div className='flex-col flex'>
+                                                    <td className="pt-1 font-bold text-xs flex-col">{product.title}</td>
+                                                    <td className="pb-1 font-medium text-xs"><span className='font-bold'>Price Per Coin:</span> ₹{(totalPrice)}</td>
+                                                </div>
+                                            </td>
+
+                                            <td className="px-4 py-2 text-sm"> {(originalProductPrice * product.quantity)} ₹</td>
+                                            <td className="px-4 py-2 text-sm">{(makingCharges * product.quantity)} ₹</td>
+                                            <td className="px-4 py-2 text-sm">{(gst * product.quantity)} ₹</td>
+                                            <td className="px-4 py-2 text-sm">{product.quantity}</td>
+                                            <td className="px-4 py-2 text-sm">₹{(totalPrice * product.quantity)}</td>
                                             </tr>
                                         );
                                     })}
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colSpan="1" className="text-right font-semibold px-4 py-2">
+                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
                                             Subtotal:
                                         </td>
-                                        <td className="px-4 py-2">₹{totalCartValue.toFixed(2)}</td>
+                                        <td className="px-4 py-2">₹{Math.round(totalCartValue)}</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan="1" className="text-right font-semibold px-4 py-2">
+                                    
+                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
                                             Shipping:
                                         </td>
-                                        <td className="px-4 py-2">₹{shippingCharge.toFixed(2)}</td>
+                                        <td className="px-4 py-2">₹{shippingCharge}</td>
                                     </tr>
                                     <tr className="bg-gray-200">
-                                        <td colSpan="1" className="text-right font-semibold px-4 py-2">
+                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
                                             Total:
                                         </td>
-                                        <td className="px-4 py-2">₹{totalAmount.toFixed(2)}</td>
+                                        <td className="px-4 py-2">₹{Math.round(totalAmount)}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
-                        <div className="mb-6">
-                            <h3 className="text-xl font-semibold mb-4">Payment Method</h3>
-                            <div className="flex items-center mt-4">
-                                <img
-                                    src={RazorpayLogo} // Replace with your image path
-                                    alt="Razorpay Logo"
-                                    className="h-8 mr-4"
-                                />
-                                <span>Razorpay Payment Solutions</span>
-                            </div>
-                        </div>
+                        
                     </>
                 )}
             </div>
 
-            <div className="col-span-2 flex justify-end">
-                <button
-                    type="submit"
-                    onClick={handlePayment}
-                    className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-                >
-                    Place Order - ₹{totalAmount.toFixed(2)}
-                </button>
+           
+            <div className="flex z-50 fixed w-full bottom-0 bg-white shadow-2xl drop-shadow-xl">
+      <div className="w-1/2  flex items-center justify-center">
+      <div className='text-center'>
+      <h3 className='text-xs font-semibold -mb-2'>Payment Method</h3>
+            <img src={RazorpayLogo} // Replace with your image path
+                alt="Razorpay Logo"
+                className="h-7"/>
+            <span className="text-gray-700 text-xs">Razorpay Payment Solutions</span>
+      </div></div>
+
+      <button type="submit"
+                onClick={handlePayment} className="w-1/2 bg-yellow-500  hover:bg-orange-600 transition duration-300 flex items-center justify-center">
+      <div>
+         
+            <div className="text-white font-bold text-sm flex flex-col items-center"
+            > <FaLock className="text-white mb-1 mx-auto" />
+                <span>Place Order - ₹{Math.round(totalAmount)}</span>
             </div>
+            </div>
+      </button>
+    </div>
+
+
+
         </div>
+
+       
+       
+        </section>
     );
 }
 
