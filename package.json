@@ -50,6 +50,7 @@
   "devDependencies": {
     "eslint-config-react-app": "^7.0.1",
     "gh-pages": "^4.0.0",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "sass": "^1.77.6"
   }
 }
