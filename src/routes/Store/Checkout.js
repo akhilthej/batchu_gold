@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { RazorpayLogo } from '../../assets/data/Imagedata'; // Ensure this path is correct
+import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
 function Checkout() {
     const { user } = useAuth();
@@ -16,6 +17,8 @@ function Checkout() {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [shippingAddress, setShippingAddress] = useState(user.address || '');
+    const [goldPrice, setGoldPrice] = useState(null);
+    const goldpricelive = GOLD_LIVE_PRICE;
 
     useEffect(() => {
         if (user.name) {
@@ -31,6 +34,24 @@ function Checkout() {
         }
     }, [user]); // Only run this effect when `user` changes
 
+    useEffect(() => {
+        const fetchGoldPrice = async () => {
+            try {
+                const response = await fetch(goldpricelive);
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    const goldData = data.find(item => item.product_name === 'Gold');
+                    if (goldData) {
+                        setGoldPrice(goldData.price);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching gold price:', error);
+            }
+        };
+        fetchGoldPrice();
+    }, [goldpricelive]);
+
     const handleReferralCodeChange = (e) => {
         const code = e.target.value;
         setReferralCode(code);
@@ -45,7 +66,7 @@ function Checkout() {
             description: 'Gold purchase',
             handler: function (response) {
                 alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-    
+
                 if (totalAmount >= 2000 && referralCode) {
                     // Call the backend to handle the referral payment
                     fetch('https://batchugold.com/(apis)/Store/Orders.php', {
@@ -63,7 +84,7 @@ function Checkout() {
                                 address: 'Gold Buying App Corporate Office',
                                 referral_code_gold: referralCode,
                                 product_type: 'Store', // Set product_type dynamically
-                                products: 'Iteams', // Set products dynamically
+                                products: 'Items', // Set products dynamically
                               },
                         }),
                     })
@@ -103,7 +124,25 @@ function Checkout() {
         rzp.open();
     };
 
-    const totalCartValue = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+    const calculateTotalPrice = (product) => {
+        if (!goldPrice) return 0;
+
+        const goldPricePerGram = goldPrice / 1; // Assuming Live goldPrice is per gram
+        const originalProductPrice = goldPricePerGram * product.weight; // Assuming goldPrice is per gram
+
+        const makingCharges = (product.making_percentage / 100) * originalProductPrice;
+        const gst = 0.03 * (originalProductPrice + makingCharges);
+
+        const totalPrice = originalProductPrice + makingCharges + gst;
+
+        return totalPrice;
+    };
+
+    const totalCartValue = cart.reduce((total, product) => {
+        const totalPrice = calculateTotalPrice(product);
+        return total + (totalPrice * product.quantity);
+    }, 0);
+
     const shippingCharge = 150; // Example shipping charge
     const totalAmount = totalCartValue + shippingCharge;
 
@@ -192,12 +231,15 @@ function Checkout() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cart.map((product) => (
-                                        <tr key={product.id} className="border-b border-gray-200">
-                                            <td className="px-4 py-2 text-sm">{product.title}</td>
-                                            <td className="px-4 py-2 text-sm">₹{(product.price * product.quantity).toFixed(2)}</td>
-                                        </tr>
-                                    ))}
+                                    {cart.map((product) => {
+                                        const totalPrice = calculateTotalPrice(product);
+                                        return (
+                                            <tr key={product.id} className="border-b border-gray-200">
+                                                <td className="px-4 py-2 text-sm">{product.title}</td>
+                                                <td className="px-4 py-2 text-sm">₹{(totalPrice * product.quantity).toFixed(2)}</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                                 <tfoot>
                                     <tr>

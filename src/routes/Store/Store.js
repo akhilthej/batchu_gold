@@ -93,7 +93,7 @@ function Store() {
 
     return (
         <div className="my-20 container mx-auto p-4 flex">
-            <div className="w-full p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="w-full p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                     <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                         <img
