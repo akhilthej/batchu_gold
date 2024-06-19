@@ -243,12 +243,12 @@ function Checkout() {
                                             </td>
 
                                             <div className='flex-col flex py-2'>
-                                            <td className="text-[10px] bg-yellow-500 text-center">PureGold (24K)</td>
+                                            <td className="text-[10px] bg-yellow-400 text-center">PureGold (24K)</td>
                                             <span className='text-sm bg-white font-bold text-center'> {(originalProductPrice * product.quantity)} ₹</span> 
 
                                             <td className="text-[10px] bg-yellow-600 text-center">Quantity :<span className=' font-bold'> {product.quantity}</span> </td>
 
-                                            <td className="text-[10px] bg-yellow-500 text-center">Making Charges</td>
+                                            <td className="text-[10px] bg-yellow-400  text-center">Making Charges</td>
                                             <span className='text-sm font-bold text-center'> {(makingCharges * product.quantity)} ₹</span> 
                                             <td className="text-[10px] bg-yellow-600 text-center">GST (3%) </td>
                                             <span className='text-sm font-bold text-center'> {(gst * product.quantity)} ₹</span> 
@@ -280,7 +280,7 @@ function Checkout() {
                                         <td colSpan="2" className="text-right font-semibold px-4 py-2 bg-yellow-600 ">
                                             Total :
                                         </td>
-                                        <td className="px-4 py-2 bg-yellow-500 ">₹{Math.round(totalAmount)}</td>
+                                        <td className="px-4 py-2 bg-yellow-400  ">₹{Math.round(totalAmount)}</td>
                                     </tr>
                                 </tfoot>
                             </table>
