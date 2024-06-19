@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RiCloseCircleLine,RiShoppingCartLine } from 'react-icons/ri';
+import { RiCloseCircleLine,RiHome2Line,RiShoppingCartLine, RiStore3Fill } from 'react-icons/ri';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { Link } from 'react-router-dom';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
@@ -92,10 +92,14 @@ function Cart() {
 
     return (
         <section>
-        <div className="my-20 mx-auto w-full max-w-screen-lg px-2">
-            <h2 className="text-3xl font-bold mb-6 text-center">Cart</h2>
+        <div className="my-20 mx-auto w-full max-w-screen-lg">
+        <div className='flex justify-between'>
+         <Link to="/"><div className='bg-yellow-500 p-2 rounded-r-lg text-white'> <RiHome2Line className="h-6 w-8 text-white text-center mx-auto" /> <p className='text-[8px] text-center'>HOME</p></div></Link>
+            <h2 className="text-3xl font-bold mb-6 text-center">CART</h2>
+            <Link to="/Store"><div className='bg-yellow-500 p-2 rounded-l-lg text-white'><RiStore3Fill className="h-6 w-8 text-white  mx-auto" /><p className='text-[8px] text-center'>STORE</p></div></Link></div>
+            
             {cart.length === 0 ? (
-                <p className="text-xl">Your cart is empty</p>
+                <p className="text-sm">Your cart is empty</p>
             ) : (
                 <div>
                     <div className="overflow-x-auto">
@@ -176,14 +180,14 @@ function Cart() {
       <p className="text-xl font-bold">₹{Math.round(totalCartValue)}</p>
       </div></div>
 
-      <div className="w-1/2  flex items-center bg-yellow-500 hover:bg-orange-600 transition duration-300  justify-center">
+      <button className="w-1/2  flex items-center bg-yellow-500 hover:bg-orange-600 transition duration-300  justify-center">
       <Link to="/Store/checkout">
       <button className="flex items-center justify-center text-white ">
         <RiShoppingCartLine className="h-6 w-8 text-white" />
          Checkout
       </button>
     </Link>
-      </div>
+      </button>
     </div>
 
         </section>

@@ -148,7 +148,7 @@ function Checkout() {
     const totalAmount = totalCartValue + shippingCharge;
 
     return (
-        <section>
+        <section className='overflow-hidden '>
         <div className="py-20 mx-auto w-full grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Left side: Customer Details */}
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -222,28 +222,7 @@ function Checkout() {
                         <div className="mb-6">
                             <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
                             <table className="min-w-full bg-white border-collapse rounded-lg">
-                                <thead className="bg-gray-200">
-                                    <tr>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                            Product
-                                        </th>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                            Raw Gold
-                                        </th>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                            Making
-                                        </th>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                            GST 3%
-                                        </th>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                        Quantity
-                                        </th>
-                                        <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700 uppercase">
-                                            Subtotal
-                                        </th>
-                                    </tr>
-                                </thead>
+                                
                                 <tbody>
                                     {cart.map((product) => {
                                         const totalPrice = calculateTotalPrice(product);
@@ -252,11 +231,10 @@ function Checkout() {
                                         const gst = Math.round(0.03 * (originalProductPrice + makingCharges));
                                         return (
                                             <tr key={product.id} className="border-b border-gray-200">
-                                            <td className="px-4 py-2 justify-center mx-auto">
-                                                <img
-                                                    src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
+                                            <td className=" justify-center mx-auto">
+                                                <img src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
                                                     alt={product.title}
-                                                    className="w-16 h-16 object-cover rounded"
+                                                    className="w-16 h-16 object-cover rounded "
                                                 />
                                                 <div className='flex-col flex'>
                                                     <td className="pt-1 font-bold text-xs flex-col">{product.title}</td>
@@ -264,34 +242,45 @@ function Checkout() {
                                                 </div>
                                             </td>
 
-                                            <td className="px-4 py-2 text-sm"> {(originalProductPrice * product.quantity)} ₹</td>
-                                            <td className="px-4 py-2 text-sm">{(makingCharges * product.quantity)} ₹</td>
-                                            <td className="px-4 py-2 text-sm">{(gst * product.quantity)} ₹</td>
-                                            <td className="px-4 py-2 text-sm">{product.quantity}</td>
-                                            <td className="px-4 py-2 text-sm">₹{(totalPrice * product.quantity)}</td>
+                                            <div className='flex-col flex py-2'>
+                                            <td className="text-[10px] bg-yellow-500 text-center">PureGold (24K)</td>
+                                            <span className='text-sm bg-white font-bold text-center'> {(originalProductPrice * product.quantity)} ₹</span> 
+
+                                            <td className="text-[10px] bg-yellow-600 text-center">Quantity :<span className=' font-bold'> {product.quantity}</span> </td>
+
+                                            <td className="text-[10px] bg-yellow-500 text-center">Making Charges</td>
+                                            <span className='text-sm font-bold text-center'> {(makingCharges * product.quantity)} ₹</span> 
+                                            <td className="text-[10px] bg-yellow-600 text-center">GST (3%) </td>
+                                            <span className='text-sm font-bold text-center'> {(gst * product.quantity)} ₹</span> 
+                                            
+                                            </div>
+
+                                            <td className="text-[10px] font-bold text-center">SUBTOTAL<br/><span className='text-sm font-bold'> ₹{(totalPrice * product.quantity)}</span> </td>
+                                     
+
                                             </tr>
                                         );
                                     })}
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
+                                        <td colSpan="2" className="text-right font-semibold px-4 py-2">
                                             Subtotal:
                                         </td>
                                         <td className="px-4 py-2">₹{Math.round(totalCartValue)}</td>
                                     </tr>
                                     <tr>
                                     
-                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
+                                        <td colSpan="2" className="text-right font-semibold px-4 py-2">
                                             Shipping:
                                         </td>
                                         <td className="px-4 py-2">₹{shippingCharge}</td>
                                     </tr>
                                     <tr className="bg-gray-200">
-                                        <td colSpan="5" className="text-right font-semibold px-4 py-2">
-                                            Total:
+                                        <td colSpan="2" className="text-right font-semibold px-4 py-2 bg-yellow-600 ">
+                                            Total :
                                         </td>
-                                        <td className="px-4 py-2">₹{Math.round(totalAmount)}</td>
+                                        <td className="px-4 py-2 bg-yellow-500 ">₹{Math.round(totalAmount)}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -318,7 +307,7 @@ function Checkout() {
          
             <div className="text-white font-bold text-sm flex flex-col items-center"
             > <FaLock className="text-white mb-1 mx-auto" />
-                <span>Place Order - ₹{Math.round(totalAmount)}</span>
+                <span>Place Order <br/><span>₹{Math.round(totalAmount)}</span></span>
             </div>
             </div>
       </button>
