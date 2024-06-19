@@ -1,30 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Goldraw } from '../../assets/data/Imagedata';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
 const LiveGoldPrice = () => {
   const [goldPrice, setGoldPrice] = useState(null);
+  const [countdown, setCountdown] = useState(240); // Initial countdown value in seconds for 4 minutes
   const goldpricelive = GOLD_LIVE_PRICE;
 
-  useEffect(() => {
-    const fetchGoldPrice = async () => {
-      try {
-        const response = await fetch(goldpricelive);
-        const data = await response.json();
-        // Assuming the API response has a structure like { price: 8000 }
-        if (data && data.length > 0) {
-          const goldData = data.find(item => item.product_name === 'Gold');
-          if (goldData) {
-            setGoldPrice(goldData.price);
-          }
+  // Function to fetch gold price from API
+  const fetchGoldPrice = async () => {
+    try {
+      const response = await fetch(goldpricelive);
+      const data = await response.json();
+      if (data && data.length > 0) {
+        const goldData = data.find(item => item.product_name === 'Gold');
+        if (goldData) {
+          setGoldPrice(goldData.price);
         }
-      } catch (error) {
-        console.error('Error fetching gold price:', error);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching gold price:', error);
+    }
+  };
 
+  // Fetch gold price initially when component mounts
+  useEffect(() => {
     fetchGoldPrice();
   }, [goldpricelive]);
+
+  // Set up interval to fetch gold price every 4 minutes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchGoldPrice();
+      setCountdown(240); // Reset countdown to 4 minutes (240 seconds) after each fetch
+    }, 240000); // 4 minutes in milliseconds (240000)
+
+    // Clean up interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array means this effect runs only once on mount
+
+  // Countdown timer effect to decrease countdown every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(prevCountdown => prevCountdown - 1);
+    }, 1000); // 1 second interval
+
+    // Clear interval on component unmount
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="flex items-center">
@@ -35,11 +58,14 @@ const LiveGoldPrice = () => {
           <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
         </div>
         <div className="flex flex-col">
-          <span className="text-black font-bold text-[9px] sm:text-xs leading-tight">
+          <span className="text-black font-medium text-[9px] sm:text-xs leading-tight">
             {`Live Gold Price`}
           </span>
           <span className="text-black font-bold text-[12px] md:text-sm leading-tight">
             {goldPrice !== null ? `₹${goldPrice.toFixed(2)}/gm` : 'Loading...'}
+          </span>
+          <span className="text-black font-medium text-[9px] sm:text-xs leading-tight">
+            {`Updating in ${Math.floor(countdown / 60)}:${countdown % 60 < 10 ? '0' : ''}${countdown % 60}`}
           </span>
         </div>
       </div>

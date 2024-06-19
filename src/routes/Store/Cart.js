@@ -137,7 +137,7 @@ function Cart() {
                                                +
                                             </td>
 
-                                            <td className="px-4 py-2 text-sm">{(product.making_percentage / 1)}%</td>
+                                            <td className="px-4 py-2 text-sm">{( ((product.making_percentage / 100) * originalProductPrice)  * product.quantity)} ₹</td>
                                             <td className="px-4 py-2 text-sm">
                                                +
                                             </td>
