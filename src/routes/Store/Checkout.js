@@ -302,7 +302,7 @@ function Checkout() {
             </div>
 
            
-            <div className="flex z-50 fixed w-full bottom-0 bg-white shadow-2xl drop-shadow-xl">
+            <div className="flex z-50 fixed w-full bottom-0 bg-white h-[70px]">
       <div className="w-1/2  flex items-center justify-center">
       <div className='text-center'>
       <h3 className='text-xs font-semibold -mb-2'>Payment Method</h3>

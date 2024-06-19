@@ -135,7 +135,7 @@ function Cart() {
                                                     type="number"
                                                     value={product.quantity}
                                                     onChange={(e) => updateQuantity(product, parseInt(e.target.value))}
-                                                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500"
                                                 />
                                             </td>
                                            
@@ -168,24 +168,22 @@ function Cart() {
         </div>
 
 
-        <div className="flex z-50 fixed w-full bottom-0 bg-white drop-shadow-xl">
-      <div className="w-1/2  flex items-center justify-center">
+        <div className="flex z-50 fixed w-full bottom-0 bg-white h-[70px] drop-shadow-xl">
+
+      <div className="w-1/2  flex items-center  justify-center">
       <div className='text-center'>
       <span className='"text-gray-700 text-sm'>Total Cart Value</span>
       <p className="text-xl font-bold">₹{Math.round(totalCartValue)}</p>
       </div></div>
 
-      <button type="submit" className="w-1/2 bg-yellow-500  hover:bg-orange-600 transition duration-300 flex items-center justify-center">
-      
+      <div className="w-1/2  flex items-center bg-yellow-500 hover:bg-orange-600 transition duration-300  justify-center">
       <Link to="/Store/checkout">
       <button className="flex items-center justify-center text-white ">
         <RiShoppingCartLine className="h-6 w-8 text-white" />
          Checkout
       </button>
     </Link>
-          
-
-      </button>
+      </div>
     </div>
 
         </section>
