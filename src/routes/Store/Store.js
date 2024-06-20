@@ -24,7 +24,6 @@ function Store() {
  <div className="w-1/2  flex items-center justify-center">
  
  <Link to='/Store'>
- <div className=" bg-black/30 w-full h-40 text-center z-10 absolute" />
  <img src={SilverCoin} alt="SilverCoin" className="md:w-[20%] w-[50%] h-auto mx-auto m-2" />
  <p className="text-[10px] text-white bg-orange-400  text-center">Silver Coin - Coming soon</p>
  </Link>

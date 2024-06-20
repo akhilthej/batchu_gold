@@ -1,181 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/GlobalProvider';
-import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
+import React, { useState } from 'react';
 
-const GoldBuying = () => {
-  const { user } = useAuth();
-  const [amount, setAmount] = useState(10);
-  const [gold, setGold] = useState(0);
-  const [referralCode, setReferralCode] = useState('');
-  const [goldPricePerGram, setGoldPricePerGram] = useState(0);
-  const [formattedGold, setFormattedGold] = useState('');
+const App = () => {
+  const [merchantTransactionId, setMerchantTransactionId] = useState('');
+  const [merchantUserId, setMerchantUserId] = useState('');
+  const [amount, setAmount] = useState('');
+  const [merchantOrderId, setMerchantOrderId] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [shortName, setShortName] = useState('');
 
-  const amountValues = [100, 200, 500, 1000];
+  const handlePay = async () => {
+    const formData = new FormData();
+    formData.append('merchantTransactionId', merchantTransactionId);
+    formData.append('merchantUserId', merchantUserId);
+    formData.append('amount', amount);
+    formData.append('merchantOrderId', merchantOrderId);
+    formData.append('mobileNumber', mobileNumber);
+    formData.append('message', message);
+    formData.append('email', email);
+    formData.append('shortName', shortName);
 
-  useEffect(() => {
-    const fetchGoldPrice = async () => {
-      try {
-        const response = await fetch(GOLD_LIVE_PRICE);
-        const data = await response.json();
-        const goldPrice = data.find(item => item.product_name === 'Gold');
-        if (goldPrice) {
-          setGoldPricePerGram(goldPrice.price);
-        } else {
-          console.error('Gold price not found in API response');
-        }
-      } catch (error) {
-        console.error('Error fetching gold price:', error);
+    try {
+      const response = await fetch('https://batchugold.com/(apis)/Store/PhonePe.php', {
+        method: 'POST',
+        body: formData,
+        mode: 'cors',
+      });
+      const data = await response.json();
+      console.log('Response:', data); // Log the response for debugging
+
+      if (data.iframeUrl) {
+        // Open the payment page in a popup window
+        window.open(data.iframeUrl, '_blank', 'width=600,height=600');
+      } else {
+        console.error('Error:', data.error);
       }
-    };
-
-    fetchGoldPrice();
-  }, []);
-
-  useEffect(() => {
-    const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.03);
-      const formattedGold = goldAfterGST.toFixed(8);
-      setFormattedGold(formattedGold);
-    };
-
-    calculateGoldAfterGST();
-  }, [gold]);
-
-  const handleSliderChange = (e) => {
-    const value = Number(e.target.value);
-    setAmount(amountValues[value]);
-    setGold(amountValues[value] / goldPricePerGram);
-  };
-
-  const handleReferralCodeChange = (e) => {
-    const code = e.target.value;
-    setReferralCode(code);
-  };
-
-  const handlePayment = () => {
-    const options = {
-      key: 'rzp_test_qjbYOaA0BlqnRS',
-      amount: amount * 100,
-      currency: 'INR',
-      name: 'Gold Buying App',
-      description: 'Gold purchase',
-      handler: function(response) {
-        alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-
-        const currentDateTime = new Date().toISOString();
-
-        if (amount >= 10) {
-          fetch('https://batchugold.com/(apis)/Store/Orders.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              payment_id: response.razorpay_payment_id,
-              amount: amount,
-              email: user.emailaddress,
-              phone: user.phonenumber,
-              referral_code: referralCode,
-              created_at: currentDateTime,
-              notes: {
-                address: 'Gold Buying App Corporate Office',
-                referral_code_gold: referralCode,
-                product_type: 'Regular Savings - Daily',
-                products: 'Raw Gold',
-              },
-            }),
-          })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                alert('Payment processed successfully');
-              } else {
-                alert('Failed to process payment');
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              alert('Failed to process payment');
-            });
-        }
-      },
-      prefill: {
-        name: user.name || '',
-        email: user.emailaddress,
-        contact: user.phonenumber,
-      },
-      notes: {
-        address: 'Gold Buying App Corporate Office',
-        referral_code_gold: referralCode,
-        product_type: 'Regular Savings - Daily',
-        products: 'Raw Gold',
-      },
-      theme: {
-        color: '#3399cc',
-      },
-      modal: {
-        ondismiss: function() {
-          alert('Payment process cancelled.');
-        },
-      },
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
-    <div className="py-10 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Daily Savings</h1>
-        <label className="block mb-2 text-gray-700">Select Amount (INR):</label>
-        <input
-          type="range"
-          min="0"
-          max={amountValues.length - 1}
-          step="1"
-          value={amountValues.indexOf(amount)}
-          onChange={handleSliderChange}
-          className="w-full"
-        />
-        <div className="text-center mt-2">
-          Rs. {amount} will be saved daily
-        </div>
-        {user && (
-          <>
-            <label className="block mb-2 text-gray-700">Email:</label>
-            <input
-              type="email"
-              value={user.emailaddress}
-              readOnly
-              className="w-full px-3 py-2 mb-4 border rounded bg-gray-200"
-            />
-            <label className="block mb-2 text-gray-700">Phone Number:</label>
-            <input
-              type="text"
-              value={user.phonenumber}
-              readOnly
-              className="w-full px-3 py-2 mb-4 border rounded bg-gray-200"
-            />
-          </>
-        )}
-        <label className="block mb-2 text-gray-700">Referral Code:</label>
+    <div className='mt-20'>
+      <form onSubmit={(e) => { e.preventDefault(); }}>
         <input
           type="text"
-          value={referralCode}
-          onChange={handleReferralCodeChange}
-          className="w-full px-3 py-2 mb-4 border rounded"
+          placeholder="Merchant Transaction ID"
+          value={merchantTransactionId}
+          onChange={(e) => setMerchantTransactionId(e.target.value)}
         />
-        <p className="mb-4">Gold you will receive after GST: {formattedGold} grams</p>
-        <button
-          onClick={handlePayment}
-          className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
-        >
-          Buy Now
-        </button>
-      </div>
+        <input
+          type="text"
+          placeholder="Merchant User ID"
+          value={merchantUserId}
+          onChange={(e) => setMerchantUserId(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Amount (in paisa)"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Merchant Order ID"
+          value={merchantOrderId}
+          onChange={(e) => setMerchantOrderId(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Mobile Number"
+          value={mobileNumber}
+          onChange={(e) => setMobileNumber(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Short Name"
+          value={shortName}
+          onChange={(e) => setShortName(e.target.value)}
+        />
+        <button type="button" onClick={handlePay}>Pay</button>
+      </form>
     </div>
   );
 };
 
-export default GoldBuying;
+export default App;
