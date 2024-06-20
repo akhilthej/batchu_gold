@@ -101,7 +101,7 @@ function GoldCoins() {
 
         <h2 className="text-3xl font-bold mb-6 text-center">Gold Coins</h2>
 
-        <img src={GoldCoin} alt="Gold" className="w-[50%] h-auto mx-auto pb-4" />
+        <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto pb-4" />
 
         <div className=" container px-2 mx-auto flex">
             <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
