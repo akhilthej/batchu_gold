@@ -44,7 +44,7 @@ const Signup = () => {
           emailaddress: emailAddress,
           phonenumber: phoneNumber,
           sex: 'Male', // Assuming default to "Male"
-          role: 'client',
+          role: 'customer',
           password: password,
         })
       });
