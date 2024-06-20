@@ -15,8 +15,8 @@ function TopFeatures() {
           <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
           <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
 
-            <h3 className="text-xl font-semibold mb-2">Regular Saving</h3>
-            <p className="text-lightblue mb-4">Save in 24K Gold,Start saving gold show 10₹.</p>
+            <h3 className="text-xl font-semibold mb-2">Quick Buy</h3>
+            <p className="text-lightblue mb-4">Save in 24K Gold, 10₹.</p>
             <Link to='/MarketPlace/gold-buying'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
           </div>
 
@@ -25,15 +25,24 @@ function TopFeatures() {
 
             <h3 className="text-xl font-semibold mb-2">Daily Save</h3>
             <p className="text-lightblue mb-4">Automate your daily gold buying.</p>
-            <Link to='/MarketPlace/gold-buying'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
+            <Link to='/MarketPlace/gold-buying-daily'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
           </div>
 
           <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
           <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
 
-            <h3 className="text-xl font-semibold mb-2">Planned Saving</h3>
-            <p className="text-lightblue mb-4">invest weekly/monthy</p>
-            <Link to='/MarketPlace/gold-buying'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
+            <h3 className="text-xl font-semibold mb-2">Plan Weekly</h3>
+            <p className="text-lightblue mb-4">invest Weekly</p>
+            <Link to='/MarketPlace/gold-buying-weekly'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
+          </div>
+
+
+          <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
+          <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
+
+            <h3 className="text-xl font-semibold mb-2">Plan Monthly</h3>
+            <p className="text-lightblue mb-4">invest Monthy</p>
+            <Link to='/MarketPlace/gold-buying-weekly'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
           </div>
 
 

@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDelivery, ReturnPolicy, Error404, 
-        Home, Aboutus, Contactus, MarketPlace, GoldBuying, ProfileEdit } from './routes/Routes';
+        Home, Aboutus, Contactus, ProfileEdit,
+        
+        MarketPlace,GoldBuyingDaily, GoldBuying,GoldBuyingWeekly,GoldBuyingMonthly } from './routes/Routes';
 
 import Store from './routes/Store/Store';
+
 import GoldCoins from "./routes/Store/GoldCoins";
+
+
 import Cart from './routes/Store/Cart';
 import Checkout from './routes/Store/Checkout'
+
 
 import Signin from './routes/auth/Signin';
 import Register from './routes/auth/register';
@@ -53,8 +59,12 @@ const App = () => {
         <Route path="/user/paymenthistory" element={<PaymentHistory />} />
         <Route path="/user/profileedit" element={<ProfileEdit />} />
         <Route path="/Admin/ProductPost" element={user ? <ProductPost /> : <Navigate to="/signin" />} />
+
         <Route path="/MarketPlace" element={<MarketPlace />} />
         <Route path="/MarketPlace/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
+        <Route path="/MarketPlace/gold-buying-weekly" element={user ? <GoldBuyingWeekly /> : <Navigate to="/signin" />} />
+        <Route path="/MarketPlace/gold-buying-monthly" element={user ? <GoldBuyingMonthly /> : <Navigate to="/signin" />} />
+        <Route path="/MarketPlace/gold-buying-daily" element={user ? <GoldBuyingDaily /> : <Navigate to="/signin" />} />
 
         <Route path="/Store" element={<Store />} />
         <Route path="/Store/GoldCoins" element={<GoldCoins />} />

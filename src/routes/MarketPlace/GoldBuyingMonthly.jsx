@@ -10,7 +10,7 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [10, 20, 50, 100, 200, 500];
+  const amountValues = [2500, 5500, 10000];
 
   useEffect(() => {
     const fetchGoldPrice = async () => {
@@ -33,7 +33,7 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.3);
+      const goldAfterGST = gold * (1 - 0.03);
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
@@ -80,7 +80,7 @@ const GoldBuying = () => {
               notes: {
                 address: 'Gold Buying App Corporate Office',
                 referral_code_gold: referralCode,
-                product_type: 'Regular Savings',
+                product_type: 'Regular Savings - Monthly',
                 products: 'Raw Gold',
               },
             }),
@@ -127,7 +127,7 @@ const GoldBuying = () => {
   return (
     <div className="py-10 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Quick Gold Buy</h1>
+        <h1 className="text-2xl font-bold mb-4">Monthly Savings</h1>
         <label className="block mb-2 text-gray-700">Select Amount (INR):</label>
         <input
           type="range"

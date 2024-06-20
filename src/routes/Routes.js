@@ -16,6 +16,9 @@ import Contactus from './Common/Contactus';
 
 import MarketPlace from './MarketPlace/MarketPlace';
 import GoldBuying from './MarketPlace/GoldBuying'
+import GoldBuyingDaily from './MarketPlace/GoldBuyingDaily'
+import GoldBuyingWeekly from './MarketPlace/GoldBuyingWeekly'
+import GoldBuyingMonthly from './MarketPlace/GoldBuyingMonthly'
 
 
 import ProfileEdit from "./user/ProfileEdit";
@@ -32,7 +35,7 @@ ReturnPolicy,
 
 ProfileEdit,
 
-MarketPlace,GoldBuying,
+MarketPlace,GoldBuying,GoldBuyingDaily,GoldBuyingWeekly,GoldBuyingMonthly,
 
 
 

@@ -110,6 +110,8 @@ function Checkout() {
             notes: {
                 address: user.address,
                 referral_code_gold: referralCode,
+                product_type: 'Store', // Set product_type dynamically
+                products: 'Items', // Set products dynamically
             },
             theme: {
                 color: '#3399cc',
