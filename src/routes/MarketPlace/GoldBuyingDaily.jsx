@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../hooks/GlobalProvider';
 
 const App = () => {
+  const { user } = useAuth();
+
   const [merchantTransactionId, setMerchantTransactionId] = useState('');
-  const [merchantUserId, setMerchantUserId] = useState('');
   const [amount, setAmount] = useState('');
   const [merchantOrderId, setMerchantOrderId] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
   const [message, setMessage] = useState('');
-  const [email, setEmail] = useState('');
-  const [shortName, setShortName] = useState('');
+  const [iframeUrl, setIframeUrl] = useState(''); // State to hold the iframe URL
+  const [showOverlay, setShowOverlay] = useState(false); // State to control overlay visibility
 
   const handlePay = async () => {
     const formData = new FormData();
     formData.append('merchantTransactionId', merchantTransactionId);
-    formData.append('merchantUserId', merchantUserId);
+    formData.append('merchantUserId', user.name);
     formData.append('amount', amount);
     formData.append('merchantOrderId', merchantOrderId);
-    formData.append('mobileNumber', mobileNumber);
+    formData.append('mobileNumber', user.phonenumber);
     formData.append('message', message);
-    formData.append('email', email);
-    formData.append('shortName', shortName);
+    formData.append('email', user.emailaddress);
+    formData.append('shortName', "BAT_REG_DAILY"); // Static value
 
     try {
       const response = await fetch('https://batchugold.com/(apis)/Store/PhonePe.php', {
@@ -31,8 +32,8 @@ const App = () => {
       console.log('Response:', data); // Log the response for debugging
 
       if (data.iframeUrl) {
-        // Open the payment page in a popup window
-        window.open(data.iframeUrl, '_blank', 'width=600,height=600');
+        setIframeUrl(data.iframeUrl);
+        setShowOverlay(true); // Show the overlay
       } else {
         console.error('Error:', data.error);
       }
@@ -42,58 +43,48 @@ const App = () => {
   };
 
   return (
-    <div className='mt-20'>
-      <form onSubmit={(e) => { e.preventDefault(); }}>
-        <input
-          type="text"
-          placeholder="Merchant Transaction ID"
-          value={merchantTransactionId}
-          onChange={(e) => setMerchantTransactionId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Merchant User ID"
-          value={merchantUserId}
-          onChange={(e) => setMerchantUserId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Amount (in paisa)"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Merchant Order ID"
-          value={merchantOrderId}
-          onChange={(e) => setMerchantOrderId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Mobile Number"
-          value={mobileNumber}
-          onChange={(e) => setMobileNumber(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Short Name"
-          value={shortName}
-          onChange={(e) => setShortName(e.target.value)}
-        />
-        <button type="button" onClick={handlePay}>Pay</button>
-      </form>
+    <div className='my-20'>
+      {!showOverlay ? (
+        <form onSubmit={(e) => { e.preventDefault(); handlePay(); }}>
+          <input
+            type="text"
+            placeholder="Merchant Transaction ID"
+            value={merchantTransactionId}
+            onChange={(e) => setMerchantTransactionId(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Amount (in paisa)"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Merchant Order ID"
+            value={merchantOrderId}
+            onChange={(e) => setMerchantOrderId(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        <button
+          onClick={handlePay}
+          className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
+        >
+          Pay
+        </button>
+
+        </form>
+      ) : (
+        <div className='overlay bg-black/70 min-h-screen '>
+          <div className='iframe-container '>
+            <iframe src={iframeUrl} className='mx-auto my-auto' width="400" height="600" title="Payment"></iframe>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
