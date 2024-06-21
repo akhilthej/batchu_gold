@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
 const GoldBuying = () => {
   const { user } = useAuth();
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(0);
   const [gold, setGold] = useState(0);
   const [referralCode, setReferralCode] = useState('');
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [10, 20, 50, 100, 200, 500];
+  const amountValues = [0,10, 20, 50, 100, 200, 500];
 
   useEffect(() => {
     const fetchGoldPrice = async () => {
@@ -125,9 +128,9 @@ const GoldBuying = () => {
   };
 
   return (
-    <div className="py-10 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
+    <div className="p-5 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Quick Gold Buy</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Quick Gold Buy</h1>
         <label className="block mb-2 text-gray-700">Select Amount (INR):</label>
         <input
           type="range"
@@ -138,35 +141,26 @@ const GoldBuying = () => {
           onChange={handleSliderChange}
           className="w-full"
         />
-        <div className="text-center mt-2">
-          Rs. {amount} will be saved daily
+        <div className="text-center mt-1">
+          Rs. {amount}
         </div>
         {user && (
           <>
-            <label className="block mb-2 text-gray-700">Email:</label>
-            <input
-              type="email"
-              value={user.emailaddress}
-              readOnly
-              className="w-full px-3 py-2 mb-4 border rounded bg-gray-200"
-            />
-            <label className="block mb-2 text-gray-700">Phone Number:</label>
-            <input
-              type="text"
-              value={user.phonenumber}
-              readOnly
-              className="w-full px-3 py-2 mb-4 border rounded bg-gray-200"
-            />
           </>
         )}
-        <label className="block mb-2 text-gray-700">Referral Code:</label>
+        <label className="block mb-2 text-gray-700 text-sm">Referral Code:</label>
         <input
           type="text"
           value={referralCode}
           onChange={handleReferralCodeChange}
-          className="w-full px-3 py-2 mb-4 border rounded"
+          className="w-full px-2  mb-2 border rounded"
         />
-        <p className="mb-4">Gold you will receive after GST: {formattedGold} grams</p>
+
+  
+
+        <p className="mb-4 text-[12px]"> 
+        <FontAwesomeIcon icon={faInfoCircle} className="mr-1 text-blue-500" /> 
+        Receive : {formattedGold} grams</p>
         <button
           onClick={handlePayment}
           className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
