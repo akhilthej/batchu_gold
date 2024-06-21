@@ -232,16 +232,18 @@ const Navbar = () => {
         </div>
       </div>
 
+      
+
       <nav className="fixed bottom-0 mb-2 w-full z-10 drop-shadow-2xl">
       <div className="flex justify-center relative">
         <div ref={navRef} className="flex flex-row justify-around w-full max-w-md p-2 bg-white mx-2 rounded-full relative z-10">
-          <div className="absolute bg-yellow-500 w-10 h-10 rounded-full transition-all duration-300 ease-in-out  " style={{ left: circlePos.left, top: -1, zIndex: 1 }}></div>
+          <div className="absolute bg-yellow-500 w-10 h-10 rounded-full transition-all duration-300 ease-in-out  " style={{ left: circlePos.left, top: 5, zIndex: 1 }}></div>
 
           {/* Item #1 */}
           <div className="flex flex-col items-center group">
             <Link to="/Store" className={`flex flex-col items-center px-4 rounded-full ${getLinkClasses('/Store')}`}>
               <i className={`mdi mdi-basket-plus-outline mdi-24px ${location.pathname === '/Store' ? 'text-white z-10 mdi-38px ' : 'text-black transition-color duration-200'}`} />
-              <span className={`text-[10px] -mt-2 ${location.pathname === '/Store' ? 'text-black ' : ''}`}>Store</span>
+              <span className={`text-[10px] ${location.pathname === '/Store' ? 'text-black z-10' : ''}`}>Store</span>
             </Link>
           </div>
 
@@ -249,7 +251,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center group">
             <Link to="/MarketPlace" className={`flex flex-col items-center px-4  rounded-full ${getLinkClasses('/MarketPlace')}`}>
               <i className={`mdi mdi-gold mdi-24px ${location.pathname === '/MarketPlace' ? 'text-white z-10' : 'text-black transition-color duration-200'}`} />
-              <span className={`text-[10px] -mt-2 ${location.pathname === '/MarketPlace' ? 'text-black ' : ''}`}>Market</span>
+              <span className={`text-[10px]  ${location.pathname === '/MarketPlace' ? 'text-black z-10' : ''}`}>Market</span>
             </Link>
           </div>
 
@@ -257,7 +259,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center group">
             <Link to="/" className={`flex flex-col items-center px-4  rounded-full ${getLinkClasses('/')}`}>
               <i className={`mdi mdi-home-outline mdi-24px ${location.pathname === '/' ? 'text-white z-10' : 'text-black transition-color duration-200'}`} />
-              <span className={`text-[10px] -mt-2 ${location.pathname === '/' ? 'text-black z-10 -mt-2' : 'text-black z-10 -mt-2'}`}>Home</span>
+              <span className={`text-[10px] ${location.pathname === '/' ? 'text-black z-10' : 'text-black z-10'}`}>Home</span>
             </Link>
           </div>
 
@@ -265,7 +267,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center group">
             <Link to="/aboutus" className={`flex flex-col items-center px-4 rounded-full ${getLinkClasses('/aboutus')}`}>
               <i className={`mdi mdi-compass-outline mdi-24px ${location.pathname === '/aboutus' ? 'text-white z-10' : 'text-black transition-color duration-200'}`} />
-              <span className={`text-[10px] -mt-2 ${location.pathname === '/aboutus' ? 'text-black z-10' : ''}`}>About</span>
+              <span className={`text-[10px] ${location.pathname === '/aboutus' ? 'text-black z-10' : ''}`}>About</span>
             </Link>
           </div>
 
@@ -274,20 +276,21 @@ const Navbar = () => {
             <div className="flex flex-col items-center group">
               <Link to="/user/dashboard" className={`flex flex-col items-center px-4  rounded-full ${getLinkClasses('/user/dashboard')}`}>
                 <i className={`mdi mdi-account-circle-outline mdi-24px ${location.pathname === '/user/dashboard' ? 'text-white z-10' : 'text-black transition-color duration-200'}`} />
-                <span className={`text-[10px] -mt-2 ${location.pathname === '/user/dashboard' ? 'text-black z-10' : ''}`}>Account</span>
+                <span className={`text-[10px] ${location.pathname === '/user/dashboard' ? 'text-black z-10' : ''}`}>Account</span>
               </Link>
             </div>
           ) : (
             <div className="flex flex-col items-center group">
               <Link to="/signup" className={`flex flex-col items-center px-5 rounded-full ${getLinkClasses('/signup')}`}>
                 <i className={`mdi mdi-account-circle-outline mdi-24px ${location.pathname === '/signup' ? 'text-white z-10' : 'text-black transition-color duration-200'}`} />
-                <span className={`text-[10px] -mt-2 ${location.pathname === '/signup' ? 'text-black z-10' : ''}`}>Signup</span>
+                <span className={`text-[10px]  ${location.pathname === '/signup' ? 'text-black z-10' : ''}`}>Signup</span>
               </Link>
             </div>
           )}
         </div>
       </div>
     </nav>
+
     </nav>
   );
 };
