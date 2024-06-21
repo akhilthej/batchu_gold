@@ -5,6 +5,7 @@ import LiveGoldPrice from '../../components/Tools/LiveGoldPrice';
 import { TheGoldJar1080p, TheGoldJartitle } from '../../assets/data/Imagedata';
 
 const Navbar = () => {
+  
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -215,9 +216,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      <nav className="fixed bottom-0 w-full bg-white z-10">
+      <nav className="fixed bottom-0 mb-2  w-full  z-10 ">
         <div className="flex justify-center">
-          <div className="flex flex-row justify-around w-full max-w-md p-2">
+          <div className="flex flex-row justify-around w-full max-w-md p-2 bg-white mx-2 rounded-full">
             {/* Item #1 */}
             <div className="flex flex-col items-center group">
               <Link to="/Store" className="text-black hover:text-yellow-500 flex flex-col items-center">

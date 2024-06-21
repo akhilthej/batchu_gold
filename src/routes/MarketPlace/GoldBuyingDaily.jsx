@@ -10,8 +10,10 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [iframeUrl, setIframeUrl] = useState(''); // State to hold the iframe URL
   const [showOverlay, setShowOverlay] = useState(false); // State to control overlay visibility
+  const [error, setError] = useState(''); // State to hold error messages
 
   const handlePay = async () => {
+    setError(''); // Clear previous errors
     const formData = new FormData();
     formData.append('merchantTransactionId', merchantTransactionId);
     formData.append('merchantUserId', user.name);
@@ -36,9 +38,11 @@ const App = () => {
         setShowOverlay(true); // Show the overlay
       } else {
         console.error('Error:', data.error);
+        setError(data.error || 'Unexpected error occurred.');
       }
     } catch (error) {
       console.error('Error:', error);
+      setError('Error processing payment. Please try again.');
     }
   };
 
@@ -70,18 +74,21 @@ const App = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-        <button
-          onClick={handlePay}
-          className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
-        >
-          Pay
-        </button>
-
+          <button
+            type="submit"
+            className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
+          >
+            Pay
+          </button>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </form>
       ) : (
-        <div className='overlay bg-black/70 min-h-screen '>
-          <div className='iframe-container '>
-            <iframe src={iframeUrl} className='mx-auto my-auto' width="400" height="600" title="Payment"></iframe>
+        <div className='overlay bg-black/70 min-h-screen flex items-center justify-center'>
+          <div className='iframe-container bg-white p-4 rounded'>
+            <iframe src={iframeUrl} className='mx-auto my-auto' width="100%" height="600" title="Payment"></iframe>
+            <button onClick={() => setShowOverlay(false)} className='mt-4 bg-red-500 text-white py-2 px-4 rounded'>
+              Close
+            </button>
           </div>
         </div>
       )}
