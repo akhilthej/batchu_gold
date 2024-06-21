@@ -216,14 +216,14 @@ const Navbar = () => {
         </div>
       </div>
 
-      <nav className="fixed bottom-0 mb-2  w-full  z-10 ">
+      <nav className="fixed bottom-0 mb-3  w-full z-10 drop-shadow-2xl">
         <div className="flex justify-center">
           <div className="flex flex-row justify-around w-full max-w-md p-2 bg-white mx-2 rounded-full">
             {/* Item #1 */}
             <div className="flex flex-col items-center group">
               <Link to="/Store" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-basket-plus-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Store</span>
+                <span className="text-[8px] -mt-2">Store</span>
               </Link>
             </div> 
            
@@ -232,7 +232,7 @@ const Navbar = () => {
             <div className="flex flex-col items-center group">
               <Link to="/MarketPlace" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-gold mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Market</span>
+                <span className="text-[8px] -mt-2">Market</span>
               </Link>
             </div>
 
@@ -240,7 +240,7 @@ const Navbar = () => {
             <div className="flex flex-col items-center group">
               <Link to="/" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-home-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">Home</span>
+                <span className="text-[8px] -mt-2">Home</span>
               </Link>
             </div>
 
@@ -248,7 +248,7 @@ const Navbar = () => {
             <div className="flex flex-col items-center group">
               <Link to="/aboutus" className="text-black hover:text-yellow-500 flex flex-col items-center">
                 <i className="mdi mdi-compass-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                <span className="text-xs">About</span>
+                <span className="text-[8px] -mt-2">About</span>
               </Link>
             </div>
 
@@ -257,7 +257,7 @@ const Navbar = () => {
               <div className="flex flex-col items-center group">
                 <Link to="/user/dashboard" className="text-black hover:text-yellow-500 flex flex-col items-center">
                   <i className="mdi mdi-account-circle-outline mdi-24px text-black group-hover:text-yellow-500 transition-color duration-200" />
-                  <span className="text-xs">Account</span>
+                  <span className="text-[8px] -mt-2">Account</span>
                 </Link>
               </div>
             ) : (
