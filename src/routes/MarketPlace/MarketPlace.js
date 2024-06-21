@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { GoldBar, Goldraw, SilverCoin, GoldCoin,MarketPlacebg } from '../../assets/data/Imagedata';
+import { GoldBar, Guarantee, SilverCoin, GoldCoin,MarketPlacebg } from '../../assets/data/Imagedata';
 import { Link } from 'react-router-dom';
 
 const ImageSlider = () => {
@@ -27,7 +27,7 @@ const ImageSlider = () => {
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center {bg-gradient-to-r from-yellow-950 via-red-800 to-yellow-950 overflow-hidden}"  style={{
+    <section className="min-h-screen flex items-center justify-center overflow-hidden {bg-gradient-to-r from-yellow-950 via-red-800 to-yellow-950 }"  style={{
       backgroundImage:
       `url("${MarketPlacebg}")`,
       backgroundSize: "cover",
@@ -40,7 +40,7 @@ const ImageSlider = () => {
 
       <section className='mx-auto text-center'>
         <h2 className="text-3xl font-bold text-white mb-">Explore Our Top Features</h2>
-        <p className="text-white text-xs mb-8">Save to watch your wealth grow. Withdraw quick and easy.</p>
+        <p className="text-white text-xs mb-8 ">Save to watch your wealth grow. Start saving gold for 10₹.</p>
       </section>
 
         <Slider {...settings}>
@@ -61,7 +61,17 @@ const ImageSlider = () => {
             </div>
           ))}
         </Slider>
+
+        <img src={Guarantee} alt="Item" className="rounded-t-lg w-[70%]  mx-auto h-auto pt-10 drop-shadow-xl" />
+        <p id="copyright" className="text-center pt-1 text-[10px] text-black">
+            <span className="font-bold ">© Batchu Gold</span> <br />(CopyRightsReserved)
+          </p>
+
       </section>
+
+      
+
+      
     </section>
   );
 };
