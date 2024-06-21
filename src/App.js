@@ -62,9 +62,9 @@ const App = () => {
 
         <Route path="/MarketPlace" element={<MarketPlace />} />
         <Route path="/MarketPlace/gold-buying" element={user ? <GoldBuying /> : <Navigate to="/signin" />} />
+        <Route path="/MarketPlace/gold-buying-daily" element={user ? <GoldBuyingDaily /> : <Navigate to="/signin" />} />
         <Route path="/MarketPlace/gold-buying-weekly" element={user ? <GoldBuyingWeekly /> : <Navigate to="/signin" />} />
         <Route path="/MarketPlace/gold-buying-monthly" element={user ? <GoldBuyingMonthly /> : <Navigate to="/signin" />} />
-        <Route path="/MarketPlace/gold-buying-daily" element={user ? <GoldBuyingDaily /> : <Navigate to="/signin" />} />
 
         <Route path="/Store" element={<Store />} />
         <Route path="/Store/GoldCoins" element={<GoldCoins />} />

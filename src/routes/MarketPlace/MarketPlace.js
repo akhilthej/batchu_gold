@@ -1,55 +1,69 @@
+// ImageSlider.js
 import React from 'react';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import { GoldBar, Goldraw, SilverCoin, GoldCoin,MarketPlacebg } from '../../assets/data/Imagedata';
 import { Link } from 'react-router-dom';
 
-import { GoldBar } from '../../assets/data/Imagedata';
+const ImageSlider = () => {
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '15%', // This will make the next slide slightly visible
+  };
 
-function TopFeatures() {
+  const slidesData = [
+    { Text: "QUICK BUY", description: "Save in 24K Gold, 10₹.", url: '/MarketPlace/gold-buying', imgSrc: GoldCoin, bgGradient: "linear-gradient(to right, #facc15 ,#ca8a04)" },
+    { Text: "DAILY SAVE", description: "Automate your daily gold buying.", url: '/MarketPlace/gold-buying-daily', imgSrc: SilverCoin, bgGradient: "linear-gradient(to right, #0ea5e9, #0369a1)" },
+    { Text: "PLAN WEEKLY", description: "Save in 24K Gold, 10₹.", url: '/MarketPlace/gold-buying-weekly', imgSrc: GoldCoin, bgGradient: "linear-gradient(to right, #f97316, #c2410c)" },
+    { Text: "PLAN MONTHLY", description: "Invest Monthly", url: '/MarketPlace/gold-buying-monthly', imgSrc: SilverCoin, bgGradient: "linear-gradient(to  right, #84552b, #341705)" },
+    // Add more slides as needed
+  ];
+
   return (
-    <section className="sm:py-40 py-20 px-2">
-      <div className="container mx-auto text-center">
-        <h2 className="text-6xl font-bold text-black mb-4">Explore Our Top Features</h2>
-        <p className="text-lightblue mb-8">Save to watch your wealth grow. Withdraw quick and easy.</p>
-        
-        <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8">
-          
-          <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
-          <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
+    <section className="min-h-screen flex items-center justify-center {bg-gradient-to-r from-yellow-950 via-red-800 to-yellow-950 overflow-hidden}"  style={{
+      backgroundImage:
+      `url("${MarketPlacebg}")`,
+      backgroundSize: "cover",
+      backgroundPosition: "top",
+    }}>
 
-            <h3 className="text-xl font-semibold mb-2">Quick Buy</h3>
-            <p className="text-lightblue mb-4">Save in 24K Gold, 10₹.</p>
-            <Link to='/MarketPlace/gold-buying'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
-          </div>
+    
 
-          <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
-          <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
+      <section className="w-full" >
 
-            <h3 className="text-xl font-semibold mb-2">Daily Save</h3>
-            <p className="text-lightblue mb-4">Automate your daily gold buying.</p>
-            <Link to='/MarketPlace/gold-buying-daily'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
-          </div>
+      <section className='mx-auto text-center'>
+        <h2 className="text-3xl font-bold text-white mb-">Explore Our Top Features</h2>
+        <p className="text-white text-xs mb-8">Save to watch your wealth grow. Withdraw quick and easy.</p>
+      </section>
 
-          <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
-          <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
-
-            <h3 className="text-xl font-semibold mb-2">Plan Weekly</h3>
-            <p className="text-lightblue mb-4">invest Weekly</p>
-            <Link to='/MarketPlace/gold-buying-weekly'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
-          </div>
-
-
-          <div className="bg-white p-6 rounded-xl text-black w-80 shadow-xl">
-          <img src={GoldBar} alt="GoldBar" width={150} height={50}  className="mb-4 mx-auto" />
-
-            <h3 className="text-xl font-semibold mb-2">Plan Monthly</h3>
-            <p className="text-lightblue mb-4">invest Monthy</p>
-            <Link to='/MarketPlace/gold-buying-weekly'><button className="bg-white border-black px-20 border-2 hover:bg-yellow-400 py-2 rounded-full text-black">Save Now</button></Link>
-          </div>
-
-
-        </div>
-      </div>
+        <Slider {...settings}>
+          {slidesData.map((slide, index) => (
+            <div key={index} className="p-2">
+              <img src={slide.imgSrc} alt="Item" className="rounded-t-lg w-28 mx-auto h-auto -mb-5  drop-shadow-xl" />
+              <div style={{ background: slide.bgGradient }} className="rounded-lg shadow-md p-4">
+                <div className="text-center mt-4">
+                  <div className="text-white font-bold text-xl mt-2">{slide.Text}</div>
+                  <div className="text-white text-sm">{slide.description}</div>
+                  <Link to={slide.url}>
+                    <button className="bg-white border-black px-10 rounded-lg hover:bg-black hover:text-white py-2 text-black mt-4">
+                      Save Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </section>
     </section>
   );
-}
+};
 
-export default TopFeatures;
+export default ImageSlider;
