@@ -25,7 +25,7 @@ const App = () => {
     formData.append('shortName', "BAT_REG_DAILY"); // Static value
 
     try {
-      const response = await fetch('https://batchugold.com/(apis)/Store/PhonePe.php', {
+      const response = await fetch('https://batchugold.com/apis/Store/PhonePe.php', {
         method: 'POST',
         body: formData,
         mode: 'cors',
