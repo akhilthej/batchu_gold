@@ -119,7 +119,7 @@ $bagHeight: 20px;
       
       /** "ADDED" text **/
       &:after {
-        transform: translate(-30%, 0); 
+        transform: translate(-30%, 20%); 
         transition-delay: $time*4;
         opacity: 1;
       }

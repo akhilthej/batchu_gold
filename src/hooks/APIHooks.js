@@ -4,11 +4,13 @@ const USER_FETCH_TRANSACTIONS_URL = "https://batchugold.com/apis/fetchTransactio
 
 const GOLD_LIVE_PRICE= "https://batchugold.com/apis/LiveGoldApi.php"
 
+const GST_MAKING_CHARGES= 'https://batchugold.com/apis/PriceUpdates/TaxCharges.php'
+
 //const CRUD_API = "http://localhost/goldapi/CRUD.php";
 //const USER_FETCH_TRANSACTIONS_URL = "http://localhost/goldapi/fetchTransactions.php";
 
 
 
 export { CRUD_API, USER_FETCH_TRANSACTIONS_URL,
-    GOLD_LIVE_PRICE 
+    GOLD_LIVE_PRICE ,GST_MAKING_CHARGES
 };
