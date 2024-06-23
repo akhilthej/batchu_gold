@@ -1,109 +1,84 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../hooks/GlobalProvider';
 
-const App = () => {
-  const { user } = useAuth();
+const PaymentForm = () => {
+  const [formData, setFormData] = useState({
+    merchantTransactionId: '',
+    merchantUserId: 'MUID' + Date.now(),
+    amount: '',
+    merchantOrderId: '',
+    mobileNumber: '',
+    message: '',
+    email: '',
+    shortName: ''
+  });
 
-  const [merchantTransactionId, setMerchantTransactionId] = useState('');
-  const [amount, setAmount] = useState('');
-  const [merchantOrderId, setMerchantOrderId] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  const handlePay = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
-
-    // Ensure required fields are not empty
-    if (!merchantTransactionId || !amount || !merchantOrderId) {
-      setError('Please fill all required fields.');
-      return;
-    }
-
-    const formData = {
-      merchantTransactionId,
-      merchantUserId: user.name,
-      amount: parseInt(amount), // Ensure amount is sent as integer
-      merchantOrderId,
-      mobileNumber: user.phonenumber,
-      message,
-      email: user.emailaddress,
-      shortName: 'BAT_REG_DAILY', // Static value
-    };
 
     try {
-      const response = await fetch('https://batchugold.com/apis/Store/PhonePe.php', {
+      const response = await fetch('https://batchugold.com/apis/Store/PhonePe/PhonePe.php', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YourAuthTokenHere', // Add authorization header if needed
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
-        mode: 'cors',
+        body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
-      console.log('Response:', data); // Log the response for debugging
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-      if (data.iframeUrl) {
-        openPopup(data.iframeUrl);
+      const responseData = await response.json();
+      if (responseData.error) {
+        console.error('Error:', responseData.error);
+        // Handle error state or show error to user
       } else {
-        console.error('Error:', data.error);
-        setError(data.error || 'Unexpected error occurred.');
+        // Redirect to payment URL received from backend
+        window.location.href = responseData.iframeUrl; // Assuming iframeUrl is returned on success
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('Error processing payment. Please try again.');
-    }
-  };
-
-  const openPopup = (url) => {
-    const newWindow = window.open(url, '_blank', 'height=600,width=800');
-    if (newWindow) {
-      newWindow.focus();
-    } else {
-      setError('Popup blocked! Please enable popups for this site.');
+      // Handle error state or show error to user
     }
   };
 
   return (
-    <div className='my-20'>
-      <h1>change2</h1>
-      <form onSubmit={handlePay}>
-        <input
-          type="text"
-          placeholder="Merchant Transaction ID"
-          value={merchantTransactionId}
-          onChange={(e) => setMerchantTransactionId(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount (in paisa)"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Merchant Order ID"
-          value={merchantOrderId}
-          onChange={(e) => setMerchantOrderId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
-        >
-          Pay
-        </button>
-        {error && <p className="text-red-500 mt-4">{error}</p>}
+    <div className='mt-20'>
+      <h2>Payment Form</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Merchant Transaction ID:
+          <input type="text" name="merchantTransactionId" value={formData.merchantTransactionId} onChange={handleChange} required />
+        </label><br />
+        <label>
+          Amount:
+          <input type="number" name="amount" value={formData.amount} onChange={handleChange} required />
+        </label><br />
+        <label>
+          Mobile Number:
+          <input type="text" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} />
+        </label><br />
+        <label>
+          Email:
+          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+        </label><br />
+        <label>
+          Message:
+          <textarea name="message" value={formData.message} onChange={handleChange}></textarea>
+        </label><br />
+        <label>
+          Short Name:
+          <input type="text" name="shortName" value={formData.shortName} onChange={handleChange} />
+        </label><br />
+        <button type="submit">Pay</button>
       </form>
     </div>
   );
 };
 
-export default App;
+export default PaymentForm;
