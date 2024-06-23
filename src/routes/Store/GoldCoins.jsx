@@ -38,7 +38,7 @@ function GoldCoins() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('https://batchugold.com/(apis)/Store/ProductPost.php');
+                const response = await fetch('https://batchugold.com/apis/Store/ProductPost.php');
                 const data = await response.json();
                 setProducts(data);
                 setFilteredProducts(data);
