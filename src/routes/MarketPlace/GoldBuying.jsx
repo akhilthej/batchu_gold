@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
+import {GoldCoin} from '../../assets/data/Imagedata';
 
 const GoldBuying = () => {
   const { user } = useAuth();
@@ -13,7 +13,7 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [0, 10, 20, 50, 100, 200, 500];
+  const amountValues = [0, 10, 20, 50, 100, 200, 500, 7430];
 
   const [formData, setFormData] = useState({
     merchantTransactionId: '',
@@ -115,39 +115,62 @@ const GoldBuying = () => {
 
   return (
     <div className="p-5 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">Quick Gold Buy</h1>
-        <label className="block mb-2 text-gray-700">Select Amount (INR):</label>
-        <input
-          type="range"
-          min="0"
-          max={amountValues.length - 1}
-          step="1"
-          value={amountValues.indexOf(amount)}
-          onChange={handleSliderChange}
-          className="w-full"
-        />
+      
+      <div className="p-8 w-full max-w-md">
+
+
+      <div className="bg-gradient-to-r from-[#facc15] to-[#ca8a04] p-8 rounded shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-4 text-center text-white">Quick Gold Buy</h1>
+        <label className="block mb-2 text-white font-bold ">Select Amount (INR):</label>
+
+        <div className="relative w-full bg-yellow-700 max-w-lg h-10 flex items-center rounded-lg">
+          <input
+            type="range"
+            min="0"
+            max={amountValues.length - 1}
+            step="1"
+            value={amountValues.indexOf(amount)}
+            onChange={handleSliderChange}
+            className="w-full appearance-none bg-transparent cursor-pointer "
+            style={{ zIndex: 10, position: 'relative' }}
+          />
+          <div
+            className="absolute top-1/2 transform -translate-y-1/2 h-8 w-8 flex items-center justify-center pointer-events-none"
+            style={{
+              left: `calc(${(amountValues.indexOf(amount) / (amountValues.length - 1)) * 100}% - 16px)`,
+              zIndex: 20
+            }}
+          >
+            <img src={GoldCoin} alt="indicator" className="h-full w-full" />
+          </div>
+        </div>
+
         <div className="text-center mt-1">
           Rs. {amount}
         </div>
-        <label className="block mb-2 text-gray-700 text-sm">Referral Code:</label>
-        <input
-          type="text"
-          value={referralCode}
-          onChange={handleReferralCodeChange}
-          className="w-full px-2 mb-2 border rounded"
-        />
+       
         <p className="mb-4 text-[12px]"> 
-          <FontAwesomeIcon icon={faInfoCircle} className="mr-1 text-blue-500" /> 
           Receive: {formattedGold} grams
         </p>
         <button
           onClick={handlePayment}
-          className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"
+          className="w-full bg-yellow-900 text-white py-2 rounded hover:bg-yellow-700"
         >
           Buy Now
         </button>
       </div>
+
+     <div className='px-5'>
+     <div className='p-5 bg-yellow-400 rounded-b-2xl'>
+      <label className="block mb-2 text-yellow-900 font-bold text-sm ">Referral Code:</label>
+        <input
+          type="text"
+          value={referralCode}
+          onChange={handleReferralCodeChange}
+          className="w-full px-2 mb-2 border rounded "
+        /></div></div>
+
+    </div>
     </div>
   );
 };

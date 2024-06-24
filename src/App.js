@@ -12,6 +12,7 @@ import GoldCoins from "./routes/Store/GoldCoins";
 
 import Cart from './routes/Store/Cart';
 import Checkout from './routes/Store/Checkout'
+import PaymentSuccess from './routes/Common/PaymentSuccess'
 
 
 import Signin from './routes/auth/Signin';
@@ -70,6 +71,8 @@ const App = () => {
         <Route path="/Store/GoldCoins" element={<GoldCoins />} />
         <Route path="/Store/cart" element={user ? <Cart /> : <Navigate to="/signin" />} />
         <Route path="/Store/checkout" element={user ? <Checkout /> : <Navigate to="/signin" />} />
+
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
         <Route path="/*" element={<Error404 />} />
       </Routes>
