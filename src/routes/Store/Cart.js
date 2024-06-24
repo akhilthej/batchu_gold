@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/GlobalProvider';
 import { Link } from 'react-router-dom';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
+
 function Cart() {
     // Destructure user from the useAuth hook
     const { user } = useAuth();
@@ -120,8 +121,7 @@ function Cart() {
                                     return (
                                         <tr key={product.id} className="border-b border-gray-200">
                                             <td className=" p-2  justify-center mx-auto">
-                                                <img
-                                                    src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
+                                                <img src={`data:image/jpeg;base64,${product.image_data}`} // Assuming product.image contains base64 data
                                                     alt={product.title}
                                                     className="w-16 h-16 object-cover rounded"
                                                 />

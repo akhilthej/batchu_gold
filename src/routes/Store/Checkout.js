@@ -85,16 +85,28 @@ function Checkout() {
         amount: totalAmount,
         merchantOrderId: user.name,
         mobileNumber: user.phonenumber,
-        message: 'referralCode',
+        message: 'hi',
         email: user.emailaddress,
-        shortName: 'BAT_StoreOrders'
+        shortName: 'BAT_StoreOrders',
+        orderlist: '', // Initialize as empty string
+        referralCode: '', // Initialize as empty string
     });
 
     useEffect(() => {
+        // Update orderlist whenever cart changes
+        const orderlist = cart.map(product => `${product.title} - Quantity: ${product.quantity}`).join(', ');
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            orderlist,
+        }));
+    }, [cart]);
+
+    useEffect(() => {
+        // Update referralCode and amount whenever they change
         setFormData(prevFormData => ({
             ...prevFormData,
             amount: totalAmount,
-            message: referralCode,
+            referralCode,
         }));
     }, [totalAmount, referralCode]);
 
