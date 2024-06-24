@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 import { GoldCoin } from '../../assets/data/Imagedata';
 import '../../components/Tools/Buttons.scss';
+import { Link } from 'react-router-dom';
 
 function GoldCoins() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [quantities, setQuantities] = useState({});
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [goldPrice, setGoldPrice] = useState(null);
     const goldpricelive = GOLD_LIVE_PRICE;
 
@@ -50,23 +52,25 @@ function GoldCoins() {
         setCart(savedCart);
     }, []);
 
-    const addToCart = (product) => {
+    const handleProductSelect = (product) => {
+        setSelectedProduct(product);
+    };
+
+    const addToCart = () => {
+        if (!selectedProduct) return;
         const existingProduct = cart.length > 0 ? cart[0] : null;
         if (existingProduct) {
-            if (existingProduct.id !== product.id) {
-                // If a different product exists in the cart, replace it with the new product
-                const updatedCart = [{ ...product, quantity: quantities[product.id] || 1 }];
+            if (existingProduct.id !== selectedProduct.id) {
+                const updatedCart = [{ ...selectedProduct, quantity: quantities[selectedProduct.id] || 1 }];
                 setCart(updatedCart);
                 localStorage.setItem('cart', JSON.stringify(updatedCart));
             } else {
-                // If the same product exists, update its quantity
-                const updatedCart = [{ ...existingProduct, quantity: existingProduct.quantity + (quantities[product.id] || 1) }];
+                const updatedCart = [{ ...existingProduct, quantity: existingProduct.quantity + (quantities[selectedProduct.id] || 1) }];
                 setCart(updatedCart);
                 localStorage.setItem('cart', JSON.stringify(updatedCart));
             }
         } else {
-            // If the cart is empty, add the new product
-            const updatedCart = [{ ...product, quantity: quantities[product.id] || 1 }];
+            const updatedCart = [{ ...selectedProduct, quantity: quantities[selectedProduct.id] || 1 }];
             setCart(updatedCart);
             localStorage.setItem('cart', JSON.stringify(updatedCart));
         }
@@ -97,11 +101,14 @@ function GoldCoins() {
     return (
         <section className='my-20'>
             <h2 className="text-3xl font-bold mb-6 text-center">Gold Coins</h2>
-            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto pb-4" />
+            
+            <div className='shadow-2xl m-5 rounded-lg'>
+            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto pb-4" /></div>
+
             <div className="container px-2 mx-auto flex">
                 <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                     {filteredProducts.map((product) => (
-                        <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div key={product.id} className={`bg-white rounded-lg shadow-md overflow-hidden ${selectedProduct && selectedProduct.id === product.id ? 'border-2 border-yellow-500' : ''}`} onClick={() => handleProductSelect(product)}>
                             <div className="p-4">
                                 <p className="text-[10px] text-white bg-yellow-400 w-14 text-center ">{product.product_catalogue}</p>
                                 <p className="text-[10px] text-white bg-yellow-700 w-16 text-center">Weight: {product.weight}g</p>
@@ -110,12 +117,32 @@ function GoldCoins() {
                                 <p className="text-[10px] text-gray-700 mb-2">{product.description}</p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Price</p>
                                 <p className="text-[18px] font-bold text-gray-900 mb-2">{calculateTotalPrice(product)}</p>
-                                <button className="button btn-cart" onClick={() => addToCart(product)}><span><span>Add to My Bag</span></span></button>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+            {selectedProduct && (
+                <div className="flex z-50 fixed w-full bottom-0 bg-white h-[80px] drop-shadow-xl">
+
+
+      <div className="w-1/2  flex items-center  justify-center ">
+      <div className='text-center'>      <Link to='/Store'>
+      <button className='"text-gray-700 text-sm'>Back to Store</button></Link>
+      <p className="text-xl font-bold"></p>
+      </div></div>
+
+      <button className="w-1/2  flex items-center transition duration-300 justify-center">
+     
+      <button className="button btn-cart" onClick={addToCart}>
+                        <span><span>Add to My Bag</span></span>
+                    </button>
+   
+      </button>
+    </div>
+
+               
+            )}
         </section>
     );
 }
