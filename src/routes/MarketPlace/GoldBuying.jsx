@@ -13,7 +13,20 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [0,10, 20, 50, 100, 200, 500];
+  const amountValues = [0, 10, 20, 50, 100, 200, 500];
+
+  const [formData, setFormData] = useState({
+    merchantTransactionId: '',
+    merchantUserId: 'MUID' + Date.now(),
+    amount: '',
+    merchantOrderId: '',
+    mobileNumber: user.phonenumber,
+    message: 'Order For Digital Gold - Regular',
+    email: user.emailaddress,
+    shortName: 'BAT_DigitalGold_Regular',
+    orderlist: '', // Initialize as empty string
+    referralCode: referralCode,
+  });
 
   useEffect(() => {
     const fetchGoldPrice = async () => {
@@ -36,7 +49,7 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.3);
+      const goldAfterGST = gold * (1 - 0.03); // Assuming 3% GST
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
@@ -46,85 +59,58 @@ const GoldBuying = () => {
 
   const handleSliderChange = (e) => {
     const value = Number(e.target.value);
-    setAmount(amountValues[value]);
-    setGold(amountValues[value] / goldPricePerGram);
+    const selectedAmount = amountValues[value];
+    const calculatedGold = selectedAmount / goldPricePerGram;
+    setAmount(selectedAmount);
+    setGold(calculatedGold);
+
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      amount: selectedAmount,
+      merchantTransactionId: 'MTID' + Date.now(),
+      merchantOrderId: 'MOID' + Date.now(),
+      orderlist: `${calculatedGold.toFixed(8)} grams`, // Update orderlist with calculated gold grams
+    }));
   };
 
   const handleReferralCodeChange = (e) => {
     const code = e.target.value;
     setReferralCode(code);
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      referralCode: code,
+      orderlist: `${formattedGold} grams`, // Update orderlist with referral code
+    }));
   };
 
-  const handlePayment = () => {
-    const options = {
-      key: 'rzp_test_qjbYOaA0BlqnRS',
-      amount: amount * 100,
-      currency: 'INR',
-      name: 'Gold Buying App',
-      description: 'Gold purchase',
-      handler: function(response) {
-        alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
+  const handlePayment = async (e) => {
+    e.preventDefault();
 
-        const currentDateTime = new Date().toISOString();
-
-        if (amount >= 10) {
-          fetch('https://batchugold.com/(apis)/Store/Orders.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              payment_id: response.razorpay_payment_id,
-              amount: amount,
-              email: user.emailaddress,
-              phone: user.phonenumber,
-              referral_code: referralCode,
-              created_at: currentDateTime,
-              notes: {
-                address: 'Gold Buying App Corporate Office',
-                referral_code_gold: referralCode,
-                product_type: 'Regular Savings',
-                products: 'Raw Gold',
-              },
-            }),
-          })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                alert('Payment processed successfully');
-              } else {
-                alert('Failed to process payment');
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              alert('Failed to process payment');
-            });
-        }
-      },
-      prefill: {
-        name: user.name || '',
-        email: user.emailaddress,
-        contact: user.phonenumber,
-      },
-      notes: {
-        address: 'Gold Buying App Corporate Office',
-        referral_code_gold: referralCode,
-        product_type: 'Regular Savings',
-        products: 'Raw Gold',
-      },
-      theme: {
-        color: '#3399cc',
-      },
-      modal: {
-        ondismiss: function() {
-          alert('Payment process cancelled.');
+    try {
+      const response = await fetch('https://batchugold.com/apis/PhonePe/DigitalGold/PhonePe.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-      },
-    };
+        body: JSON.stringify(formData)
+      });
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      if (responseData.error) {
+        console.error('Error:', responseData.error);
+        // Handle error state or show error to user
+      } else {
+        // Redirect to payment URL received from backend
+        window.location.href = responseData.iframeUrl; // Assuming iframeUrl is returned on success
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error state or show error to user
+    }
   };
 
   return (
@@ -144,23 +130,17 @@ const GoldBuying = () => {
         <div className="text-center mt-1">
           Rs. {amount}
         </div>
-        {user && (
-          <>
-          </>
-        )}
         <label className="block mb-2 text-gray-700 text-sm">Referral Code:</label>
         <input
           type="text"
           value={referralCode}
           onChange={handleReferralCodeChange}
-          className="w-full px-2  mb-2 border rounded"
+          className="w-full px-2 mb-2 border rounded"
         />
-
-  
-
         <p className="mb-4 text-[12px]"> 
-        <FontAwesomeIcon icon={faInfoCircle} className="mr-1 text-blue-500" /> 
-        Receive : {formattedGold} grams</p>
+          <FontAwesomeIcon icon={faInfoCircle} className="mr-1 text-blue-500" /> 
+          Receive: {formattedGold} grams
+        </p>
         <button
           onClick={handlePayment}
           className="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600"

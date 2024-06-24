@@ -80,12 +80,12 @@ function Checkout() {
     const totalAmount = totalCartValue + shippingCharge;
 
     const [formData, setFormData] = useState({
-        merchantTransactionId: user.name + Date.now() ,
-        merchantUserId: user.name + Date.now(),
+        merchantTransactionId: user.name,
+        merchantUserId: 'MUID' + Date.now(),
         amount: totalAmount,
         merchantOrderId: user.name,
         mobileNumber: user.phonenumber,
-        message: 'hi',
+        message: 'Order From Store',
         email: user.emailaddress,
         shortName: 'BAT_StoreOrders',
         orderlist: '', // Initialize as empty string
