@@ -128,7 +128,7 @@ function Cart() {
                                                 <div className='flex-col flex'>
                                                     <td className="pt-1 font-bold text-xs flex-col">{product.title}</td>
                                                     <td className="pb-1 font-medium text-xs"><span className='font-bold'>Per Coin:</span> ₹{totalPrice}</td>
-                                                    <td className="pt-1 font-bold text-xs flex-col">Referral Commission: {product.referral_commission}</td>
+                                                    <td className="pt-1 font-bold text-xs flex-col">Referral Commission: {product.referral_commission} %</td>
                                                 </div>
                                             </td>
                                        

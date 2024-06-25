@@ -114,7 +114,10 @@ function GoldCoins() {
                                 <p className="text-[10px] text-white bg-yellow-400 w-14 text-center ">{product.product_catalogue}</p>
                                 <p className="text-[10px] text-white bg-yellow-700 w-16 text-center">Weight: {product.weight}g</p>
                                 <h3 className="text-[18px] font-semibold mb-2">{product.title}</h3>
-                                <p className="text-[10px] font-bold text-gray-900 leading-tight">Know More</p>
+                                <p className="text-[12px] font-bold text-gray-900 leading-tight">Purity: 24 karat (99.9)</p>
+                                <p className="text-[10px] font-bold text-gray-900 leading-tight mt-2">Know More</p>
+                                
+                                
                                 <p className="text-[10px] text-gray-700 mb-2">{product.description}</p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
                                 <p className="text-[10px] text-gray-700 mb-2">On each Coin Purchase Get Flat : <br/>{product.referral_commission}% Commission. </p>
