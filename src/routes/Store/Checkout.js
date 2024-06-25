@@ -115,7 +115,7 @@ function Checkout() {
       
         try {
           // Generate a unique transaction ID
-          const transactionId = `${user.name}_${Date.now()}`;
+          const transactionId = `${'MUID'}${Date.now()}`;
       
           const response = await fetch('https://batchugold.com/apis/PhonePe/Store/PhonePe.php', {
             method: 'POST',
