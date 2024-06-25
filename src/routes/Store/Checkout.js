@@ -80,7 +80,7 @@ function Checkout() {
     const totalAmount = totalCartValue + shippingCharge;
 
     const [formData, setFormData] = useState({
-        merchantTransactionId: user.name,
+        merchantTransactionId: '',
         merchantUserId: 'MUID' + Date.now(),
         amount: totalAmount,
         merchantOrderId: user.name,
@@ -112,20 +112,26 @@ function Checkout() {
 
     const handlePayment = async (e) => {
         e.preventDefault();
-    
+      
         try {
+          // Generate a unique transaction ID
+          const transactionId = `${user.name}_${Date.now()}`;
+      
           const response = await fetch('https://batchugold.com/apis/PhonePe/Store/PhonePe.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({
+              ...formData,
+              merchantTransactionId: transactionId,
+            })
           });
-    
+      
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-    
+      
           const responseData = await response.json();
           if (responseData.error) {
             console.error('Error:', responseData.error);
@@ -139,6 +145,7 @@ function Checkout() {
           // Handle error state or show error to user
         }
       };
+      
 
     return (
         <section className='overflow-hidden'>
