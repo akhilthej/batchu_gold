@@ -21,9 +21,9 @@ const GoldBuying = () => {
     amount: '',
     merchantOrderId: '',
     mobileNumber: user.phonenumber,
-    message: 'Order For Digital Gold - Regular',
+    message: 'Order For Digital Gold - QuickBuy',
     email: user.emailaddress,
-    shortName: 'BAT_DigitalGold_Regular',
+    shortName: 'BAT_DigitalGold_QuickBuy',
     orderlist: '', // Initialize as empty string
     referralCode: referralCode,
   });
