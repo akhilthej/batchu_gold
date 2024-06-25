@@ -22,9 +22,6 @@ function Store() {
               alt="Gold"
               className="md:w-[20%] w-[50%]  h-auto  mx-auto m-2"
             />
-            <p className="text-[10px] text-white bg-yellow-400  text-center">
-              Gold Coins
-            </p>
           </Link>
         </div>
 
@@ -46,9 +43,7 @@ function Store() {
               alt="SilverCoin"
               className="md:w-[20%] w-[50%] h-auto mx-auto m-2"
             />
-            <p className="text-[10px] text-white bg-orange-400  text-center">
-              Silver Coin - Coming soon
-            </p>
+          
           </Link>
         </div>
       </div>
@@ -62,13 +57,11 @@ function Store() {
               alt="Gold"
               className="md:w-[20%] w-[50%]  h-auto  mx-auto m-2"
             />
-            <p className="text-[10px] text-white bg-yellow-400  text-center">
-              Ear Rings
-            </p>
+           
           </Link>
         </div>
 
-        <div className="w-1/2 bg-yellow-500 flex items-center  rounded-r-full justify-center">
+        <div className="w-1/2 bg-pink-500 flex items-center  rounded-r-full justify-center">
         <h2 className="text-white font-bold text-[20px]">EAR RINGS</h2>
         </div>
       </div>

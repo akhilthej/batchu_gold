@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
-import { GoldCoin } from '../../assets/data/Imagedata';
+import { GoldCoin,Guarantee,StoreGoldCoinBG } from '../../assets/data/Imagedata';
 import '../../components/Tools/Buttons.scss';
 import { Link } from 'react-router-dom';
 
@@ -100,11 +100,28 @@ function GoldCoins() {
     };
 
     return (
-        <section className='my-20'>
-            <h2 className="text-3xl font-bold mb-6 text-center">Gold Coins</h2>
+        <section className="min-h-screen flex items-center justify-center overflow-hidden"  style={{
+              backgroundImage:
+      `url("${StoreGoldCoinBG}")`,
+      backgroundSize: "contain",
+      backgroundPosition: "top",
+          }}>
+
+        <section className='my-32'>
+            <h2 className="text-[50px] text-yellow-500 font-bold text-center bg-white/80">GOLD COIN</h2>
+            <p className="text-[18px] text-center font-bold text-yellow-900 bg-white/80">Save Earn & Grow</p>
+            <p className="text-[16px] text-center text-yellow-900 bg-white/80">Get 100% Referral Commission on every purchase. </p>
             
-            <div className='shadow-2xl m-5 rounded-lg'>
+            <div className='m-5'>
             <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto pb-4" /></div>
+
+
+            <div className="flex w-full items-center justify-center">
+      
+        <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[60%]  h-auto mx-auto pb-4" />
+     
+      </div>
+
 
             <div className="container px-2 mx-auto flex">
                 <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -149,6 +166,8 @@ function GoldCoins() {
 
                
             )}
+        </section>
+
         </section>
     );
 }
