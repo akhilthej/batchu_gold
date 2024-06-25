@@ -93,7 +93,8 @@ function GoldCoins() {
         const makingCharges = (product.making_percentage / 100) * originalProductPrice;
         const gst = 0.03 * (originalProductPrice + makingCharges);
 
-        const totalPrice = originalProductPrice + makingCharges + gst;
+
+        const totalPrice = originalProductPrice + makingCharges + gst ;
 
         return `₹${totalPrice.toFixed(2)}`;
     };
@@ -115,6 +116,8 @@ function GoldCoins() {
                                 <h3 className="text-[18px] font-semibold mb-2">{product.title}</h3>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Know More</p>
                                 <p className="text-[10px] text-gray-700 mb-2">{product.description}</p>
+                                <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
+                                <p className="text-[10px] text-gray-700 mb-2">On each Coin Purchase Get Flat : <br/>{product.referral_commission}% Commission. </p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Price</p>
                                 <p className="text-[18px] font-bold text-gray-900 mb-2">{calculateTotalPrice(product)}</p>
                             </div>

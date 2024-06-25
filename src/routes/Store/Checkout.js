@@ -242,12 +242,28 @@ function Checkout() {
                                                         </div>
                                                     </td>
                                                     <div className='flex-col flex py-2'>
-                                                        <td className="text-[10px] bg-yellow-400 text-center">PureGold (24K)</td>
+                                                        <td className="text-[10px] bg-yellow-400 text-center font-bold">PureGold (24K)</td>
                                                         <span className='text-sm bg-white font-bold text-center'> {(originalProductPrice * product.quantity)} ₹</span>
-                                                        <td className="text-[10px] bg-yellow-600 text-center">Quantity :<span className=' font-bold'> {product.quantity}</span> </td>
-                                                        <td className="text-[10px] bg-yellow-400 text-center">Making Charges</td>
+                                                        <td className="text-[10px] bg-yellow-600 text-center text-white">Quantity :<span className=' font-bold'> {product.quantity}</span> </td>
+                                                        <td className="text-[10px] bg-yellow-400 text-center mt-2 font-bold">Charges</td>
                                                         <span className='text-sm font-bold text-center'> {(makingCharges * product.quantity)} ₹</span>
-                                                        <td className="text-[10px] bg-yellow-600 text-center">GST (3%) </td>
+
+                                                        <td className="text-[8px] font-bold text-center">Which includes</td>
+                                                        <td className="text-[10px] bg-yellow-400 p-2 text-left">
+                                                        <li>Making Charges +</li>
+                                                         <li>Payment Gateway +</li>
+                                                         <li>Vault Charges +</li>
+                                                         <li>Insurance +</li> 
+                                                         <li>Handling Charges +</li>
+                                                         <li>Referral commission {product.referral_commission}% = ₹{Math.round(((product.referral_commission) * totalAmount) / 100)} </li>
+                                                      
+                                                        </td>
+
+                                                       
+
+
+
+                                                        <td className="text-[10px] bg-yellow-600 text-center font-bold">GST <span className='text-white'>(3%) </span></td>
                                                         <span className='text-sm font-bold text-center'> {(gst * product.quantity)} ₹</span>
                                                     </div>
                                                     <td className="text-[10px] font-bold text-center">SUBTOTAL<br /><span className='text-sm font-bold'> ₹{(totalPrice * product.quantity)}</span> </td>
