@@ -60,6 +60,15 @@ function Dashboard() {
                 <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
               </Link>
 
+              <Link to='/user/paymenthistory'>
+                <button className="flex items-center justify-center text-black py-2">
+                  <FaHistory className="mr-3" size={23} />
+                  <p className="text-[16px]">Store Purchases</p>
+                </button>
+                <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
+              </Link>
+
+
               <Link to='/MarketPlace'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaStore className="mr-3" size={23} />
