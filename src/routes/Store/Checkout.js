@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
-import { RazorpayLogo } from '../../assets/data/Imagedata'; // Ensure this path is correct
+import { PhonepeLogo } from '../../assets/data/Imagedata'; // Ensure this path is correct
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 import { FaLock } from 'react-icons/fa';
 
@@ -297,13 +297,13 @@ function Checkout() {
                     )}
                 </div>
 
-                <div className="flex z-50 fixed w-full bottom-0 bg-white h-[70px]">
+                <div className="flex z-50 fixed w-full bottom-0 bg-white  h-[80px]">
                     <div className="w-1/2 flex items-center justify-center">
                         <div className='text-center'>
-                            <h3 className='text-xs font-semibold -mb-2'>Payment Method</h3>
-                            <img src={RazorpayLogo} // Replace with your image path
-                                alt="Razorpay Logo"
-                                className="h-7" />
+                            <h3 className='text-[10px] font-semibold -mb-1'>Payment Method</h3>
+                            <img src={PhonepeLogo} // Replace with your image path
+                                alt="Phonepe"
+                                className="h-10" />
                             <span className="text-gray-700 text-xs">UPI Payment Solutions</span>
                         </div>
                     </div>
