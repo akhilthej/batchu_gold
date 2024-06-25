@@ -155,13 +155,13 @@ function GoldCoins() {
       <p className="text-xl font-bold"></p>
       </div></div>
 
-      <button className="w-1/2  flex items-center transition duration-300 justify-center">
-     
-      <button className="button btn-cart" onClick={addToCart}>
-                        <span><span>Add to My Bag</span></span>
-                    </button>
-   
-      </button>
+      
+      <button className="w-1/2 flex items-center transition duration-300 justify-center">
+    <button className="button btn-cart" onClick={addToCart}>
+        <span><span>Add to My Bag</span></span>
+    </button>
+</button>
+
     </div>
 
                

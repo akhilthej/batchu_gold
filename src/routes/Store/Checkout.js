@@ -193,7 +193,7 @@ function Checkout() {
                             placeholder="Phone Number"
                             className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
                         />
-                        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">Shipping Address</label>
+                        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">Shipping Address<br/> <span className='text-[12px] font-bold text-gray-500'>PLEASE MAKE SURE TO ADD AREA CODE / PinCode!</span></label>
                         <textarea
                             value={shippingAddress}
                             onChange={(e) => setShippingAddress(e.target.value)}

@@ -59,6 +59,7 @@ function Cart() {
             localStorage.setItem('cart', JSON.stringify(updatedCart));
         }
     };
+    
 
     // Save cart items to local storage whenever it changes
     useEffect(() => {
@@ -108,7 +109,7 @@ function Cart() {
                             <thead className="bg-yellow-500">
                                 <tr>
                                     <th className="border-b-2 border-gray-300 px-4 py-2 text-left text-sm font-semibold text-white uppercase">Product</th>
-                                    <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase">Quantity</th>
+                                    <th className="border-b-2 border-gray-300 py-2 text-sm font-semibold  text-white text-center uppercase">Quantity</th>
                                     <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase">Subtotal</th>
                                     <th className="border-b-2 border-gray-300 py-2 text-left text-sm font-semibold  text-white uppercase"></th>
                                 </tr>
@@ -136,19 +137,34 @@ function Cart() {
                                            
 
                                             <td className="text-sm">
-                                                <input
-                                                    type="number"
-                                                    value={product.quantity}
-                                                    onChange={(e) => updateQuantity(product, parseInt(e.target.value))}
-                                                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500"
-                                                />
-                                            </td>
+    <div className="flex justify-center items-center">
+        <button
+            onClick={() => updateQuantity(product, product.quantity - 1)}
+            className="px-3 py-1 border border-yellow-300 rounded-l-lg focus:outline-none bg-yellow-400 hover:bg-yellow-300"
+        >
+            -
+        </button>
+        <input
+            type="number"
+            value={product.quantity}
+            onChange={(e) => updateQuantity(product, parseInt(e.target.value))}
+            className="w-16 px-2 py-1 text-sm border border-yellow-300 rounded-none text-center focus:outline-none focus:border-yellow-500"
+        />
+        <button
+            onClick={() => updateQuantity(product, product.quantity + 1)}
+            className="px-3 py-1 border border-yellow-300 rounded-r-lg focus:outline-none bg-yellow-400 hover:bg-yellow-300"
+        >
+            +
+        </button>
+    </div>
+</td>
+
                                            
 
-                                            <td className="text-sm">₹{(totalPrice * product.quantity)}</td>
+                                            <td className="text-sm text-center">₹{(totalPrice * product.quantity)}</td>
                                             <td className="">
                                                 <RiCloseCircleLine
-                                                    className="h-6 w-6 text-red-500 cursor-pointer"
+                                                    className="h-6 w-6 text-yellow-700 cursor-pointer"
                                                     onClick={() => removeFromCart(product)}
                                                 />
                                             </td>
@@ -162,7 +178,7 @@ function Cart() {
                    
                       
                   
-                            <div className='mt-10'>
+                            <div className='m-10'>
                                 <p className="text-lg font-semibold p-2">Shipping:</p>
                                 <div className="flex justify-between items-center border-t border-gray-300 p-2" />
                                
@@ -173,7 +189,7 @@ function Cart() {
         </div>
 
 
-        <div className="flex z-50 fixed w-full bottom-0 bg-white h-[70px] drop-shadow-xl">
+        <div className="flex z-50 fixed w-full bottom-0 bg-white h-[80px] drop-shadow-xl">
 
       <div className="w-1/2  flex items-center  justify-center">
       <div className='text-center'>
