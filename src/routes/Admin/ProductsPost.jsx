@@ -15,7 +15,7 @@ function Productpost() {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('https://batchugold.com/(apis)/Store/ProductPost.php');
+            const response = await fetch('https://batchugold.com/apis/Store/ProductPost.php');
             const data = await response.json();
             setProducts(data);
         } catch (error) {
@@ -35,7 +35,7 @@ function Productpost() {
         formData.append('image', image);
 
         try {
-            const response = await fetch('https://batchugold.com/(apis)/Store/ProductPost.php', {
+            const response = await fetch('https://batchugold.com/apis/Store/ProductPost.php', {
                 method: 'POST',
                 body: formData
             });
@@ -60,7 +60,7 @@ function Productpost() {
 
     const handleRemove = async (id) => {
         try {
-            const response = await fetch(`https://batchugold.com/(apis)/Store/ProductPost.php?id=${id}`, {
+            const response = await fetch(`https://batchugold.com/apis/Store/ProductPost.php?id=${id}`, {
                 method: 'DELETE'
             });
 

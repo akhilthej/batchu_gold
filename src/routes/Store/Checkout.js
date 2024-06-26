@@ -18,8 +18,31 @@ function Checkout() {
 
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [shippingAddress, setShippingAddress] = useState(user.address || '');
+    const [street, setStreet] = useState(user.address || '');
+    const [city, setCity] = useState('');
+    const [pincode, setPincode] = useState('');
+
     const [goldPrice, setGoldPrice] = useState(null);
     const goldpricelive = GOLD_LIVE_PRICE;
+
+    // Timer state
+    const [timer, setTimer] = useState(120); // 120 seconds = 2 minutes
+
+    useEffect(() => {
+        // Countdown timer
+        const countdown = setInterval(() => {
+            setTimer(prevTimer => prevTimer - 1);
+        }, 1000);
+
+        // Redirect when timer hits zero
+        if (timer === 0) {
+            clearInterval(countdown);
+            window.location.href = '/Store'; // Redirect to '/Store' when timer reaches zero
+        }
+
+        // Cleanup interval on unmount or timer change
+        return () => clearInterval(countdown);
+    }, [timer]);
 
     useEffect(() => {
         if (user.name) {
@@ -85,7 +108,7 @@ function Checkout() {
         amount: totalAmount,
         merchantOrderId: user.name,
         mobileNumber: user.phonenumber,
-        message: 'Order From Store',
+        message: 'Order From Store | Address:' + shippingAddress,
         email: user.emailaddress,
         shortName: 'BAT_StoreOrders',
         orderlist: '', // Initialize as empty string
@@ -145,7 +168,18 @@ function Checkout() {
           // Handle error state or show error to user
         }
       };
-      
+
+    const handleAddressChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'street') {
+            setStreet(value);
+        } else if (name === 'city') {
+            setCity(value);
+        } else if (name === 'pincode') {
+            setPincode(value);
+        }
+        setShippingAddress(`${street}, ${city}, ${pincode}`);
+    };
 
     return (
         <section className='overflow-hidden'>
@@ -193,15 +227,31 @@ function Checkout() {
                             placeholder="Phone Number"
                             className="border-b border-gray-300 py-2 text-base text-black mt-4 w-full"
                         />
-                        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">Shipping Address<br/> <span className='text-[12px] font-bold text-gray-500'>PLEASE MAKE SURE TO ADD AREA CODE / PinCode!</span></label>
-                        <textarea
-                            value={shippingAddress}
-                            onChange={(e) => setShippingAddress(e.target.value)}
-                            placeholder="Enter your shipping address..."
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                            rows={4}
-                            required
-                        ></textarea>
+                        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">Shipping Address</label>
+                        <input
+                            type="text"
+                            name="street"
+                            value={street}
+                            onChange={handleAddressChange}
+                            placeholder="Street"
+                            className="border-b border-gray-300 py-2 text-base text-black mt-1 w-full"
+                        />
+                        <input
+                            type="text"
+                            name="city"
+                            value={city}
+                            onChange={handleAddressChange}
+                            placeholder="City"
+                            className="border-b border-gray-300 py-2 text-base text-black mt-1 w-full"
+                        />
+                        <input
+                            type="text"
+                            name="pincode"
+                            value={pincode}
+                            onChange={handleAddressChange}
+                            placeholder="Pincode"
+                            className="border-b border-gray-300 py-2 text-base text-black mt-1 w-full"
+                        />
                         <label className="block mb-2 text-gray-700">Referral Code:</label>
                         <input
                             type="text"
@@ -215,6 +265,12 @@ function Checkout() {
                 {/* Right side: Order Summary */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
                     <h2 className="text-2xl font-bold mb-6">Your Order</h2>
+
+                    {/* Timer display */}
+                    <div className="text-center mt-4 text-[12px] bg-red-500">
+                        <p className="text-white">Redirecting to Store in {timer} seconds...</p>
+                    </div>
+
                     {cart.length === 0 ? (
                         <p className="text-lg">Your cart is empty</p>
                     ) : (
@@ -250,18 +306,14 @@ function Checkout() {
 
                                                         <td className="text-[8px] font-bold text-center">Which includes</td>
                                                         <td className="text-[10px] bg-yellow-400 p-2 text-left">
-                                                        <li>Making Charges +</li>
-                                                         <li>Payment Gateway +</li>
-                                                         <li>Vault Charges +</li>
-                                                         <li>Insurance +</li> 
-                                                         <li>Handling Charges +</li>
-                                                         <li>Referral commission {product.referral_commission}% = ₹{Math.round(((product.referral_commission) * totalAmount) / 100)} </li>
-                                                      
+                                                            <li>Making Charges +</li>
+                                                            <li>Payment Gateway +</li>
+                                                            <li>Vault Charges +</li>
+                                                            <li>Insurance +</li>
+                                                            <li>Handling Charges +</li>
+                                                            <li>Referral commission {product.referral_commission}% = ₹{Math.round(((product.referral_commission) * totalAmount) / 100)} </li>
+
                                                         </td>
-
-                                                       
-
-
 
                                                         <td className="text-[10px] bg-yellow-600 text-center font-bold">GST <span className='text-white'>(3%) </span></td>
                                                         <span className='text-sm font-bold text-center'> {(gst * product.quantity)} ₹</span>
@@ -318,6 +370,7 @@ function Checkout() {
                     </button>
                 </div>
             </div>
+
         </section>
     );
 }
