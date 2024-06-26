@@ -120,15 +120,16 @@ function GoldCoins() {
       backgroundPosition: "top",
           }}>
 
-        <section className='my-32'>
+        <section className='my-20'>
             <h2 className="text-[50px] text-yellow-500 font-bold text-center bg-white/80">GOLD COIN</h2>
             <p className="text-[18px] text-center font-bold text-yellow-900 bg-white/80">Save Earn & Grow</p>
             <p className="text-[16px] text-center text-yellow-900 bg-white/80">Get 100% Referral Commission on every purchase. </p>
             
+            
             <div >
-            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto m-1" />
-            <p className="text-[8px] font-bold text-gray-900 leading-tight bg-white/80 p-2 text-center">Introducing the exclusive 0.5 Grams Pure Gold Coin by "The Gold Jar" – a symbol of luxury and refinement. Crafted with precision and elegance, this exquisite coin exudes timeless beauty and sophistication. Properly packed. Elevate your collection with this rare and precious piece, showcasing the finest craftsmanship and purity of gold. Whether as a valuable investment or a cherished gift, experience the epitome of opulence with this exclusive gold coin from "The Gold Jar."</p>
-            <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[50%]  h-[50%] mx-auto pt-2" />
+            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto m-4" />
+            
+            
             </div>
 
 
@@ -179,7 +180,12 @@ function GoldCoins() {
                     ))}
                 </div>
             </div>
-            
+
+            <div className=' bg-white/80 p-2'>
+            <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[50%]  h-[50%] mx-auto pt-2" />
+            <p className="text-[8px] font-bold text-gray-900 leading-tight text-center pt-2">Introducing the exclusive 0.5 Grams Pure Gold Coin by "The Gold Jar" – a symbol of luxury and refinement. Crafted with precision and elegance, this exquisite coin exudes timeless beauty and sophistication. Properly packed. Elevate your collection with this rare and precious piece, showcasing the finest craftsmanship and purity of gold. Whether as a valuable investment or a cherished gift, experience the epitome of opulence with this exclusive gold coin from "The Gold Jar."</p>
+            </div>
+
             {selectedProduct && (
                 <div className="flex z-50 fixed w-full bottom-0 bg-white h-[80px] drop-shadow-xl">
 
