@@ -49,7 +49,7 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.03); // Assuming 3% GST
+      const goldAfterGST = gold * (1 - 0.0); // Assuming 3% GST
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
@@ -73,15 +73,7 @@ const GoldBuying = () => {
     }));
   };
 
-  const handleReferralCodeChange = (e) => {
-    const code = e.target.value;
-    setReferralCode(code);
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      referralCode: code,
-      orderlist: `${formattedGold} grams`, // Update orderlist with referral code
-    }));
-  };
+  
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -166,7 +158,6 @@ const GoldBuying = () => {
         <input
           type="text"
           value={referralCode}
-          onChange={handleReferralCodeChange}
           className="w-full px-2 mb-2 border rounded "
         /></div></div>
 
