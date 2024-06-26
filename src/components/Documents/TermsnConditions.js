@@ -2,7 +2,7 @@ import React from 'react'
 
 const TermsnConditions = () => {
   return (
-    <section className="sm:pt-20 pt-20 px-10">
+    <section className="sm:pt-20 pt-20 px-10 my-20">
     <>
   <style
     dangerouslySetInnerHTML={{

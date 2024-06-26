@@ -2,7 +2,7 @@ import React from 'react';
 
 const ShippingPolicy = () => {
   return (
-    <section className="sm:py-20 py-20 px-10">
+    <section className="sm:py-20 py-20 px-10 my-20">
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">Shipping & Delivery Policy</h1>
       <p className="mb-4">At BatchuGold, we strive to deliver your orders in a timely and efficient manner. Please read through our shipping and delivery policy to understand how we process and deliver your orders.</p>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrivacyPolicy = () => {
     return (
-      <section className="sm:py-20 py-20 px-10">
+      <section className="sm:py-20 py-20 px-10 my-20">
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Privacy Policy for BatchuGold</h1>
 
