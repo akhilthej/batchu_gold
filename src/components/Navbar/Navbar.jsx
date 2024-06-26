@@ -8,6 +8,8 @@ const Navbar = () => {
   const location = useLocation();
   const [circlePos, setCirclePos] = useState({ left: 0 });
   const navRef = useRef();
+  
+  const isStoreRoute = location.pathname.startsWith('/Store');
 
   useEffect(() => {
     const activeLink = navRef.current.querySelector('.active');
@@ -99,9 +101,13 @@ const Navbar = () => {
         <div className="flex items-center relative ">
           <LiveGoldPrice />
 
-         <Link to='/Store/cart'> <button className="text-black py-1 px-3 rounded-lg">
-            <i className="mdi mdi-cart mdi-24px"></i>
-          </button></Link>
+          {isStoreRoute && (
+                <Link to='/Store/cart'>
+                    <button className="text-black py-1 px-3 rounded-lg">
+                        <i className="mdi mdi-cart mdi-24px"></i>
+                    </button>
+                </Link>
+            )}
 
            
 
