@@ -125,13 +125,14 @@ function GoldCoins() {
             <p className="text-[18px] text-center font-bold text-yellow-900 bg-white/80">Save Earn & Grow</p>
             <p className="text-[16px] text-center text-yellow-900 bg-white/80">Get 100% Referral Commission on every purchase. </p>
             
-            <div className='m-5'>
-            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto pb-4" /></div>
+            <div >
+            <img src={GoldCoin} alt="Gold" className=" md:w-[10%] w-[30%]  h-auto mx-auto m-1" />
+            <p className="text-[8px] font-bold text-gray-900 leading-tight bg-white/80 p-2 text-center">Introducing the exclusive 0.5 Grams Pure Gold Coin by "The Gold Jar" – a symbol of luxury and refinement. Crafted with precision and elegance, this exquisite coin exudes timeless beauty and sophistication. Properly packed. Elevate your collection with this rare and precious piece, showcasing the finest craftsmanship and purity of gold. Whether as a valuable investment or a cherished gift, experience the epitome of opulence with this exclusive gold coin from "The Gold Jar."</p>
+            <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[50%]  h-[50%] mx-auto pt-2" />
+            </div>
 
 
             <div className="flex w-full items-center justify-center">
-      
-        <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[60%]  h-auto mx-auto pb-4" />
      
       </div>
 
@@ -163,16 +164,13 @@ function GoldCoins() {
         <p className="text-[10px] text-gray-700  z-10">{product.description}</p>
           <button 
             className=" text-xs text-yellow-600"
-            onClick={() => setShowPopup(false)}
-          >
+            onClick={() => setShowPopup(false)}>
             Close
           </button>
         </div>
       )}
     </div>
-
-                                
-                                <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
+                <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
                                 <p className="text-[10px] text-gray-700 mb-2">On each Coin Purchase Get Flat : <br/>{product.referral_commission}% Commission. </p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Price</p>
                                 <p className="text-[18px] font-bold text-gray-900 mb-2">{calculateTotalPrice(product)}</p>
@@ -181,6 +179,7 @@ function GoldCoins() {
                     ))}
                 </div>
             </div>
+            
             {selectedProduct && (
                 <div className="flex z-50 fixed w-full bottom-0 bg-white h-[80px] drop-shadow-xl">
 
