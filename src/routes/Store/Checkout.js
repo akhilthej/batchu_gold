@@ -104,7 +104,7 @@ function Checkout() {
 
     const [formData, setFormData] = useState({
         merchantTransactionId: '',
-        merchantUserId: 'MUID' + Date.now(),
+        merchantUserId: user.emailaddress,
         amount: totalAmount,
         merchantOrderId: user.name,
         mobileNumber: user.phonenumber,

@@ -20,9 +20,9 @@ const ImageSlider = () => {
 
   const slidesData = [
     { Text: "QUICK BUY", description: "Save in 24K Gold, 10₹.", url: '/MarketPlace/gold-buying', imgSrc: GoldCoin, bgGradient: "linear-gradient(to right, #facc15 ,#ca8a04)" },
-    { Text: "DAILY SAVE", description: "Automate your daily gold buying.", url: '/MarketPlace/gold-buying-daily', imgSrc: SilverCoin, bgGradient: "linear-gradient(to right, #0ea5e9, #0369a1)" },
-    { Text: "PLAN WEEKLY", description: "Save in 24K Gold, 10₹.", url: '/MarketPlace/gold-buying-weekly', imgSrc: GoldCoin, bgGradient: "linear-gradient(to right, #f97316, #c2410c)" },
-    { Text: "PLAN MONTHLY", description: "Invest Monthly", url: '/MarketPlace/gold-buying-monthly', imgSrc: SilverCoin, bgGradient: "linear-gradient(to  right, #84552b, #341705)" },
+    { Text: "DAILY SAVE", description: "Automate Your Savings Daily, 24 karat gold.", url: '/MarketPlace/gold-buying-daily', imgSrc: SilverCoin, bgGradient: "linear-gradient(to right, #0ea5e9, #0369a1)" },
+    { Text: "PLAN WEEKLY", description: "Automate Your Savings Weekly, 24 karat gold.", url: '/MarketPlace/gold-buying-weekly', imgSrc: GoldCoin, bgGradient: "linear-gradient(to right, #f97316, #c2410c)" },
+    { Text: "PLAN MONTHLY", description: "Automate Your Savings Monthly, 24 karat gold.", url: '/MarketPlace/gold-buying-monthly', imgSrc: SilverCoin, bgGradient: "linear-gradient(to  right, #84552b, #341705)" },
     // Add more slides as needed
   ];
 
