@@ -62,7 +62,7 @@ const ImageSlider = () => {
           ))}
         </Slider>
 
-        <img src={Guarantee} alt="Item" className="rounded-t-lg w-[70%]  mx-auto h-auto pt-10 drop-shadow-xl" />
+        <img src={Guarantee} alt="Item" className="rounded-t-lg w-[40%]  mx-auto h-auto pt-10 drop-shadow-xl" />
         <p id="copyright" className="text-center pt-1 text-[10px] text-black">
             <span className="font-bold ">© Batchu Gold</span> -CopyRightsReserved
           </p>

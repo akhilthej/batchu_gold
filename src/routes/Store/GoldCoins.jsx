@@ -4,6 +4,11 @@ import { GoldCoin,Guarantee,StoreGoldCoinBG } from '../../assets/data/Imagedata'
 import '../../components/Tools/Buttons.scss';
 import { Link } from 'react-router-dom';
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { RiStore3Fill } from 'react-icons/ri';
+
 function GoldCoins() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -12,6 +17,14 @@ function GoldCoins() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [goldPrice, setGoldPrice] = useState(null);
     const goldpricelive = GOLD_LIVE_PRICE;
+
+
+        const [showPopup, setShowPopup] = useState(false);
+      
+        const handleIconClick = () => {
+          setShowPopup(!showPopup);
+        };
+
 
     useEffect(() => {
         const fetchGoldPrice = async () => {
@@ -123,7 +136,7 @@ function GoldCoins() {
       </div>
 
 
-            <div className="container px-2 mx-auto flex">
+            <div className="px-2 mx-auto flex">
                 <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                     {filteredProducts.map((product) => (
                         <div key={product.id} className={`bg-white rounded-lg shadow-md overflow-hidden ${selectedProduct && selectedProduct.id === product.id ? 'border-2 border-yellow-500' : ''}`} onClick={() => handleProductSelect(product)}>
@@ -132,10 +145,33 @@ function GoldCoins() {
                                 <p className="text-[10px] text-white bg-yellow-700 w-16 text-center">Weight: {product.weight}g</p>
                                 <h3 className="text-[18px] font-semibold mb-2">{product.title}</h3>
                                 <p className="text-[12px] font-bold text-gray-900 leading-tight">Purity: 24 karat (99.9)</p>
-                                <p className="text-[10px] font-bold text-gray-900 leading-tight mt-2">Know More</p>
+                               
+
+                                <div className="relative">
+
+      <p className="text-[10px] font-bold text-gray-900 leading-tight mt-2">
+        Know More 
+        <FontAwesomeIcon 
+          icon={faInfoCircle} 
+          className="w-3 cursor-pointer ml-1" 
+          onClick={handleIconClick} 
+        />
+      </p>
+      {showPopup && (
+        <div className="absolute top-1 left-0 bg-white p-2 shadow-lg border border-gray-300 rounded">
+        <p className="text-[10px] text-black font-bold  z-10">Charges Includes</p>
+        <p className="text-[10px] text-gray-700  z-10">{product.description}</p>
+          <button 
+            className=" text-xs text-yellow-600"
+            onClick={() => setShowPopup(false)}
+          >
+            Close
+          </button>
+        </div>
+      )}
+    </div>
+
                                 
-                                
-                                <p className="text-[10px] text-gray-700 mb-2">{product.description}</p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
                                 <p className="text-[10px] text-gray-700 mb-2">On each Coin Purchase Get Flat : <br/>{product.referral_commission}% Commission. </p>
                                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Price</p>
@@ -150,8 +186,9 @@ function GoldCoins() {
 
 
       <div className="w-1/2  flex items-center  justify-center ">
-      <div className='text-center'>      <Link to='/Store'>
-      <button className='"text-gray-700 text-sm'>Back to Store</button></Link>
+      <div className='text-center'>    
+      <Link to="/Store"><div className=' rounded-l-lg text-black'><RiStore3Fill className="h-6 w-8 text-black  mx-auto" /></div></Link>
+      <Link to='/Store'><button className='"text-gray-700 text-xs'>BACK TO STORE</button></Link>
       <p className="text-xl font-bold"></p>
       </div></div>
 
