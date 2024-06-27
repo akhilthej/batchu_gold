@@ -113,14 +113,17 @@ function Checkout() {
         shortName: 'BAT_StoreOrders',
         orderlist: '', // Initialize as empty string
         referralCode: '', // Initialize as empty string
+        quantity:'',
     });
 
     useEffect(() => {
-        // Update orderlist whenever cart changes
-        const orderlist = cart.map(product => `${product.title} - Quantity: ${product.quantity}`).join(', ');
+        // Update orderlist and quantity whenever cart changes
+        const orderlist = cart.map(product => product.title).join(', ');
+        const quantity = cart.reduce((total, product) => total + product.quantity, 0);
         setFormData(prevFormData => ({
             ...prevFormData,
             orderlist,
+            quantity
         }));
     }, [cart]);
 
