@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
+
 import { GoldCoin,Guarantee,StoreGoldCoinBG } from '../../assets/data/Imagedata';
 import '../../components/Tools/Buttons.scss';
 import { Link } from 'react-router-dom';
@@ -198,11 +199,13 @@ function GoldCoins() {
       </div></div>
 
       
-      <button className="w-1/2 flex items-center transition duration-300 justify-center">
-    <button className="button btn-cart" onClick={addToCart}>
-        <span><span>Add to My Bag</span></span>
-    </button>
-</button>
+      <button className="w-1/2  flex items-center bg-yellow-500 hover:bg-orange-600 transition duration-300  justify-center " onClick={addToCart}>
+      <Link to="/Store/cart">
+      <button className="flex items-center justify-center text-white ">
+         Add to Bag
+      </button>
+    </Link>
+      </button>
 
     </div>
 
