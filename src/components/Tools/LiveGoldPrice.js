@@ -4,7 +4,7 @@ import { GOLD_LIVE_PRICE } from '../../hooks/APIHooks';
 
 const LiveGoldPrice = () => {
   const [goldPrice, setGoldPrice] = useState(null);
-  const [countdown, setCountdown] = useState(300); // Initial countdown value in seconds for 4 minutes
+  const [countdown, setCountdown] = useState(60); // Initial countdown value in seconds for 4 minutes
   const goldpricelive = GOLD_LIVE_PRICE;
 
   // Function to fetch gold price from API
@@ -32,8 +32,8 @@ const LiveGoldPrice = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchGoldPrice();
-      setCountdown(300); // Reset countdown to 4 minutes (240 seconds) after each fetch
-    }, 300000); // 4 minutes in milliseconds (240000)
+      setCountdown(60); // Reset countdown to 4 minutes (240 seconds) after each fetch
+    }, 60000); // 4 minutes in milliseconds (240000)
 
     // Clean up interval on component unmount
     return () => clearInterval(interval);
