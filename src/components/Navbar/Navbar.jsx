@@ -1,7 +1,10 @@
 import React, { useState, useEffect,useRef } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/GlobalProvider';
+
 import LiveGoldPrice from '../../components/Tools/LiveGoldPrice';
+import UserCurrency from '../../components/Tools/UserCurrency';
+
 import { TheGoldJar1080p, TheGoldJartitle } from '../../assets/data/Imagedata';
 
 const Navbar = () => {
@@ -114,6 +117,11 @@ const Navbar = () => {
 
         </div>
       </div>
+
+
+<section className='fixed right-0 bottom-24 z-10'>
+<UserCurrency/>
+</section>
 
       {/* Sidebar */}
       <div

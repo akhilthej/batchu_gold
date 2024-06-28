@@ -5,6 +5,7 @@ import SilverCoin from '../../assets/common/Silver_coin.png'
 import UPI from '../../assets/common/UPi.svg'
 import Goldraw from '../../assets/common/goldraw.png'
 import PhonepeLogo from '../../assets/common/Razorpay_logo.svg'
+import Ant from '../../assets/common/ant.png'
 
 import MarketPlacebg from '../../assets/common/MarketPlacebg.png'
 import Guarantee from '../../assets/common/Guarantee.png'
@@ -22,7 +23,7 @@ import Godjar_home_video from '../../assets/home/Godjar_home_video.mp4'
 
 export {
   /*Company Logos */
-  TheGoldJar1080p,TheGoldJartitle,PhonepeLogo,
+  TheGoldJar1080p,TheGoldJartitle,PhonepeLogo,Ant,
   
   MarketPlacebg,Guarantee,StoreGoldCoinBG,
 
