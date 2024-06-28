@@ -14,7 +14,7 @@ function Store() {
         </h2>
       </div>
 
-      <div className="flex w-full  bg-white my-2">
+      <div className="flex w-full bg-white my-2">
         <div className="w-1/2  flex items-center justify-center">
           <Link to="/Store/GoldCoins">
             <img
@@ -25,8 +25,11 @@ function Store() {
           </Link>
         </div>
 
-        <div className="w-1/2 bg-yellow-500 flex items-center  rounded-r-full justify-center">
-         <h2 className="text-white font-bold text-[20px]">GOLD COIN</h2>
+        <div className="w-1/2 bg-yellow-500 flex items-center justify-center p-2">
+         <h2 className="text-white font-bold text-center text-[20px]">GOLD COIN
+         <p className="text-[8px] font-bold text-white leading-tight text-center pt-1">Introducing the exclusive Pure Gold Coin by "The Gold Jar" – a symbol of luxury and refinement. Crafted with precision and elegance, this exquisite coin exudes timeless beauty and sophistication. Properly packed. Elevate your collection with this rare and precious piece, showcasing the finest craftsmanship and purity of gold. Whether as a valuable investment or a cherished gift, experience the epitome of opulence with this exclusive gold coin from "The Gold Jar."</p>
+         </h2>
+        
         </div>
       </div>
 

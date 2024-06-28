@@ -168,9 +168,9 @@ function GoldCoins() {
                 </div>
             </div>
 
-            <div className=' bg-white/80 p-2'>
+            <div className='p-2'>
             <img src={Guarantee} alt="Gold" className=" md:w-[20%] w-[50%]  h-[50%] mx-auto pt-2" />
-            <p className="text-[8px] font-bold text-gray-900 leading-tight text-center pt-2">Introducing the exclusive 0.5 Grams Pure Gold Coin by "The Gold Jar" – a symbol of luxury and refinement. Crafted with precision and elegance, this exquisite coin exudes timeless beauty and sophistication. Properly packed. Elevate your collection with this rare and precious piece, showcasing the finest craftsmanship and purity of gold. Whether as a valuable investment or a cherished gift, experience the epitome of opulence with this exclusive gold coin from "The Gold Jar."</p>
+           
             </div>
 
             {selectedProduct && (
