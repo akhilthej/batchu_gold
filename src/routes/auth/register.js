@@ -17,7 +17,7 @@ const Signup = () => {
 
   const sendOnboardingEmail = async (email) => {
     try {
-      const response = await fetch('https://batchugold.com/(apis)/sendOnboardingEmail.php', {
+      const response = await fetch('https://batchugold.com/apis/sendOnboardingEmail.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
