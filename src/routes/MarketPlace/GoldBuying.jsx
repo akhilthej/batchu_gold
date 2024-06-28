@@ -12,7 +12,7 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [0, 10, 20, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 7400];
+  const amountValues = [0, 10, 20, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
 
   const [formData, setFormData] = useState({
     merchantTransactionId: '',
@@ -48,7 +48,7 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.0); // Assuming 3% GST
+      const goldAfterGST = gold * (1 - 0.03); // Assuming 3% GST
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
