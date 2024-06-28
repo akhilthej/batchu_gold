@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.c4d5fabc.css",
-    "main.js": "/static/js/main.4306e615.js",
+    "main.css": "/static/css/main.84ba2e4c.css",
+    "main.js": "/static/js/main.99f71601.js",
     "static/media/thegoldjar_1080p.png": "/static/media/thegoldjar_1080p.00f0826236b59db328df.png",
     "static/media/TGJLogofooter.png": "/static/media/TGJLogofooter.3f0785746724b4aa9cc9.png",
     "static/media/thegoldjar_title.png": "/static/media/thegoldjar_title.3f0785746724b4aa9cc9.png",
     "static/media/CSDLogo.mp4": "/static/media/CSDLogo.829913f9dec63138ba9b.mp4",
+    "static/media/GoldCoinsCover.png": "/static/media/GoldCoinsCover.98ea799808e69f6bd7ed.png",
     "static/media/goldraw.png": "/static/media/goldraw.6d557567ea53e1e33639.png",
     "static/media/Godjar_home_video.mp4": "/static/media/Godjar_home_video.1ad1900c35a29155ecad.mp4",
     "static/media/StoreGoldCoinBG.png": "/static/media/StoreGoldCoinBG.642e20d059b430d39c46.png",
@@ -24,11 +25,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.c4d5fabc.css.map": "/static/css/main.c4d5fabc.css.map",
-    "main.4306e615.js.map": "/static/js/main.4306e615.js.map"
+    "main.84ba2e4c.css.map": "/static/css/main.84ba2e4c.css.map",
+    "main.99f71601.js.map": "/static/js/main.99f71601.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4d5fabc.css",
-    "static/js/main.4306e615.js"
+    "static/css/main.84ba2e4c.css",
+    "static/js/main.99f71601.js"
   ]
 }
