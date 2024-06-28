@@ -33,12 +33,12 @@ const UserCurrency = () => {
 
   return (
 
-    <div className="flex bg-white w-24 h-14 rounded-l-full  border-2">
+    <div className="flex bg-yellow-500 w-24 h-14 rounded-l-full">
     <div className="w-1/2 flex items-center justify-center">
     <img
               src={Ant}
               alt="ant"
-              className="w-10 h-auto mx-auto m-2 bg-gray-300 rounded-full p-2"
+              className="w-10 h-auto mx-auto m-2 bg-white rounded-full p-2"
             />
     </div>
 

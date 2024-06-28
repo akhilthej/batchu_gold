@@ -154,23 +154,9 @@ function GoldCoins() {
 
       <p className="text-[10px] font-bold text-gray-900 leading-tight mt-2">
         Know More 
-        <FontAwesomeIcon 
-          icon={faInfoCircle} 
-          className="w-3 cursor-pointer ml-1" 
-          onClick={handleIconClick} 
-        />
       </p>
-      {showPopup && (
-        <div className="absolute top-1 left-0 bg-white p-2 shadow-lg border border-gray-300 rounded">
-        <p className="text-[10px] text-black font-bold  z-10">Charges Includes</p>
+      <p className="text-[10px] text-black font-bold  z-10">Charges Includes</p>
         <p className="text-[10px] text-gray-700  z-10">{product.description}</p>
-          <button 
-            className=" text-xs text-yellow-600"
-            onClick={() => setShowPopup(false)}>
-            Close
-          </button>
-        </div>
-      )}
     </div>
                 <p className="text-[10px] font-bold text-gray-900 leading-tight">Referral Commission</p>
                                 <p className="text-[10px] text-gray-700 mb-2">On each Coin Purchase Get Flat : <br/>{product.referral_commission}% Commission. </p>
