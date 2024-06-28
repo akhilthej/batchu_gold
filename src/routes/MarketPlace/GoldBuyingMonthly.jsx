@@ -12,7 +12,7 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [100, 150, 200, 250, 300, 350, 400, 450, 500,1000,2000,5000];
+  const amountValues = [0 , 100, 150, 200, 250, 300, 350, 400, 450, 500,1000,2000,5000];
 
   const [formData, setFormData] = useState({
     merchantTransactionId: '',
