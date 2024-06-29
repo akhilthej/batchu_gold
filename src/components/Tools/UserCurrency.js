@@ -33,16 +33,24 @@ const UserCurrency = () => {
 
   if (loading)
     return (
-      <div className="neumorphic-container flex w-24 h-14 rounded-l-full">
-        <div className="w-1/2 flex items-center justify-center">
-          <p className="text-center h-full text-[10px]">Loading...</p>
+      <div className="neumorphic-container flex items-center w-32 h-16 rounded-l-full">
+      <div className="relative w-full h-full flex items-center justify-end">
+        <img
+          src={Ant}
+          alt="ant"
+          className="absolute w-full h-full object-cover rounded-l-2xl"
+        />
+        <div className="relative z-10 text-center">
+        <p className="text-[10px] text-white pr-2">Start </p>
+        <p className="text-[10px] text-white pr-2">Earning </p>
         </div>
       </div>
+    </div>
     );
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="neumorphic-container flex items-center w-32 h-16 rounded-l-full">
+    <div className="neumorphic-container flex items-center w-32 h-16 rounded-l-2xl">
       <div className="relative w-full h-full flex items-center justify-end">
         <img
           src={Ant}
