@@ -85,6 +85,22 @@ function Dashboard() {
                 <span className='text-xs text-gray-600'>Start saving gold. Buy from 10 INR. Daily, planned, and bulk savings available.</span>
               </Link>
 
+
+              <div className='border-t border-gray-300 '></div>
+              <div className="text-center">
+                <p className="text-xl font-medium">Referral Clam</p>
+                <p className="text-sm">Change to ants into gold coins.</p>
+              </div>
+
+              <Link to='/Store/referralstore'>
+                <button className="flex items-center justify-center text-black py-2">
+                  <FaUserEdit className="mr-3" size={23} />
+                  <p className="text-[16px]">Referral Store</p>
+                </button>
+                <span className='text-xs text-gray-600'>Convert you ants to mine in gold for gold coins the larger ants you have the more gold you can clam.</span>
+              </Link>
+
+
               <div className='border-t border-gray-300 '></div>
               <div className="text-center">
                 <p className="text-xl font-medium">Personal</p>

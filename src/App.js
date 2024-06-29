@@ -6,12 +6,10 @@ import { Navbar, PrivacyPolicy, TermsnConditions, Disclaimer, ShippingandDeliver
         MarketPlace,GoldBuyingDaily, GoldBuying,GoldBuyingWeekly,GoldBuyingMonthly } from './routes/Routes';
 
 import Store from './routes/Store/Store';
-
 import GoldCoins from "./routes/Store/GoldCoins";
-
-
 import Cart from './routes/Store/Cart';
 import Checkout from './routes/Store/Checkout'
+import ReferralStore from './routes/Store/ReferralStore'
 
 
 import Signin from './routes/auth/Signin';
@@ -72,6 +70,8 @@ const App = () => {
         <Route path="/Store/GoldCoins" element={user ? <GoldCoins /> : <Navigate to="/signin" />} />
         <Route path="/Store/cart" element={user ? <Cart /> : <Navigate to="/signin" />} />
         <Route path="/Store/checkout" element={user ? <Checkout /> : <Navigate to="/signin" />} />
+        <Route path="/Store/referralstore" element={user ? <ReferralStore /> : <Navigate to="/ReferralStore" />} />
+
 
 
         <Route path="/*" element={<Error404 />} />

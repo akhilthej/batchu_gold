@@ -37,30 +37,6 @@ function Store() {
       </div>
 
 
-<h2 className="text-center bg-yellow-700 text-white">Store For Referral</h2>
-      <div className="flex w-full  bg-white">
-        <div className="w-1/2  flex items-center justify-center">
-          <Link to="/Store">
-            <img
-              src={ReferralStoreCover}
-              alt="Gold"
-              className="md:w-[20%] w-[50%]  h-auto  mx-auto m-2"
-            />
-          </Link>
-        </div>
-
-        <div className="w-1/2  flex items-center justify-center">
-          <Link to="/Store/GoldCoins">
-            <img
-              src={GoldCoin}
-              alt="SilverCoin"
-              className="md:w-[20%] w-[50%] h-auto mx-auto m-2"
-            />
-          
-          </Link>
-        </div>
-
-      </div>
 
 
 
