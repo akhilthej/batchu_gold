@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.297fb272.css",
-    "main.js": "/static/js/main.24c7401f.js",
+    "main.css": "/static/css/main.0a15099a.css",
+    "main.js": "/static/js/main.50be9e86.js",
     "static/media/thegoldjar_1080p.png": "/static/media/thegoldjar_1080p.00f0826236b59db328df.png",
     "static/media/cover4.png": "/static/media/cover4.e5627161df74af365f57.png",
     "static/media/cover1.png": "/static/media/cover1.fa6c30dfe20bd742e825.png",
@@ -30,11 +30,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.297fb272.css.map": "/static/css/main.297fb272.css.map",
-    "main.24c7401f.js.map": "/static/js/main.24c7401f.js.map"
+    "main.0a15099a.css.map": "/static/css/main.0a15099a.css.map",
+    "main.50be9e86.js.map": "/static/js/main.50be9e86.js.map"
   },
   "entrypoints": [
-    "static/css/main.297fb272.css",
-    "static/js/main.24c7401f.js"
+    "static/css/main.0a15099a.css",
+    "static/js/main.50be9e86.js"
   ]
 }
