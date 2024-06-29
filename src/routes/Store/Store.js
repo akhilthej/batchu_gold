@@ -92,7 +92,7 @@ const Store = () => {
         );
 
   return (
-    <section className="my-20 w-full">
+    <section className="my-20 w-full overflow-hidden">
       <Slider {...settings}>
         {slidesData.map((slide, index) => (
           <div key={index} className="p-2">
