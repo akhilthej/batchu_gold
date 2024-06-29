@@ -1,12 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.955a693c.css",
-    "main.js": "/static/js/main.5bcd5eb8.js",
+    "main.css": "/static/css/main.297fb272.css",
+    "main.js": "/static/js/main.24c7401f.js",
     "static/media/thegoldjar_1080p.png": "/static/media/thegoldjar_1080p.00f0826236b59db328df.png",
+    "static/media/cover4.png": "/static/media/cover4.e5627161df74af365f57.png",
+    "static/media/cover1.png": "/static/media/cover1.fa6c30dfe20bd742e825.png",
+    "static/media/cover2.png": "/static/media/cover2.271d581abe66acb4de29.png",
     "static/media/TGJLogofooter.png": "/static/media/TGJLogofooter.3f0785746724b4aa9cc9.png",
     "static/media/thegoldjar_title.png": "/static/media/thegoldjar_title.3f0785746724b4aa9cc9.png",
+    "static/media/cover3.png": "/static/media/cover3.2a44552f3be892a98b48.png",
     "static/media/CSDLogo.mp4": "/static/media/CSDLogo.829913f9dec63138ba9b.mp4",
-    "static/media/GoldCoinsCover.png": "/static/media/GoldCoinsCover.98ea799808e69f6bd7ed.png",
     "static/media/ReferralStoreCover.png": "/static/media/ReferralStoreCover.b60a98cda71a15771014.png",
     "static/media/goldraw.png": "/static/media/goldraw.6d557567ea53e1e33639.png",
     "static/media/Godjar_home_video.mp4": "/static/media/Godjar_home_video.1ad1900c35a29155ecad.mp4",
@@ -15,6 +18,7 @@
     "static/media/ant.png": "/static/media/ant.3816b79ef2eed6360cb3.png",
     "static/media/Gold_coin.png": "/static/media/Gold_coin.f1f9b94a3615e23f2787.png",
     "static/media/Silver_coin.png": "/static/media/Silver_coin.711b1eaadbb6d56546ad.png",
+    "static/media/GoldCoinsCover.jpeg": "/static/media/GoldCoinsCover.2e2b49a576f660f55a6f.jpeg",
     "static/media/MarketPlacebg.png": "/static/media/MarketPlacebg.e5e9b91b6391a87259ab.png",
     "static/media/Gold_bar.png": "/static/media/Gold_bar.7d1e00ba99c7414b5103.png",
     "static/media/Guarantee.png": "/static/media/Guarantee.d6121969d75d99751502.png",
@@ -26,11 +30,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.955a693c.css.map": "/static/css/main.955a693c.css.map",
-    "main.5bcd5eb8.js.map": "/static/js/main.5bcd5eb8.js.map"
+    "main.297fb272.css.map": "/static/css/main.297fb272.css.map",
+    "main.24c7401f.js.map": "/static/js/main.24c7401f.js.map"
   },
   "entrypoints": [
-    "static/css/main.955a693c.css",
-    "static/js/main.5bcd5eb8.js"
+    "static/css/main.297fb272.css",
+    "static/js/main.24c7401f.js"
   ]
 }
