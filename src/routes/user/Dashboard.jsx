@@ -52,21 +52,21 @@ function Dashboard() {
                 <p className="text-sm">Check all your transactions</p>
               </div>
 
-              <Link to='/user/paymenthistory'>
+              <a href ='/user/paymenthistory'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaHistory className="mr-3" size={23} />
                   <p className="text-[16px]">Payment History</p>
                 </button>
                 <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
-              </Link>
+              </a>
 
-              <Link to='/user/paymenthistory'>
+              <a href ='/user/storehistory'>
                 <button className="flex items-center justify-center text-black py-2">
                   <FaHistory className="mr-3" size={23} />
-                  <p className="text-[16px]">Store Purchases</p>
+                  <p className="text-[16px]">Store History</p>
                 </button>
                 <span className='text-xs text-gray-600'>View your payment transactions and remaining balance.</span>
-              </Link>
+              </a>
 
 
               <Link to='/MarketPlace'>

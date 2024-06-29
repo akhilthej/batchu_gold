@@ -31,10 +31,7 @@ const TransactionTable = () => {
 
   const renderTable = (transactions) => (
     <div className="bg-white shadow-lg rounded-md p-6 mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Digital Gold History</h2>
-      <span className="font-bold text-lg">User: {user.name}</span>
-      <span className="text-sm">{user.emailaddress}</span>
-      <span className="text-sm">{user.address}</span>
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Gold Transaction History</h2>
 
       {transactions.length > 0 ? (
         <div className="overflow-x-auto">
@@ -51,9 +48,12 @@ const TransactionTable = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions
-                .filter(transaction => transaction.email === user.emailaddress && transaction.shortName === 'BAT_DigitalGold')
-                .map(transaction => (
+              {transactions.map(transaction => {
+                // Parse amount to extract gold grams
+                const amountString = transaction.amount.replace(',', ''); // Remove commas if present
+                const amountInINR = parseFloat(amountString);
+
+                return (
                   <tr key={transaction.id} className="border-b">
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.transactionId}</td>
                     <td className={`py-2 px-1 text-[10px] ${transaction.status.toLowerCase() === 'completed' ? 'text-green-500' : 'text-red-500'}`}>{transaction.status}</td>
@@ -63,7 +63,8 @@ const TransactionTable = () => {
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.shortName}</td>
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.created_at}</td>
                   </tr>
-                ))}
+                );
+              })}
             </tbody>
           </table>
         </div>

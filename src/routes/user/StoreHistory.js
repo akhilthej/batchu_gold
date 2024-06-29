@@ -31,7 +31,7 @@ const TransactionTable = () => {
 
   const renderTable = (transactions) => (
     <div className="bg-white shadow-lg rounded-md p-6 mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Digital Gold History</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Store History</h2>
       <span className="font-bold text-lg">User: {user.name}</span>
       <span className="text-sm">{user.emailaddress}</span>
       <span className="text-sm">{user.address}</span>
@@ -52,7 +52,7 @@ const TransactionTable = () => {
             </thead>
             <tbody>
               {transactions
-                .filter(transaction => transaction.email === user.emailaddress && transaction.shortName === 'BAT_DigitalGold')
+                .filter(transaction => transaction.email === user.emailaddress && transaction.shortName === 'BAT_StoreOrders')
                 .map(transaction => (
                   <tr key={transaction.id} className="border-b">
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.transactionId}</td>
