@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 function Productpost() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [makingPercentage, setMakingPercentage] = useState(''); // Updated
+    const [makingPercentage, setMakingPercentage] = useState('');
+    const [referralCommission, setReferralCommission] = useState(''); // Added
     const [productCatalogue, setProductCatalogue] = useState('Gold Coin');
     const [weight, setWeight] = useState('');
     const [image, setImage] = useState(null);
@@ -29,7 +30,8 @@ function Productpost() {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('making_percentage', makingPercentage); // Updated
+        formData.append('making_percentage', makingPercentage);
+        formData.append('referral_commission', referralCommission); // Added
         formData.append('product_catalogue', productCatalogue);
         formData.append('weight', weight);
         formData.append('image', image);
@@ -47,7 +49,8 @@ function Productpost() {
             // Reset form after successful upload
             setTitle('');
             setDescription('');
-            setMakingPercentage(''); // Updated
+            setMakingPercentage('');
+            setReferralCommission(''); // Added
             setProductCatalogue('Gold Coin');
             setWeight('');
             setImage(null);
@@ -74,7 +77,7 @@ function Productpost() {
     };
 
     return (
-        <div className='mt-20 container mx-auto p-4 my-20 grid grid-cols-1 gap-8 sm:grid-cols-2'>
+        <section>
             {/* Left side: Upload Product Form */}
             <div>
                 <h2 className='text-2xl font-bold mb-6'>Upload Product</h2>
@@ -88,15 +91,37 @@ function Productpost() {
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} required className='p-2 border rounded'></textarea>
                     </div>
                     <div className='flex flex-col'>
-                        <label className='font-semibold mb-1'>Making Percentage:</label> {/* Updated */}
-                        <input type="number" value={makingPercentage} onChange={(e) => setMakingPercentage(e.target.value)} step="0.01" required className='p-2 border rounded' /> {/* Updated */}
+                        <label className='font-semibold mb-1'>Making Percentage:</label>
+                        <input type="number" value={makingPercentage} onChange={(e) => setMakingPercentage(e.target.value)} step="0.01" required className='p-2 border rounded' />
+                    </div>
+                    <div className='flex flex-col'>
+                        <label className='font-semibold mb-1'>Referral Commission:</label> {/* Added */}
+                        <input type="number" value={referralCommission} onChange={(e) => setReferralCommission(e.target.value)} step="0.01" required className='p-2 border rounded' /> {/* Added */}
                     </div>
                     <div className='flex flex-col'>
                         <label className='font-semibold mb-1'>Product Catalogue:</label>
                         <select value={productCatalogue} onChange={(e) => setProductCatalogue(e.target.value)} required className='p-2 border rounded'>
-                            <option value="Gold Coin">Gold Coin</option>
-                            <option value="Silver Coin">Silver Coin</option>
-                            <option value="Ear Rings">Ear Rings</option>
+                        
+                        <option value="Gold Coin">Gold Coin</option>
+<option value="Silver Coin">Silver Coin</option>
+                        <option value="Chains">Chains</option>
+<option value="Blackbeads">Blackbeads</option>
+<option value="Ear Tops and Hangings">Ear Tops and Hangings</option>
+<option value="Finger Rings">Finger Rings</option>
+<option value="Bangles">Bangles</option>
+<option value="Bracelets and Kadas">Bracelets and Kadas</option>
+<option value="Bajubandh">Bajubandh</option>
+<option value="Necklaces">Necklaces</option>
+<option value="Haram">Haram</option>
+<option value="Vaddanam">Vaddanam</option>
+<option value="Jadas">Jadas</option>
+<option value="Light weight">Light weight</option>
+<option value="Nose pin">Nose pin</option>
+<option value="Diamond">Diamond</option>
+<option value="Bridal">Bridal</option>
+<option value="Platinum">Platinum</option>
+<option value="Ear Rings">Ear Rings</option>
+
                         </select>
                     </div>
                     <div className='flex flex-col'>
@@ -111,15 +136,17 @@ function Productpost() {
                 </form>
             </div>
 
-            {/* Right side: Product List Table */}
-            <div className='overflow-x-auto'>
+
+
+ <div className='overflow-x-auto'>
                 <h2 className='text-2xl font-bold mb-4'>Product List</h2>
                 <table className='table-auto w-full'>
                     <thead>
                         <tr className='bg-gray-200'>
                             <th className='p-2'>Title</th>
                             <th className='p-2'>Description</th>
-                            <th className='p-2'>Making Percentage</th> {/* Updated */}
+                            <th className='p-2'>Making Percentage</th>
+                            <th className='p-2'>Referral Commission</th> {/* Added */}
                             <th className='p-2'>Product Catalogue</th>
                             <th className='p-2'>Weight (g)</th>
                             <th className='p-2'>Image</th>
@@ -131,7 +158,8 @@ function Productpost() {
                             <tr key={product.id} className='border-b'>
                                 <td className='p-2'>{product.title}</td>
                                 <td className='p-2'>{product.description}</td>
-                                <td className='p-2'>{product.making_percentage}%</td> {/* Updated */}
+                                <td className='p-2'>{product.making_percentage}%</td>
+                                <td className='p-2'>{product.referral_commission}%</td> {/* Added */}
                                 <td className='p-2'>{product.product_catalogue}</td>
                                 <td className='p-2'>{product.weight}</td>
                                 <td className='p-2'>
@@ -154,7 +182,7 @@ function Productpost() {
                     </tbody>
                 </table>
             </div>
-        </div>
+            </section>
     );
 }
 

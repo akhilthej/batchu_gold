@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,37 +6,50 @@ import { GoldCoinsCover } from "../../assets/data/Imagedata";
 import { cover1, cover2, cover3, cover4 } from "../../assets/data/Imagedata";
 import { Link } from "react-router-dom";
 
-
-import { AiFillGold } from "react-icons/ai";
 import { FaStoreAlt } from "react-icons/fa";
-import { GiCrystalEarrings } from "react-icons/gi";
-
-const items = [
-  {
-    id: 1,
-    category: "Gold",
-    name: "Gold Coin",
-    background: GoldCoinsCover,
-    url: "/Store/GoldCoins",
-  },
-  {
-    id: 2,
-    category: "Silver",
-    name: "Silver Ring",
-    background: GoldCoinsCover,
-    url: "/Store/GoldCoins",
-  },
-  {
-    id: 3,
-    category: "Earrings",
-    name: "Earrings ",
-    background: GoldCoinsCover,
-    url: "/Store/GoldCoins",
-  },
- 
-];
 
 const Store = () => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "https://batchugold.com/apis/Store/ProductPost.php"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+
+        // Filter out products with "Gold Coin" and "Silver Coin" categories
+        const filteredProducts = data.filter(
+          (product) =>
+            product.product_catalogue !== "Gold Coin" &&
+            product.product_catalogue !== "Silver Coin"
+        );
+
+        // Set products in state
+        setProducts(filteredProducts);
+
+        // Extract unique categories from filtered products
+        const uniqueCategories = Array.from(
+          new Set(filteredProducts.map((product) => product.product_catalogue.toLowerCase()))
+        );
+
+        // Set categories in state, including "All"
+        setCategories(["All", ...uniqueCategories]);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        // Handle error or show a message to the user
+      }
+    };
+
+    fetchProducts();
+  }, []); // Fetch products and categories only once on component mount
+
   const settings = {
     dots: true,
     infinite: true,
@@ -46,12 +59,6 @@ const Store = () => {
     centerMode: true,
     centerPadding: "5%", // This will make the next slide slightly visible
   };
-
-  const [filter, setFilter] = useState("All");
-
-  const filteredItems =
-    filter === "All" ? items : items.filter((item) => item.category === filter);
-
   const slidesData = [
     {
       Text: "QUICK BUY",
@@ -75,6 +82,14 @@ const Store = () => {
     },
     // Add more slides as needed
   ];
+
+  const filteredProducts =
+    filter === "All"
+      ? products // Show all products except "Gold Coin" and "Silver Coin"
+      : products.filter(
+          (item) =>
+            item.product_catalogue.toLowerCase() === filter.toLowerCase()
+        );
 
   return (
     <section className="my-20 w-full">
@@ -100,38 +115,11 @@ const Store = () => {
         ))}
       </Slider>
 
-      <section>
-        <div className="p-4">
-          <h2 className="text-[25px] font-bold">Category</h2>
-          <div className="flex space-x-4 mb-4 text-[15px]">
-            <button
-              onClick={() => setFilter("All")}
-              className="flex bg-gray-300 text-black px-4 py-2 rounded-full"
-            ><FaStoreAlt className="mr-3" size={23} />
-              All
-            </button>
-            <button
-              onClick={() => setFilter("Gold")}
-              className="flex bg-gray-300 text-black px-4 py-2 rounded-full"
-            ><AiFillGold className="mr-3" size={23} />
-              Gold
-            </button>
-            <button
-              onClick={() => setFilter("Silver")}
-              className="flex bg-gray-300 text-black px-4 py-2 rounded-full"
-            ><AiFillGold className="mr-3" size={23} />
-              Silver
-            </button>
-            <button
-              onClick={() => setFilter("Earrings")}
-              className="flex bg-gray-300 text-black px-4 py-2 rounded-full"
-            ><GiCrystalEarrings className="mr-3" size={23} />
-              Earrings
-            </button>
-          </div>
 
-
-          <p className="text-[10px] font-bold text-black leading-tight text-center mx-auto p-5">
+{/*Coins */}
+<section>
+<h3 className="text-center font-bold text-3xl mt-5"> Store</h3>
+<p className="text-[10px] font-bold text-black leading-tight text-center mx-auto p-5">
                 Introducing the exclusive Pure Gold Coin by "The Gold Jar" – a
                 symbol of luxury and refinement. Crafted with precision and
                 elegance, this exquisite coin exudes timeless beauty and
@@ -141,34 +129,93 @@ const Store = () => {
                 investment or a cherished gift, experience the epitome of
                 opulence with this exclusive gold coin from "The Gold Jar."
               </p>
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+          <Link
+            to="/Store/GoldCoins"
+            className="relative rounded-lg shadow-md h-[23vh] sm:h-[40vh]"
+            style={{
+              backgroundImage: `url("${GoldCoinsCover}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="absolute bottom-0 w-full text-center bg-opacity-50 bg-black p-2">
+                    <h2 className="text-[14px] font-bold text-white">
+                      Gold Coins
+                    </h2>
+                    </div>
+          </Link>
+
+<Link
+            to=""
+            className="relative rounded-lg shadow-md h-[23vh] sm:h-[40vh] "
+            style={{
+              backgroundImage: `url("${GoldCoinsCover}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="absolute bottom-0 w-full text-center bg-opacity-50 bg-black p-2">
+                    <h2 className="text-[14px] font-bold text-white">
+                      Silver Coins
+                    </h2>
+                    </div>
+          </Link>
+
+        </div>
+</section>
+
+      <section>
+        <div className="p-4 overflow-hidden">
+          <h2 className="text-[25px] font-bold">Category</h2>
+          <div className="flex space-x-4 mb-4 text-[15px]">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => setFilter(category)}
+                className={`flex ${
+                  filter.toLowerCase() === category.toLowerCase()
+                    ? "bg-gray-600 text-white"
+                    : "bg-gray-300 text-black"
+                } px-4 py-2 rounded-full`}
+              >
+                {category.toLowerCase() === "all" && (
+                  <FaStoreAlt className="mr-3" size={23} />
+                )}
+                
+                {category}
+              </button>
+            ))}
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {filteredItems.map((item) => (
-              <Link to={item.url}>
-              <div
-  key={item.id}
-  className="relative rounded-lg shadow-md h-[23vh] sm:h-[40vh]"
-  style={{
-    backgroundImage: `url(${item.background})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  <div className="absolute bottom-0 w-full text-center bg-opacity-50 bg-black p-2">
-    <h2 className="text-[14px] font-bold text-white">{item.name}</h2>
-    <p className="text-[10px] text-white font-bold">{item.category}</p>
-  </div>
-</div>
+            {filteredProducts.map((product) => (
+              <Link key={product.id} to={`/Store/contactus`}>
+                <div
+                  className="relative rounded-lg shadow-md h-[23vh] sm:h-[40vh]"
+                  style={{
+                    backgroundImage: `url(data:image/jpeg;base64,${product.image_data})`,
+                    
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
                 
-                
+                </div>
+                <div className=" w-full text-center p-2">
+                    <h2 className="text-[14px] font-bold text-black">
+                      {product.title}
+                    </h2>
+                    <p className="text-[10px] text-black font-bold">
+                      {product.product_catalogue}
+                    </p>
+                  </div>
               </Link>
+              
             ))}
           </div>
         </div>
-        
       </section>
-
-      
     </section>
   );
 };
