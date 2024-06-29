@@ -15,7 +15,11 @@ import StoreGoldCoinBG from '../../assets/common/StoreGoldCoinBG.png'
 import GoldBar from '../../assets/common/Gold_bar.png'
 
 /*Store */
-import GoldCoinsCover from '../../assets/Store/GoldCoinsCover.png'
+import GoldCoinsCover from '../../assets/Store/GoldCoinsCover.jpeg'
+import cover1 from '../../assets/Store/cover1.png'
+import cover2 from '../../assets/Store/cover2.png'
+import cover3 from '../../assets/Store/cover3.png'
+import cover4 from '../../assets/Store/cover4.png'
 
 /*Company Logos */
 import TheGoldJar1080p from '../../assets/companylogos/thegoldjar_1080p.png'
@@ -38,7 +42,7 @@ export {
   Godjar_home,Godjar_home_video,
 
   /*Store */
-  GoldCoinsCover
+  GoldCoinsCover,cover1,cover2,cover3,cover4,
 
   };
  
