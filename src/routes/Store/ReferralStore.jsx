@@ -177,7 +177,7 @@ function GoldCoins() {
     >
       <section className="my-20">
         <h2 className="text-[50px] text-yellow-500 font-bold text-center bg-white/80">
-          GOLD COIN
+          REFERRAL STORE
         </h2>
         <p className="text-[18px] text-center font-bold text-yellow-900 bg-white/80">
           Save Earn & Grow
@@ -207,8 +207,8 @@ function GoldCoins() {
           </div>
         </div>
 
-        <div className="px-2 mx-auto flex">
-          <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className=" mx-auto flex">
+          <div className="w-full grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
@@ -219,17 +219,17 @@ function GoldCoins() {
                 }`}
                 onClick={() => handleProductSelect(product)}
               >
-                <div className="p-4 text-center">
-                  <h3 className="text-[18px] font-semibold ">
+                <div className=" text-center py-2">
+                  <h3 className="text-[12px] font-semibold ">
                     {product.title}
                   </h3>
-                  <p className="text-[12px] text-gray-900 leading-tight">
+                  <p className="text-[8px] text-gray-900 leading-tight">
                     Purity: 24 Karat (99.9)
                   </p>
-                  <p className="text-[10px] font-bold text-gray-900 leading-tight mt-2">
-                    Ants
+                  <p className="text-[12px] font-bold text-gray-900 leading-tight mt-2">
+                    ANTS
                   </p>
-                  <p className="text-[18px] font-bold text-gray-900 mb-2">
+                  <p className="text-[18px] font-bold text-gray-900">
                     {calculateTotalPrice(product)}
                   </p>
                 </div>
