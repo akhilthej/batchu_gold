@@ -20,10 +20,10 @@ const GoldBuying = () => {
     amount: '',
     merchantOrderId: '',
     mobileNumber: user.phonenumber,
-    message: 'Order For Digital Gold - QuickBuy',
+    message: 'Order For Digital Gold - Daily',
     email: user.emailaddress,
-    shortName: 'BAT_DigitalGold_QuickBuy',
-    orderlist: '', // Initialize as empty string
+    shortName: 'BAT_DigitalGold_Daily',
+    orderlist: '',
     referralCode: referralCode,
   });
 
@@ -48,24 +48,23 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.03); // Assuming 3% GST
+      const goldAfterGST = gold * (1 - 0.35); // Assuming 35% GST
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
-
+  
     calculateGoldAfterGST();
   }, [gold]);
-
-  const handleSliderChange = (e) => {
-    const value = Number(e.target.value);
-    const selectedAmount = amountValues[value];
+  
+  const handleAmountChange = (value) => {
+    const selectedAmount = value;
     const calculatedGold = selectedAmount / goldPricePerGram;
     setAmount(selectedAmount);
     setGold(calculatedGold);
-
-    const formattedGoldAfterGST = (calculatedGold * (1 - 0.03)).toFixed(8);
+  
+    const formattedGoldAfterGST = (calculatedGold * (1 - 0.35)).toFixed(8); // Assuming 35% GST
     setFormattedGold(formattedGoldAfterGST);
-
+  
     setFormData(prevFormData => ({
       ...prevFormData,
       amount: selectedAmount,
@@ -74,6 +73,7 @@ const GoldBuying = () => {
       orderlist: `${formattedGoldAfterGST} grams`,
     }));
   };
+  
 
   const handleReferralCodeChange = (e) => {
     const code = e.target.value;
@@ -103,14 +103,11 @@ const GoldBuying = () => {
       const responseData = await response.json();
       if (responseData.error) {
         console.error('Error:', responseData.error);
-        // Handle error state or show error to user
       } else {
-        // Redirect to payment URL received from backend
-        window.location.href = responseData.iframeUrl; // Assuming iframeUrl is returned on success
+        window.location.href = responseData.iframeUrl;
       }
     } catch (error) {
       console.error('Error:', error);
-      // Handle error state or show error to user
     }
   };
 
@@ -118,34 +115,33 @@ const GoldBuying = () => {
     <div className="p-5 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <div className="p-8 w-full max-w-md">
         <div className="bg-gradient-to-r from-[#facc15] to-[#ca8a04] p-8 rounded shadow-md w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-4 text-center text-white">Quick Gold Buy</h1>
-          <label className="block mb-2 text-white font-bold">Select Amount (INR):</label>
+          <h1 className="text-2xl font-bold mb-4 text-center text-white">Daily Gold Buy</h1>
+          <label className="block mb-2 text-white font-bold">Enter Amount (INR):</label>
+          
+          <input
+  type="number"
+  value={amount}
+  onChange={(e) => handleAmountChange(Number(e.target.value))}
+  className="w-full px-2 py-1 mb-4 border rounded"
+  readOnly
+/>
 
-          <div className="relative w-full bg-yellow-700 max-w-lg h-10 flex items-center rounded-lg">
-            <input
-              type="range"
-              min="0"
-              max={amountValues.length - 1}
-              step="1"
-              value={amountValues.indexOf(amount)}
-              onChange={handleSliderChange}
-              className="w-full appearance-none bg-transparent cursor-pointer"
-              style={{ zIndex: 10, position: 'relative' }}
-            />
-            <div
-              className="absolute top-1/2 transform -translate-y-1/2 h-8 w-8 flex items-center justify-center pointer-events-none"
-              style={{
-                left: `calc(${(amountValues.indexOf(amount) / (amountValues.length - 1)) * 100}% - 16px)`,
-                zIndex: 20
-              }}
-            >
-              <img src={GoldCoin} alt="indicator" className="h-full w-full" />
-            </div>
+
+          <div className="flex flex-wrap gap-2 justify-center">
+            {amountValues.map((value, index) => (
+              <button
+                key={index}
+                onClick={() => handleAmountChange(value)}
+                className="bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-400"
+              >
+                {value}
+              </button>
+            ))}
           </div>
 
-          <div className="text-center mt-1">
+          <p className="text-center mt-4">
             Rs. {amount}
-          </div>
+          </p>
 
           <p className="mb-4 text-[12px]">
             Receive: {formattedGold} grams
