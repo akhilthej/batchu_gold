@@ -134,7 +134,7 @@ function GoldCoins() {
                 mobileNumber: user.phonenumber, // Example, replace with actual data
                 message: "Order From Store | Address:" + user.address,
                 email: user.emailaddress, // Assuming you have user email
-                shortName: "BAT_StoreOrders", // Assuming you have user name
+                shortName: "BAT_ReferralStoreOrders", // Assuming you have user name
                 orderlist: `${selectedProduct.title}`, // Example, replace with actual data
                 delivery: "PROCESSING", // Example, replace with actual delivery type
                 quantity: 1, // Example, replace with actual quantity

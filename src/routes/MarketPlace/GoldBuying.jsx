@@ -12,7 +12,7 @@ const GoldBuying = () => {
   const [goldPricePerGram, setGoldPricePerGram] = useState(0);
   const [formattedGold, setFormattedGold] = useState('');
 
-  const amountValues = [0, 10, 20, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+  const amountValues = [0, 10, 20, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 7400];
 
   const [formData, setFormData] = useState({
     merchantTransactionId: '',
@@ -20,9 +20,9 @@ const GoldBuying = () => {
     amount: '',
     merchantOrderId: '',
     mobileNumber: user.phonenumber,
-    message: 'Order For Digital Gold - Daily',
+    message: 'Order For Digital Gold - Quick buy',
     email: user.emailaddress,
-    shortName: 'BAT_DigitalGold_Daily',
+    shortName: 'BAT_DigitalGold',
     orderlist: '',
     referralCode: referralCode,
   });
@@ -48,7 +48,7 @@ const GoldBuying = () => {
 
   useEffect(() => {
     const calculateGoldAfterGST = () => {
-      const goldAfterGST = gold * (1 - 0.35); // Assuming 35% GST
+      const goldAfterGST = gold * (1 - 0.18); // Assuming 18% GST
       const formattedGold = goldAfterGST.toFixed(8);
       setFormattedGold(formattedGold);
     };
@@ -115,7 +115,7 @@ const GoldBuying = () => {
     <div className="p-5 flex flex-col items-center justify-center bg-gray-100 min-h-screen">
       <div className="p-8 w-full max-w-md">
         <div className="bg-gradient-to-r from-[#facc15] to-[#ca8a04] p-8 rounded shadow-md w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-4 text-center text-white">Daily Gold Buy</h1>
+          <h1 className="text-2xl font-bold mb-4 text-center text-white">Quick Gold Buy</h1>
           <label className="block mb-2 text-white font-bold">Enter Amount (INR):</label>
           
           <input

@@ -18,6 +18,7 @@ import { useAuth } from './hooks/GlobalProvider';
 import Dashboard from "./routes/user/Dashboard";
 import PaymentHistory from './routes/user/PaymentHistory';
 import StoreHistory from './routes/user/StoreHistory';
+import ReferralStoreHistory from './routes/user/ReferralHistory'
 import ProductPost from "./routes/Admin/ProductsPost";
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
         <Route path="/user/dashboard" element={<Dashboard />} />
         <Route path="/user/paymenthistory" element={<PaymentHistory />} />
         <Route path="/user/storehistory" element={<StoreHistory />} />
+        <Route path="/user/referralstorehistory" element={<ReferralStoreHistory />} />
         <Route path="/user/profileedit" element={<ProfileEdit />} />
         <Route path="/Admin/ProductPost" element={user ? <ProductPost /> : <Navigate to="/signin" />} />
 

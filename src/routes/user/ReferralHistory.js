@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/GlobalProvider';
 import { USER_FETCH_TRANSACTIONS_URL } from '../../hooks/APIHooks';
-import { GoldCoin } from '../../assets/data/Imagedata';
 
-const TransactionTable = () => {
+const ReferralHistory = () => {
   const { user } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,10 +30,12 @@ const TransactionTable = () => {
 
   const renderTable = (transactions) => (
     <div className="bg-white shadow-lg rounded-md p-6 mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Store History</h2>
-      <span className="font-bold text-lg">User: {user.name}</span>
-      <span className="text-sm">{user.emailaddress}</span>
-      <span className="text-sm">{user.address}</span>
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Referral Store History</h2>
+      <div className="mb-4">
+        <span className="block font-bold text-lg">User: {user.name}</span>
+        <span className="block text-sm">{user.emailaddress}</span>
+        <span className="block text-sm">{user.address}</span>
+      </div>
 
       {transactions.length > 0 ? (
         <div className="overflow-x-auto">
@@ -42,10 +43,10 @@ const TransactionTable = () => {
             <thead className="bg-gray-200">
               <tr>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">TransactionId</th>
-                <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Status</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Amount (INR)</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Gold (grams)</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Email</th>
+                <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Phone Number</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">ShortCode</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Created At</th>
                 <th className="py-3 px-1 text-left font-medium text-gray-800 text-[10px]">Delivery</th>
@@ -53,16 +54,17 @@ const TransactionTable = () => {
             </thead>
             <tbody>
               {transactions
-                .filter(transaction => transaction.email === user.emailaddress && transaction.shortName === 'BAT_StoreOrders')
+                .filter(transaction => transaction.email === user.emailaddress && transaction.shortName === 'BAT_ReferralStoreOrders')
                 .map(transaction => (
                   <tr key={transaction.id} className="border-b">
-                    <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.transactionId}</td>
-                    <td className={`py-2 px-1 text-[10px] ${transaction.status.toLowerCase() === 'completed' ? 'text-green-500' : 'text-red-500'}`}>{transaction.status}</td>
+                    <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.merchantTransactionId}</td>
+                   
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.amount}</td>
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.orderlist}</td>
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.email}</td>
+                    <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.mobileNumber}</td>
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.shortName}</td>
-                    <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.created_at}</td>
+                    <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.order_date}</td>
                     <td className="py-2 px-1 text-[10px] text-gray-700">{transaction.delivery}</td>
                   </tr>
                 ))}
@@ -88,4 +90,4 @@ const TransactionTable = () => {
   );
 };
 
-export default TransactionTable;
+export default ReferralHistory;

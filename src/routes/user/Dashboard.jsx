@@ -96,6 +96,16 @@ function Dashboard() {
                 </span>
               </a>
 
+              <a href="/user/referralstorehistory">
+                <button className="flex items-center justify-center text-black py-2">
+                  <FaHistory className="mr-3" size={23} />
+                  <p className="text-[16px]">Referral Store History</p>
+                </button>
+                <span className="text-xs text-gray-600">
+                  View your payment transactions and remaining balance.
+                </span>
+              </a>
+
               <Link to="/MarketPlace">
                 <button className="flex items-center justify-center text-black py-2">
                   <FaStore className="mr-3" size={23} />
