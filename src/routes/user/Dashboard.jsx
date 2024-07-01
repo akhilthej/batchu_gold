@@ -106,26 +106,7 @@ function Dashboard() {
                 </span>
               </a>
 
-              <Link to="/MarketPlace">
-                <button className="flex items-center justify-center text-black py-2">
-                  <FaStore className="mr-3" size={23} />
-                  <p className="text-[16px]">Market Place</p>
-                </button>
-                <span className="text-xs text-gray-600">
-                  Browse our marketplace for more ornaments and items.
-                </span>
-              </Link>
-
-              <Link to="/Store">
-                <button className="flex items-center justify-center text-black py-2">
-                  <FaExchangeAlt className="mr-3" size={23} />
-                  <p className="text-[16px]">Store</p>
-                </button>
-                <span className="text-xs text-gray-600">
-                  Start saving gold. Buy from 10 INR. Daily, planned, and bulk
-                  savings available.
-                </span>
-              </Link>
+              
 
               <div className="border-t border-gray-300 "></div>
               <div className="text-center">

@@ -54,10 +54,7 @@ function BottomNavbar() {
           ref={navRef}
           className="flex flex-row justify-around w-full max-w-md p-2 bg-white mx-2 rounded-full relative z-10"
         >
-          <div
-            className="absolute bg-yellow-500 w-10 h-10 rounded-full transition-all duration-300 ease-in-out"
-            style={{ left: circlePos.left, top: 5, zIndex: 1 }}
-          ></div>
+          
 
           {/* Your navigation items here */}
           {/* Item #1 */}
@@ -71,11 +68,11 @@ function BottomNavbar() {
               <i
                 className={`mdi mdi-basket-plus-outline mdi-24px ${
                   location.pathname === "/Store"
-                    ? "text-white z-10 mdi-38px"
+                    ? "text-yellow-500 z-10 mdi-38px"
                     : "text-black transition-color z-10"
                 }`}
               />
-              <span className="text-[10px]">Store</span>
+              <span className="text-[10px] text-black">Store</span>
             </Link>
           </div>
 
@@ -90,11 +87,11 @@ function BottomNavbar() {
               <i
                 className={`mdi mdi-gold mdi-24px ${
                   location.pathname === "/MarketPlace"
-                    ? "text-white z-10"
+                    ? "text-yellow-500 z-10"
                     : "text-black transition-color z-10"
                 }`}
               />
-              <span className="text-[10px]">Market</span>
+              <span className="text-[10px] text-black">Market</span>
             </Link>
           </div>
 
@@ -109,11 +106,11 @@ function BottomNavbar() {
               <i
                 className={`mdi mdi-home-outline mdi-24px ${
                   location.pathname === "/"
-                    ? "text-white z-10"
+                    ? "text-yellow-500 z-10"
                     : "text-black transition-color z-10"
                 }`}
               />
-              <span className="text-[10px]">Home</span>
+              <span className="text-[10px] text-black">Home</span>
             </Link>
           </div>
 
@@ -128,11 +125,11 @@ function BottomNavbar() {
               <i
                 className={`mdi mdi-compass-outline mdi-24px ${
                   location.pathname === "/aboutus"
-                    ? "text-white z-10"
+                    ? "text-yellow-500 z-10"
                     : "text-black transition-color z-10"
                 }`}
               />
-              <span className="text-[10px]">About</span>
+              <span className="text-[10px] text-black">About</span>
             </Link>
           </div>
 
@@ -148,11 +145,11 @@ function BottomNavbar() {
                 <i
                   className={`mdi mdi-account-circle-outline mdi-24px ${
                     location.pathname === "/user/dashboard"
-                      ? "text-white z-10"
+                      ? "text-yellow-500 z-10"
                       : "text-black transition-color z-10"
                   }`}
                 />
-                <span className="text-[10px]">Account</span>
+                <span className="text-[10px] text-black">Account</span>
               </Link>
             </div>
           ) : (
@@ -166,11 +163,11 @@ function BottomNavbar() {
                 <i
                   className={`mdi mdi-account-circle-outline mdi-24px ${
                     location.pathname === "/signup"
-                      ? "text-white z-10"
+                      ? "text-yellow-500 z-10"
                       : "text-black transition-color z-10"
                   }`}
                 />
-                <span className="text-[10px]">Signup</span>
+                <span className="text-[10px] text-black">Signup</span>
               </Link>
             </div>
           )}
